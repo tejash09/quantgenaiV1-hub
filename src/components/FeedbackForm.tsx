@@ -1,0 +1,140 @@
+
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Send, CheckCircle } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
+
+const FeedbackForm = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const { toast } = useToast();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!name || !email || !message) {
+      toast({
+        title: "Missing information",
+        description: "Please fill in all fields.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    
+    toast({
+      title: "Feedback submitted",
+      description: "Thank you for your feedback!",
+    });
+    
+    // Reset form after 2 seconds
+    setTimeout(() => {
+      setName('');
+      setEmail('');
+      setMessage('');
+      setIsSubmitted(false);
+    }, 2000);
+  };
+
+  return (
+    <div className="rounded-2xl overflow-hidden shadow-lg">
+      <div className="p-6 md:p-8 bg-gradient-to-r from-quantum-700 to-quantum-900 text-white">
+        <h3 className="text-2xl font-bold mb-2">We Value Your Feedback</h3>
+        <p className="text-quantum-100">
+          Share your thoughts, suggestions, or questions with us.
+        </p>
+      </div>
+      
+      <div className="p-6 md:p-8 bg-white dark:bg-gray-900">
+        {isSubmitted ? (
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex flex-col items-center justify-center py-8 text-center"
+          >
+            <CheckCircle className="w-16 h-16 text-green-500 mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Thank You!</h3>
+            <p className="text-gray-600 dark:text-gray-300 max-w-md">
+              Your feedback has been submitted successfully. We appreciate your input!
+            </p>
+          </motion.div>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Name
+              </label>
+              <input
+                id="name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-quantum-500"
+                placeholder="Your name"
+              />
+            </div>
+            
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Email
+              </label>
+              <input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-quantum-500"
+                placeholder="Your email"
+              />
+            </div>
+            
+            <div>
+              <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Message
+              </label>
+              <textarea
+                id="message"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                rows={4}
+                className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-quantum-500 resize-none"
+                placeholder="Your feedback, questions, or suggestions"
+              />
+            </div>
+            
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full bg-quantum-500 hover:bg-quantum-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center"
+            >
+              {isSubmitting ? (
+                <div className="flex items-center">
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                  <span>Submitting...</span>
+                </div>
+              ) : (
+                <div className="flex items-center">
+                  <Send className="w-4 h-4 mr-2" />
+                  <span>Submit Feedback</span>
+                </div>
+              )}
+            </Button>
+          </form>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default FeedbackForm;
