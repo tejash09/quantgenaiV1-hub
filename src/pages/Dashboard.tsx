@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Search, BellRing, Settings, LogOut, MessageSquare, FileText, Book, Video, Brain } from 'lucide-react';
+import { Search, BellRing, Settings, LogOut, MessageSquare, FileText, Book, Video, Brain, User } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import TopicCard from '../components/TopicCard';
 import Chatbot from '../components/Chatbot';
