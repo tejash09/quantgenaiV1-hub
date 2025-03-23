@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Send, MessageSquare, Clock } from 'lucide-react';
+import { MapPin, Phone, Mail, Send, MessageSquare } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Chatbot from '../components/Chatbot';
 import { Button } from '@/components/ui/button';
@@ -185,9 +185,9 @@ const Contact = () => {
                     <div>
                       <h4 className="font-medium text-gray-900 dark:text-white mb-1">Our Location</h4>
                       <p className="text-gray-600 dark:text-gray-400">
-                        123 Innovation Way<br />
-                        Tech City, TC 12345<br />
-                        United States
+                        Vasavi College of Engineering<br />
+                        Hyderabad<br />
+                        India
                       </p>
                     </div>
                   </div>
@@ -199,8 +199,8 @@ const Contact = () => {
                     <div>
                       <h4 className="font-medium text-gray-900 dark:text-white mb-1">Phone Number</h4>
                       <p className="text-gray-600 dark:text-gray-400">
-                        <a href="tel:+1234567890" className="hover:text-quantum-500 transition-colors">
-                          +1 (234) 567-890
+                        <a href="tel:+918523040012" className="hover:text-quantum-500 transition-colors">
+                          +91 8523040012
                         </a>
                       </p>
                     </div>
@@ -216,20 +216,6 @@ const Contact = () => {
                         <a href="mailto:info@quantgenailabs.com" className="hover:text-quantum-500 transition-colors">
                           info@quantgenailabs.com
                         </a>
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <div className="w-10 h-10 rounded-full bg-quantum-100 dark:bg-quantum-900 text-quantum-500 flex items-center justify-center mr-4 flex-shrink-0">
-                      <Clock className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-gray-900 dark:text-white mb-1">Working Hours</h4>
-                      <p className="text-gray-600 dark:text-gray-400">
-                        Monday - Friday: 9:00 AM - 6:00 PM<br />
-                        Saturday: 10:00 AM - 4:00 PM<br />
-                        Sunday: Closed
                       </p>
                     </div>
                   </div>
@@ -310,11 +296,11 @@ const Contact = () => {
           >
             <div className="aspect-[16/9] w-full bg-gray-200 dark:bg-gray-800">
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387193.305935303!2d-74.25986548248684!3d40.69714941932609!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sca!4v1621912578173!5m2!1sen!2sca" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.210370237431!2d78.36861001467856!3d17.39601298807994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb97c9f9c1c1a5%3A0x9be74c2a5a22bb5f!2sVasavi%20College%20of%20Engineering!5e0!3m2!1sen!2sin!4v1637233760761!5m2!1sen!2sin" 
                 className="w-full h-full" 
                 style={{ border: 0 }} 
                 loading="lazy"
-                title="QuantGenAILabs Location"
+                title="Vasavi College of Engineering Location"
               ></iframe>
             </div>
           </motion.div>
