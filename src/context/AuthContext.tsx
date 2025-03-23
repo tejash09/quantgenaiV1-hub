@@ -37,14 +37,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      // Mock validation
-      if (email === 'user@example.com' && password === 'password') {
-        const user = { id: '1', email, name: 'John Doe' };
-        setUser(user);
-        localStorage.setItem('user', JSON.stringify(user));
-      } else {
-        throw new Error('Invalid credentials');
-      }
+      // For demo purposes, accept any email/password combination
+      // In a real app, you would validate credentials against a backend
+      const user = { 
+        id: '1', 
+        email, 
+        name: email.split('@')[0].split('.').map(part => 
+          part.charAt(0).toUpperCase() + part.slice(1)
+        ).join(' ')
+      };
+      setUser(user);
+      localStorage.setItem('user', JSON.stringify(user));
     } catch (error) {
       console.error('Login error:', error);
       throw error;

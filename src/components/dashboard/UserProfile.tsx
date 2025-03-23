@@ -1,11 +1,30 @@
 
 import React from 'react';
 import { User, FileText, Book, Video, Brain, Settings, LogOut } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { useToast } from '@/hooks/use-toast';
 
 const UserProfile = () => {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
+  const { toast } = useToast();
+  
+  const handleLogout = () => {
+    logout();
+    toast({
+      title: "Logged out",
+      description: "You have been successfully logged out",
+    });
+    navigate('/');
+  };
+
+  const handleMenuClick = (title: string) => {
+    toast({
+      title: `${title} Selected`,
+      description: `You've navigated to the ${title} section`,
+    });
+  };
 
   return (
     <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-md overflow-hidden sticky top-24">
@@ -27,6 +46,7 @@ const UserProfile = () => {
             <Link 
               to="/dashboard" 
               className="flex items-center p-3 rounded-lg text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-800"
+              onClick={() => handleMenuClick('Dashboard')}
             >
               <div className="w-8 h-8 rounded-lg bg-quantum-100 dark:bg-quantum-900 text-quantum-500 flex items-center justify-center mr-3">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5">
@@ -38,8 +58,9 @@ const UserProfile = () => {
           </li>
           <li>
             <Link 
-              to="#" 
+              to="/topic/research-papers" 
               className="flex items-center p-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              onClick={() => handleMenuClick('Research Papers')}
             >
               <div className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-500 flex items-center justify-center mr-3">
                 <FileText className="w-4 h-4" />
@@ -49,8 +70,9 @@ const UserProfile = () => {
           </li>
           <li>
             <Link 
-              to="#" 
+              to="/topic/learning-resources" 
               className="flex items-center p-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              onClick={() => handleMenuClick('Learning Resources')}
             >
               <div className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-500 flex items-center justify-center mr-3">
                 <Book className="w-4 h-4" />
@@ -60,8 +82,9 @@ const UserProfile = () => {
           </li>
           <li>
             <Link 
-              to="#" 
+              to="/topic/video-tutorials" 
               className="flex items-center p-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              onClick={() => handleMenuClick('Video Tutorials')}
             >
               <div className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-500 flex items-center justify-center mr-3">
                 <Video className="w-4 h-4" />
@@ -71,8 +94,9 @@ const UserProfile = () => {
           </li>
           <li>
             <Link 
-              to="#" 
+              to="/dashboard?openChat=true" 
               className="flex items-center p-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              onClick={() => handleMenuClick('AI Assistant')}
             >
               <div className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-500 flex items-center justify-center mr-3">
                 <Brain className="w-4 h-4" />
@@ -82,8 +106,9 @@ const UserProfile = () => {
           </li>
           <li>
             <Link 
-              to="#" 
+              to="/settings" 
               className="flex items-center p-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              onClick={() => handleMenuClick('Settings')}
             >
               <div className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-500 flex items-center justify-center mr-3">
                 <Settings className="w-4 h-4" />
@@ -93,7 +118,7 @@ const UserProfile = () => {
           </li>
           <li>
             <button 
-              onClick={() => logout()}
+              onClick={handleLogout}
               className="w-full flex items-center p-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
             >
               <div className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-500 flex items-center justify-center mr-3">

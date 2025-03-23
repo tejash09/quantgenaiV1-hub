@@ -35,6 +35,8 @@ const App = () => (
               <Route path="/topic/:slug" element={<TopicPage />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
+              {/* Redirect settings to dashboard for now */}
+              <Route path="/settings" element={<Dashboard />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
