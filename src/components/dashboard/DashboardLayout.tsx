@@ -9,10 +9,16 @@ import SearchBar from '../SearchBar';
 const DashboardLayout = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    console.log("Searching for:", query);
+    // Here you would typically implement the search functionality
+  };
+
   return (
     <div className="container mx-auto py-8">
       <div className="mb-6">
-        <SearchBar className="max-w-full" />
+        <SearchBar onSearch={handleSearch} className="max-w-full" />
       </div>
       
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">

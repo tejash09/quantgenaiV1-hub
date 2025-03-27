@@ -286,6 +286,92 @@ export const topics: Topic[] = [
         description: 'Berkeley course on quantum computing foundations'
       }
     ]
+  },
+  {
+    id: '7',
+    title: 'Generative AI',
+    slug: 'genai',
+    shortDescription: 'AI systems that can generate new content and ideas',
+    description: 'Generative AI refers to artificial intelligence systems that can generate new content such as text, images, audio, and video that resembles human-created work. These models use deep learning architectures to identify patterns in existing data and create new outputs that reflect those patterns.',
+    videoUrl: 'https://www.youtube.com/embed/3oVc3pWJ3bw',
+    image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+    papers: [
+      {
+        id: 'genai-paper-1',
+        title: 'Generative Adversarial Networks',
+        authors: 'Ian J. Goodfellow et al.',
+        year: '2014',
+        link: 'https://arxiv.org/abs/1406.2661',
+        abstract: 'The original paper introducing GANs, a framework for training generative models.'
+      },
+      {
+        id: 'genai-paper-2',
+        title: 'DALL·E 2: Hierarchical Text-Conditional Image Generation with CLIP Latents',
+        authors: 'A. Ramesh et al.',
+        year: '2022',
+        link: 'https://arxiv.org/abs/2204.06125',
+        abstract: 'Research paper on DALL·E 2, a system for creating images from text descriptions.'
+      }
+    ],
+    resources: [
+      {
+        id: 'genai-resource-1',
+        title: 'Generative Deep Learning',
+        type: 'Book',
+        link: 'https://www.oreilly.com/library/view/generative-deep-learning/9781492041931/',
+        description: 'Comprehensive guide to building generative models with practical examples'
+      },
+      {
+        id: 'genai-resource-2',
+        title: 'Stable Diffusion Tutorial',
+        type: 'Tutorial',
+        link: 'https://huggingface.co/docs/diffusers/main/en/tutorials/stable_diffusion',
+        description: 'Learn how to use Stable Diffusion for image generation'
+      }
+    ]
+  },
+  {
+    id: '8',
+    title: 'Large Language Models',
+    slug: 'llms',
+    shortDescription: 'Advanced AI models that understand and generate human language',
+    description: 'Large Language Models (LLMs) are advanced AI systems trained on vast amounts of text data that can understand, generate, and manipulate human language. These models have billions or even trillions of parameters and can perform various language tasks from translation to creative writing.',
+    videoUrl: 'https://www.youtube.com/embed/zjkBMFhNj_g',
+    image: 'https://images.unsplash.com/photo-1677442135968-6d89469c5f97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+    papers: [
+      {
+        id: 'llm-paper-1',
+        title: 'Attention Is All You Need',
+        authors: 'A. Vaswani et al.',
+        year: '2017',
+        link: 'https://arxiv.org/abs/1706.03762',
+        abstract: 'Introduces the Transformer architecture that forms the foundation of modern LLMs.'
+      },
+      {
+        id: 'llm-paper-2',
+        title: 'Training language models to follow instructions with human feedback',
+        authors: 'Long Ouyang et al.',
+        year: '2022',
+        link: 'https://arxiv.org/abs/2203.02155',
+        abstract: 'Describes the RLHF technique used to align language models with human preferences.'
+      }
+    ],
+    resources: [
+      {
+        id: 'llm-resource-1',
+        title: 'Hugging Face Transformers Library',
+        type: 'Tutorial',
+        link: 'https://huggingface.co/transformers/',
+        description: 'State-of-the-art framework for working with pre-trained language models'
+      },
+      {
+        id: 'llm-resource-2',
+        title: 'Building LLM applications for production',
+        type: 'Course',
+        link: 'https://www.deeplearning.ai/short-courses/building-applications-with-vector-databases/',
+        description: 'Learn how to build LLM-powered applications that can scale'
+      }
+    ]
   }
 ];
 

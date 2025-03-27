@@ -326,7 +326,7 @@ const Contact = () => {
             {[
               {
                 question: "What is QuantGenAILabs?",
-                answer: "QuantGenAILabs is a platform dedicated to making advanced technologies like AI, quantum computing, and robotics accessible to everyone through educational resources, research papers, and community engagement."
+                answer: "QuantGenAILabs is a platform dedicated to making advanced technologies like AI, quantum computing, and robotics accessible to everyone through educational resources, research papers, and insights into cutting-edge technologies that are shaping our world."
               },
               {
                 question: "Do I need a technical background to use your resources?",
@@ -334,7 +334,7 @@ const Contact = () => {
               },
               {
                 question: "How can I contribute to QuantGenAILabs?",
-                answer: "We welcome contributions in various forms, including guest articles, research paper submissions, tutorial creation, and community participation. Contact us through this form to discuss collaboration opportunities."
+                answer: "We welcome contributions in various forms, including guest articles, research paper submissions, and tutorial creation. Contact us through this form to discuss collaboration opportunities."
               },
               {
                 question: "Are your resources free to access?",
