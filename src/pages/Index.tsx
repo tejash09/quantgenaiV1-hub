@@ -102,12 +102,12 @@ const Index = () => {
             >
               <div className="w-12 h-12 bg-quantum-100 dark:bg-quantum-900 text-quantum-500 rounded-xl flex items-center justify-center mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold mb-2">Expert Guidance</h3>
+              <h3 className="text-xl font-bold mb-2">Technology Integration</h3>
               <p className="text-gray-600 dark:text-gray-400">
-                Get expert guidance from our team of professionals specializing in various technology domains.
+                Discover practical implementations and applications of advanced technologies in various industries.
               </p>
             </motion.div>
           </div>
@@ -325,9 +325,9 @@ const Index = () => {
                 <li className="text-gray-400">
                   <span className="block">Address:</span>
                   <address className="not-italic">
-                    123 Innovation Way<br />
-                    Tech City, TC 12345<br />
-                    United States
+                    Ibrahim Bagh<br />
+                    Hyderabad, Telangana 500031<br />
+                    India
                   </address>
                 </li>
               </ul>

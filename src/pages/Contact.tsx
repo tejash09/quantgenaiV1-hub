@@ -185,8 +185,8 @@ const Contact = () => {
                     <div>
                       <h4 className="font-medium text-gray-900 dark:text-white mb-1">Our Location</h4>
                       <p className="text-gray-600 dark:text-gray-400">
-                        Vasavi College of Engineering<br />
-                        Hyderabad<br />
+                        Ibrahim Bagh<br />
+                        Hyderabad, Telangana 500031<br />
                         India
                       </p>
                     </div>
@@ -296,11 +296,11 @@ const Contact = () => {
           >
             <div className="aspect-[16/9] w-full bg-gray-200 dark:bg-gray-800">
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.210370237431!2d78.36861001467856!3d17.39601298807994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb97c9f9c1c1a5%3A0x9be74c2a5a22bb5f!2sVasavi%20College%20of%20Engineering!5e0!3m2!1sen!2sin!4v1637233760761!5m2!1sen!2sin" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.302289409887!2d78.38847777586747!3d17.391792283589086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb978978df9153%3A0x85dcf377abbd8902!2sIbrahim%20Bagh%2C%20Hyderabad%2C%20Telangana%20500031!5e0!3m2!1sen!2sin!4v1719141043745!5m2!1sen!2sin"
                 className="w-full h-full" 
                 style={{ border: 0 }} 
                 loading="lazy"
-                title="Vasavi College of Engineering Location"
+                title="Ibrahim Bagh, Hyderabad, Telangana 500031"
               ></iframe>
             </div>
           </motion.div>
