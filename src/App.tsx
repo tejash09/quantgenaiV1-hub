@@ -37,6 +37,12 @@ const App = () => (
               <Route path="/contact" element={<Contact />} />
               {/* Redirect settings to dashboard for now */}
               <Route path="/settings" element={<Dashboard />} />
+              {/* Routes for Research Papers, Learning Resources, Video Tutorials */}
+              <Route path="/topic/research-papers" element={<TopicPage />} />
+              <Route path="/topic/learning-resources" element={<TopicPage />} />
+              <Route path="/topic/video-tutorials" element={<TopicPage />} />
+              <Route path="/topic/genai" element={<TopicPage />} />
+              <Route path="/topic/llms" element={<TopicPage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

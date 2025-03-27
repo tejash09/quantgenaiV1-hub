@@ -16,35 +16,6 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/30" />
       </div>
 
-      {/* Animated particles or shapes in the background */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full bg-quantum-300/20"
-            initial={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
-              scale: Math.random() * 0.5 + 0.5,
-              opacity: Math.random() * 0.3 + 0.1
-            }}
-            animate={{
-              y: [null, '-10vh'],
-              opacity: [null, 0],
-              transition: {
-                duration: Math.random() * 10 + 10,
-                repeat: Infinity,
-                ease: 'linear'
-              }
-            }}
-            style={{
-              width: `${Math.random() * 50 + 10}px`,
-              height: `${Math.random() * 50 + 10}px`,
-            }}
-          />
-        ))}
-      </div>
-
       {/* Content */}
       <div className="container px-6 relative z-10">
         <div className="max-w-3xl mx-auto text-center">

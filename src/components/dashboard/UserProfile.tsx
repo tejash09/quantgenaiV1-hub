@@ -20,10 +20,29 @@ const UserProfile = () => {
   };
 
   const handleMenuClick = (title: string) => {
+    const route = getRouteForTitle(title);
+    navigate(route);
     toast({
       title: `${title} Selected`,
       description: `You've navigated to the ${title} section`,
     });
+  };
+
+  const getRouteForTitle = (title: string) => {
+    switch(title) {
+      case 'Research Papers':
+        return '/topic/research-papers';
+      case 'Learning Resources':
+        return '/topic/learning-resources';
+      case 'Video Tutorials':
+        return '/topic/video-tutorials';
+      case 'AI Assistant':
+        return '/dashboard?openChat=true';
+      case 'Settings':
+        return '/settings';
+      default:
+        return '/dashboard';
+    }
   };
 
   return (

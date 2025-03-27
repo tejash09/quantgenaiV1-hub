@@ -55,7 +55,7 @@ const Navbar = () => {
               <Link to="#services" className="nav-link">Services</Link>
               <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2 z-10">
                 <div className="rounded-md ring-1 ring-black ring-opacity-5 p-2 space-y-1">
-                  {['Machine Learning', 'Deep Learning', 'NLP', 'Robotics', 'Drones', 'Quantum Computing'].map((service) => (
+                  {['Machine Learning', 'Deep Learning', 'NLP', 'Robotics', 'Drones', 'Quantum Computing', 'GenAI', 'LLMs'].map((service) => (
                     <Link 
                       key={service}
                       to={`/topic/${service.toLowerCase().replace(' ', '-')}`}
@@ -125,7 +125,7 @@ const Navbar = () => {
             <Link to="/about" className="nav-link px-4 py-2">About</Link>
             <Link to="#services" className="nav-link px-4 py-2">Services</Link>
             <div className="pl-8 space-y-2">
-              {['Machine Learning', 'Deep Learning', 'NLP', 'Robotics', 'Drones', 'Quantum Computing'].map((service) => (
+              {['Machine Learning', 'Deep Learning', 'NLP', 'Robotics', 'Drones', 'Quantum Computing', 'GenAI', 'LLMs'].map((service) => (
                 <Link 
                   key={service}
                   to={`/topic/${service.toLowerCase().replace(' ', '-')}`}

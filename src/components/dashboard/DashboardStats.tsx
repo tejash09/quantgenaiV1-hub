@@ -3,7 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
 import { Button } from '@/components/ui/button';
-import { BellRing, Search, FileText, Book, MessageSquare } from 'lucide-react';
+import { Search, FileText, Book, MessageSquare } from 'lucide-react';
 
 const DashboardStats = () => {
   const { user } = useAuth();
@@ -24,17 +24,6 @@ const DashboardStats = () => {
             <p className="text-gray-600 dark:text-gray-400 mt-1">
               Here's what's new in the world of AI and quantum technologies
             </p>
-          </div>
-          
-          <div className="mt-4 md:mt-0 flex space-x-2">
-            <Button variant="outline" size="sm" className="flex items-center">
-              <BellRing className="w-4 h-4 mr-2" />
-              <span>Notifications</span>
-            </Button>
-            <Button size="sm" className="bg-quantum-500 hover:bg-quantum-600 text-white flex items-center">
-              <Search className="w-4 h-4 mr-2" />
-              <span>Search</span>
-            </Button>
           </div>
         </div>
         
