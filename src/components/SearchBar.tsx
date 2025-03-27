@@ -5,11 +5,12 @@ import { Search, X, FileText, Book, Tag } from 'lucide-react';
 import { searchContent } from '../utils/mockData';
 
 interface SearchBarProps {
+  onSearch?: (query: string) => void;
   onClose?: () => void;
   className?: string;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ onClose, className }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onClose, className }) => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<any>({ topics: [], papers: [], resources: [] });
   const [isLoading, setIsLoading] = useState(false);
@@ -49,7 +50,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ onClose, className }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle submission logic if needed
+    // Call the onSearch prop function if it exists
+    if (onSearch) {
+      onSearch(query);
+    }
   };
 
   return (
