@@ -18,28 +18,11 @@ const AllResources = () => {
   
   // Get all resources from all topics
   const allResources = topics.flatMap(topic => {
-    const tutorials = topic.tutorials?.map(tutorial => ({
-      ...tutorial,
-      type: 'tutorial',
+    return topic.resources.map(resource => ({
+      ...resource,
       topic: topic.title,
       topicSlug: topic.slug
-    })) || [];
-    
-    const courses = topic.courses?.map(course => ({
-      ...course,
-      type: 'course',
-      topic: topic.title,
-      topicSlug: topic.slug
-    })) || [];
-    
-    const videos = topic.videos?.map(video => ({
-      ...video,
-      type: 'video',
-      topic: topic.title,
-      topicSlug: topic.slug
-    })) || [];
-    
-    return [...tutorials, ...courses, ...videos];
+    }));
   });
   
   // Filter resources based on search query, selected topic, and resource type
@@ -50,7 +33,7 @@ const AllResources = () => {
     
     const matchesTopic = selectedTopic === 'all' || resource.topic.toLowerCase() === selectedTopic.toLowerCase();
     
-    const matchesType = resourceType === 'all' || resource.type === resourceType;
+    const matchesType = resourceType === 'all' || resource.type.toLowerCase() === resourceType.toLowerCase();
     
     return matchesSearch && matchesTopic && matchesType;
   });
@@ -130,16 +113,16 @@ const AllResources = () => {
                 <div className="p-6">
                   <div className="h-12 w-12 rounded-lg flex items-center justify-center mb-4"
                     style={{
-                      backgroundColor: resource.type === 'video'
+                      backgroundColor: resource.type.toLowerCase() === 'video'
                         ? 'rgba(220, 38, 38, 0.1)'
-                        : resource.type === 'course'
+                        : resource.type.toLowerCase() === 'course'
                           ? 'rgba(79, 70, 229, 0.1)'
                           : 'rgba(16, 185, 129, 0.1)'
                     }}
                   >
-                    {resource.type === 'video' ? (
+                    {resource.type.toLowerCase() === 'video' ? (
                       <Video className="w-6 h-6 text-red-500" />
-                    ) : resource.type === 'course' ? (
+                    ) : resource.type.toLowerCase() === 'course' ? (
                       <Book className="w-6 h-6 text-indigo-500" />
                     ) : (
                       <Book className="w-6 h-6 text-emerald-500" />
@@ -151,31 +134,19 @@ const AllResources = () => {
                       {resource.title}
                     </h3>
                     <Badge variant={
-                      resource.type === 'video'
+                      resource.type.toLowerCase() === 'video'
                         ? 'destructive'
-                        : resource.type === 'course'
+                        : resource.type.toLowerCase() === 'course'
                           ? 'default'
                           : 'outline'
                     }>
-                      {resource.type === 'video' ? 'Video' : resource.type === 'course' ? 'Course' : 'Tutorial'}
+                      {resource.type}
                     </Badge>
                   </div>
                   
                   <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3">
                     {resource.description}
                   </p>
-                  
-                  {resource.duration && (
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
-                      Duration: {resource.duration}
-                    </p>
-                  )}
-                  
-                  {resource.level && (
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
-                      Level: {resource.level}
-                    </p>
-                  )}
                   
                   <div className="flex items-center justify-between mt-4">
                     <Button variant="default" size="sm" asChild className="gap-2">
