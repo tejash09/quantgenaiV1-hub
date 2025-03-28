@@ -1,43 +1,10 @@
 
-import React, { useEffect, useState } from 'react';
-import { Navigate, useLocation, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import DashboardLayout from '../components/dashboard/DashboardLayout';
 import Chatbot from '../components/Chatbot';
 import { useAuth } from '../context/AuthContext';
-
-// Create pages for each section in dashboard
-const ResearchPapers = () => (
-  <div className="p-4">
-    <h2 className="text-2xl font-bold mb-4">Research Papers</h2>
-    <p>Browse through our collection of research papers on quantum computing, AI, and more.</p>
-    {/* Content would go here */}
-  </div>
-);
-
-const LearningResources = () => (
-  <div className="p-4">
-    <h2 className="text-2xl font-bold mb-4">Learning Resources</h2>
-    <p>Explore educational materials to help you understand advanced technologies.</p>
-    {/* Content would go here */}
-  </div>
-);
-
-const VideoTutorials = () => (
-  <div className="p-4">
-    <h2 className="text-2xl font-bold mb-4">Video Tutorials</h2>
-    <p>Watch video tutorials on various technology topics.</p>
-    {/* Content would go here */}
-  </div>
-);
-
-const Settings = () => (
-  <div className="p-4">
-    <h2 className="text-2xl font-bold mb-4">Settings</h2>
-    <p>Manage your account settings and preferences.</p>
-    {/* Content would go here */}
-  </div>
-);
 
 const Dashboard = () => {
   const { isAuthenticated } = useAuth();

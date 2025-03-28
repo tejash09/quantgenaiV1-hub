@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -12,6 +13,8 @@ import TopicPage from "./pages/TopicPage";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import AllPapers from "./pages/AllPapers";
+import AllResources from "./pages/AllResources";
 
 // Import framer-motion
 import { motion, AnimatePresence } from "framer-motion";
@@ -34,8 +37,9 @@ const App = () => (
               <Route path="/topic/:slug" element={<TopicPage />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
-              {/* Redirect settings to dashboard for now */}
-              <Route path="/settings" element={<Dashboard />} />
+              {/* New pages for all papers and resources */}
+              <Route path="/papers" element={<AllPapers />} />
+              <Route path="/resources" element={<AllResources />} />
               {/* Routes for Research Papers, Learning Resources, Video Tutorials */}
               <Route path="/topic/research-papers" element={<TopicPage />} />
               <Route path="/topic/learning-resources" element={<TopicPage />} />

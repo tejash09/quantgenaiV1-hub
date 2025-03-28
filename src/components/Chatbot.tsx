@@ -1,15 +1,21 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Bot, X, ChevronDown, ChevronUp } from 'lucide-react';
+import { Send, Bot, X, ChevronDown, ChevronUp, Book, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
+import { getAllTopics } from '../utils/mockData';
 
 interface Message {
   id: string;
   text: string;
   sender: 'user' | 'bot';
   timestamp: Date;
+  resources?: {
+    type: 'paper' | 'resource';
+    title: string;
+    link: string;
+  }[];
 }
 
 // Sample AI knowledge base for common questions
@@ -47,6 +53,21 @@ const Chatbot: React.FC = () => {
     scrollToBottom();
   }, [messages, isTyping]);
 
+  useEffect(() => {
+    // Listen for custom events to open the chat
+    const handleOpenChat = (e: CustomEvent) => {
+      if (e.detail?.open) {
+        setIsOpen(true);
+        setIsMinimized(false);
+      }
+    };
+
+    window.addEventListener('openChat' as any, handleOpenChat);
+    return () => {
+      window.removeEventListener('openChat' as any, handleOpenChat);
+    };
+  }, []);
+
   const toggleChat = () => {
     if (!isOpen) {
       setIsOpen(true);
@@ -60,42 +81,178 @@ const Chatbot: React.FC = () => {
     setIsOpen(false);
   };
 
+  // Function to find related papers and resources for a topic
+  const findTopicResources = (query: string) => {
+    // Convert query to lowercase for case-insensitive matching
+    const lcQuery = query.toLowerCase();
+    const topics = getAllTopics();
+    
+    // Keywords to identify if the user is asking for resources or papers
+    const resourceKeywords = ['resource', 'tutorial', 'course', 'video', 'learn', 'guide', 'how to'];
+    const paperKeywords = ['paper', 'research', 'study', 'publication', 'journal', 'conference'];
+    
+    // Check if query is asking for resources or papers
+    const isAskingForResources = resourceKeywords.some(keyword => lcQuery.includes(keyword));
+    const isAskingForPapers = paperKeywords.some(keyword => lcQuery.includes(keyword));
+    
+    // If not specifically asking for papers or resources, return nothing
+    if (!isAskingForResources && !isAskingForPapers) {
+      return null;
+    }
+    
+    // Find the topic that matches the query
+    let matchedTopic = null;
+    for (const topic of topics) {
+      if (lcQuery.includes(topic.title.toLowerCase()) || lcQuery.includes(topic.slug.replace('-', ' '))) {
+        matchedTopic = topic;
+        break;
+      }
+    }
+    
+    // If no specific topic is found, look for general AI/ML/Quantum keywords
+    if (!matchedTopic) {
+      if (lcQuery.includes('quantum') || lcQuery.includes('qubits')) {
+        matchedTopic = topics.find(t => t.slug === 'quantum-computing');
+      } else if (lcQuery.includes('ai') || lcQuery.includes('artificial intelligence')) {
+        matchedTopic = topics.find(t => t.slug === 'artificial-intelligence');
+      } else if (lcQuery.includes('machine learning') || lcQuery.includes('ml')) {
+        matchedTopic = topics.find(t => t.slug === 'machine-learning');
+      } else if (lcQuery.includes('deep learning') || lcQuery.includes('neural network')) {
+        matchedTopic = topics.find(t => t.slug === 'deep-learning');
+      } else if (lcQuery.includes('llm') || lcQuery.includes('language model')) {
+        matchedTopic = topics.find(t => t.slug === 'llm');
+      } else if (lcQuery.includes('genai') || lcQuery.includes('generative ai')) {
+        matchedTopic = topics.find(t => t.slug === 'genai');
+      }
+    }
+    
+    if (!matchedTopic) {
+      return null;
+    }
+    
+    const result: {
+      type: 'paper' | 'resource';
+      title: string;
+      link: string;
+    }[] = [];
+    
+    // Add papers if requested
+    if (isAskingForPapers && matchedTopic.papers) {
+      result.push(...matchedTopic.papers.slice(0, 3).map(paper => ({
+        type: 'paper' as const,
+        title: paper.title,
+        link: paper.link
+      })));
+    }
+    
+    // Add resources if requested
+    if (isAskingForResources) {
+      if (matchedTopic.tutorials) {
+        result.push(...matchedTopic.tutorials.slice(0, 1).map(tutorial => ({
+          type: 'resource' as const,
+          title: tutorial.title,
+          link: tutorial.link
+        })));
+      }
+      
+      if (matchedTopic.courses) {
+        result.push(...matchedTopic.courses.slice(0, 1).map(course => ({
+          type: 'resource' as const,
+          title: course.title,
+          link: course.link
+        })));
+      }
+      
+      if (matchedTopic.videos) {
+        result.push(...matchedTopic.videos.slice(0, 1).map(video => ({
+          type: 'resource' as const,
+          title: video.title,
+          link: video.link
+        })));
+      }
+    }
+    
+    return result.length > 0 ? result : null;
+  };
+
   // Function to generate AI response based on user input
   const generateResponse = async (userMessage: string) => {
     const lowerCaseMessage = userMessage.toLowerCase();
     
+    // Find related resources if the user is asking for papers or resources
+    const relatedResources = findTopicResources(userMessage);
+    
     // Check knowledge base for exact matches
     for (const [key, value] of Object.entries(knowledgeBase)) {
       if (lowerCaseMessage.includes(key)) {
-        return value;
+        let response = value;
+        
+        // Add a prompt to ask for resources if we found related resources
+        if (relatedResources) {
+          response += "\n\nI've also found some relevant resources that might interest you.";
+        }
+        
+        return { text: response, resources: relatedResources };
       }
     }
     
     // Handle greetings
     if (lowerCaseMessage.match(/^(hi|hello|hey|greetings)/i)) {
-      return "Hello! How can I help you with quantum computing or AI today?";
+      return { text: "Hello! How can I help you with quantum computing or AI today?" };
     }
     
     // Handle thanks
     if (lowerCaseMessage.match(/(thank you|thanks)/i)) {
-      return "You're welcome! Feel free to ask if you have more questions.";
+      return { text: "You're welcome! Feel free to ask if you have more questions." };
     }
 
     // Handle questions about specific topics
     if (lowerCaseMessage.includes("quantum")) {
-      return "Quantum computing is a fascinating field that uses quantum mechanics principles to process information. It has potential applications in cryptography, optimization problems, and simulating quantum systems.";
+      let response = "Quantum computing is a fascinating field that uses quantum mechanics principles to process information. It has potential applications in cryptography, optimization problems, and simulating quantum systems.";
+      
+      if (relatedResources) {
+        response += "\n\nI've found some relevant quantum computing resources that might interest you.";
+      }
+      
+      return { text: response, resources: relatedResources };
     }
     
     if (lowerCaseMessage.includes("machine learning") || lowerCaseMessage.includes("ml")) {
-      return "Machine learning is a field of study that gives computers the ability to learn without being explicitly programmed. It focuses on developing algorithms that can access data and use it to learn for themselves.";
+      let response = "Machine learning is a field of study that gives computers the ability to learn without being explicitly programmed. It focuses on developing algorithms that can access data and use it to learn for themselves.";
+      
+      if (relatedResources) {
+        response += "\n\nI've found some relevant machine learning resources that might interest you.";
+      }
+      
+      return { text: response, resources: relatedResources };
     }
 
     if (lowerCaseMessage.includes("llm") || lowerCaseMessage.includes("language model")) {
-      return "Large Language Models (LLMs) are sophisticated AI systems trained on vast amounts of text data. They can understand context, generate human-like text, and perform various language tasks from translation to creative writing.";
+      let response = "Large Language Models (LLMs) are sophisticated AI systems trained on vast amounts of text data. They can understand context, generate human-like text, and perform various language tasks from translation to creative writing.";
+      
+      if (relatedResources) {
+        response += "\n\nI've found some relevant LLM resources that might interest you.";
+      }
+      
+      return { text: response, resources: relatedResources };
     }
 
     if (lowerCaseMessage.includes("genai") || lowerCaseMessage.includes("generative")) {
-      return "Generative AI refers to AI systems that can create new content like text, images, audio, and video. These systems learn patterns from existing data and generate new outputs that reflect those patterns.";
+      let response = "Generative AI refers to AI systems that can create new content like text, images, audio, and video. These systems learn patterns from existing data and generate new outputs that reflect those patterns.";
+      
+      if (relatedResources) {
+        response += "\n\nI've found some relevant Generative AI resources that might interest you.";
+      }
+      
+      return { text: response, resources: relatedResources };
+    }
+
+    // If the user is asking for resources but we don't have a specific topic match
+    if (relatedResources) {
+      return { 
+        text: "I've found some resources that might help you with your question:", 
+        resources: relatedResources 
+      };
     }
 
     // Default responses for unknown queries
@@ -107,7 +264,7 @@ const Chatbot: React.FC = () => {
       "This is an evolving field of study. Check out our latest research papers for the most up-to-date information on this topic."
     ];
     
-    return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+    return { text: defaultResponses[Math.floor(Math.random() * defaultResponses.length)] };
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -130,14 +287,15 @@ const Chatbot: React.FC = () => {
       const response = await generateResponse(input);
       
       // Simulate variable typing time
-      const typingDelay = Math.max(700, Math.min(2000, response.length * 10));
+      const typingDelay = Math.max(700, Math.min(2000, response.text.length * 10));
       
       setTimeout(() => {
         const botMessage: Message = {
           id: (Date.now() + 1).toString(),
-          text: response,
+          text: response.text,
           sender: 'bot',
           timestamp: new Date(),
+          resources: response.resources || undefined
         };
         
         setMessages(prevMessages => [...prevMessages, botMessage]);
@@ -229,6 +387,32 @@ const Chatbot: React.FC = () => {
                           }`}
                         >
                           <p className="text-sm whitespace-pre-wrap">{message.text}</p>
+                          
+                          {/* Resources section */}
+                          {message.resources && message.resources.length > 0 && (
+                            <div className="mt-3 border-t border-gray-200 dark:border-gray-700 pt-2">
+                              <p className="text-xs font-medium mb-2">Recommended resources:</p>
+                              <div className="space-y-2">
+                                {message.resources.map((resource, index) => (
+                                  <a
+                                    key={index}
+                                    href={resource.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center text-xs p-2 bg-white dark:bg-gray-700 rounded-md hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
+                                  >
+                                    {resource.type === 'paper' ? (
+                                      <FileText className="h-3 w-3 mr-2 text-quantum-500" />
+                                    ) : (
+                                      <Book className="h-3 w-3 mr-2 text-quantum-500" />
+                                    )}
+                                    <span className="line-clamp-1">{resource.title}</span>
+                                  </a>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                          
                           <span className="text-xs opacity-70 mt-1 block text-right">
                             {formatTime(message.timestamp)}
                           </span>
