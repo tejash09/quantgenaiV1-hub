@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { User, FileText, Book, Video, Brain, Settings, LogOut } from 'lucide-react';
+import { User, FileText, Book, Video, Brain, LogOut } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '@/hooks/use-toast';
@@ -31,15 +31,13 @@ const UserProfile = () => {
   const getRouteForTitle = (title: string) => {
     switch(title) {
       case 'Research Papers':
-        return '/topic/research-papers';
+        return '/papers';
       case 'Learning Resources':
-        return '/topic/learning-resources';
+        return '/resources';
       case 'Video Tutorials':
         return '/topic/video-tutorials';
       case 'AI Assistant':
         return '/dashboard?openChat=true';
-      case 'Settings':
-        return '/settings';
       default:
         return '/dashboard';
     }
@@ -77,7 +75,7 @@ const UserProfile = () => {
           </li>
           <li>
             <Link 
-              to="/topic/research-papers" 
+              to="/papers" 
               className="flex items-center p-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
               onClick={() => handleMenuClick('Research Papers')}
             >
@@ -89,7 +87,7 @@ const UserProfile = () => {
           </li>
           <li>
             <Link 
-              to="/topic/learning-resources" 
+              to="/resources" 
               className="flex items-center p-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
               onClick={() => handleMenuClick('Learning Resources')}
             >
@@ -121,18 +119,6 @@ const UserProfile = () => {
                 <Brain className="w-4 h-4" />
               </div>
               <span>AI Assistant</span>
-            </Link>
-          </li>
-          <li>
-            <Link 
-              to="/settings" 
-              className="flex items-center p-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-              onClick={() => handleMenuClick('Settings')}
-            >
-              <div className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-500 flex items-center justify-center mr-3">
-                <Settings className="w-4 h-4" />
-              </div>
-              <span>Settings</span>
             </Link>
           </li>
           <li>
