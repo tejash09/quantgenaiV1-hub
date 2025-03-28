@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -230,7 +231,7 @@ const TopicPage = () => {
                 <div className="mt-6 text-center">
                   <Button 
                     variant="outline"
-                    onClick={() => navigate(`/topic/research-papers?topic=${topic.slug}`)}
+                    onClick={() => navigate(`/papers?topic=${topic.slug}`)}
                   >
                     View All Papers
                     <ChevronRight className="ml-2 h-4 w-4" />
@@ -277,7 +278,7 @@ const TopicPage = () => {
                 <div className="mt-6 text-center">
                   <Button 
                     variant="outline"
-                    onClick={() => navigate(`/topic/learning-resources?topic=${topic.slug}`)}
+                    onClick={() => navigate(`/resources?topic=${topic.slug}`)}
                   >
                     View All Resources
                     <ChevronRight className="ml-2 h-4 w-4" />

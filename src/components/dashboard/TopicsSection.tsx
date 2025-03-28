@@ -18,7 +18,7 @@ const TopicsSection = () => {
         <h2 className="text-xl font-bold text-gray-900 dark:text-white">
           Explore Technologies
         </h2>
-        <Link to="#" className="text-quantum-500 hover:text-quantum-600 text-sm font-medium">
+        <Link to="/dashboard" className="text-quantum-500 hover:text-quantum-600 text-sm font-medium">
           View all
         </Link>
       </div>

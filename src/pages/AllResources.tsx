@@ -1,6 +1,7 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { getAllTopics } from '../utils/mockData';
 import { Book, Video, Search, Filter, ExternalLink } from 'lucide-react';
@@ -15,6 +16,21 @@ const AllResources = () => {
   const [selectedTopic, setSelectedTopic] = useState('all');
   const [resourceType, setResourceType] = useState('all');
   const topics = getAllTopics();
+  const location = useLocation();
+  
+  // Extract topic from URL query parameter
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const topicParam = params.get('topic');
+    
+    if (topicParam) {
+      // Find the matching topic by slug
+      const matchingTopic = topics.find(t => t.slug === topicParam);
+      if (matchingTopic) {
+        setSelectedTopic(matchingTopic.title.toLowerCase());
+      }
+    }
+  }, [location, topics]);
   
   // Get all resources from all topics
   const allResources = topics.flatMap(topic => {

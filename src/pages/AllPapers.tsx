@@ -1,6 +1,7 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { getAllTopics } from '../utils/mockData';
 import { FileText, Search, Filter } from 'lucide-react';
@@ -12,6 +13,21 @@ const AllPapers = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTopic, setSelectedTopic] = useState('all');
   const topics = getAllTopics();
+  const location = useLocation();
+  
+  // Extract topic from URL query parameter
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const topicParam = params.get('topic');
+    
+    if (topicParam) {
+      // Find the matching topic by slug
+      const matchingTopic = topics.find(t => t.slug === topicParam);
+      if (matchingTopic) {
+        setSelectedTopic(matchingTopic.title.toLowerCase());
+      }
+    }
+  }, [location, topics]);
   
   // Flatten all papers from all topics
   const allPapers = topics.flatMap(topic => 
