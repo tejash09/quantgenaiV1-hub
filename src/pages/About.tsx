@@ -118,15 +118,36 @@ const About = () => {
             >
               <div className="w-12 h-12 bg-quantum-100 dark:bg-quantum-900 text-quantum-500 rounded-xl flex items-center justify-center mx-auto mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Connect</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Implement</h3>
               <p className="text-gray-600 dark:text-gray-400">
-                We build communities of students and teachers passionate about leveraging technology for better learning experiences.
+                We help bridge the gap between theoretical knowledge and practical applications of advanced technologies.
               </p>
             </motion.div>
           </div>
+        </div>
+      </section>
+      
+      {/* Inspirational Quote Section (replacing community section) */}
+      <section className="py-16 md:py-24 px-4 bg-gradient-to-r from-quantum-800 to-quantum-900 text-white">
+        <div className="container mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="max-w-3xl mx-auto"
+          >
+            <div className="text-5xl font-bold mb-6">"</div>
+            <h2 className="text-2xl md:text-3xl font-light italic mb-6">
+              Learning AI today is developing humanity for tomorrow. The future belongs to those who understand the machines that shape it.
+            </h2>
+            <div className="text-5xl font-bold mb-6">"</div>
+            <p className="text-lg text-quantum-100 mt-8">
+              Join us on this journey to understand and harness the power of advanced technologies for a better future.
+            </p>
+          </motion.div>
         </div>
       </section>
       
@@ -161,16 +182,16 @@ const About = () => {
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">Our Story</h2>
               <div className="space-y-4 text-gray-600 dark:text-gray-400">
                 <p>
-                  QuantGenAILabs was created by a group of passionate students who wanted to better understand cutting-edge technologies like quantum computing and artificial intelligence.
+                  QuantGenAILabs was created by a group of passionate researchers who wanted to better understand cutting-edge technologies like quantum computing and artificial intelligence.
                 </p>
                 <p>
                   We recognized that many educational resources on advanced technologies were either too technical or scattered across different platforms, making it difficult for students to learn effectively.
                 </p>
                 <p>
-                  Our platform aims to bridge this gap by providing accessible, structured learning resources that help both students in their learning journey and teachers in their instructional efforts.
+                  Our platform aims to bridge this gap by providing accessible, structured learning resources that help both students in their learning journey and professionals in their instructional efforts.
                 </p>
                 <p>
-                  Built by students for students, our mission is to democratize knowledge about advanced technologies and make complex concepts easier to understand for everyone in the educational community.
+                  Our mission is to democratize knowledge about advanced technologies and make complex concepts easier to understand for everyone interested in the field.
                 </p>
               </div>
             </motion.div>
@@ -179,27 +200,27 @@ const About = () => {
       </section>
       
       {/* CTA Section */}
-      <section className="py-16 md:py-24 px-4 bg-gradient-to-r from-quantum-800 to-quantum-900 text-white">
-        <div className="container mx-auto text-center">
+      <section className="py-16 md:py-24 px-4 bg-gray-50 dark:bg-gray-950 text-center">
+        <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="max-w-3xl mx-auto"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Join the QuantGenAILabs Community</h2>
-            <p className="text-lg text-quantum-100 mb-8">
-              Sign up today to access our full library of resources, connect with fellow students and teachers, and stay updated on the latest in AI and quantum technologies.
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">Ready to Explore?</h2>
+            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
+              Sign up today to access our full library of resources and stay updated on the latest in AI and quantum technologies.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
               <Link to="/signup">
-                <Button size="lg" className="bg-white text-quantum-800 hover:bg-quantum-100">
+                <Button size="lg" className="bg-quantum-500 hover:bg-quantum-600 text-white">
                   Get Started
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
               <Link to="/contact">
-                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/10">
+                <Button variant="outline" size="lg" className="border-quantum-500 text-quantum-500 hover:bg-quantum-50 dark:hover:bg-quantum-900/20">
                   Contact Us
                 </Button>
               </Link>

@@ -5,6 +5,13 @@ import { Send, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 
+interface FeedbackData {
+  name: string;
+  email: string;
+  message: string;
+  timestamp: string;
+}
+
 const FeedbackForm = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -27,24 +34,51 @@ const FeedbackForm = () => {
 
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    
-    toast({
-      title: "Feedback submitted",
-      description: "Thank you for your feedback!",
-    });
-    
-    // Reset form after 2 seconds
-    setTimeout(() => {
-      setName('');
-      setEmail('');
-      setMessage('');
-      setIsSubmitted(false);
-    }, 2000);
+    try {
+      // Create feedback object
+      const feedbackData: FeedbackData = {
+        name,
+        email,
+        message,
+        timestamp: new Date().toISOString(),
+      };
+      
+      // In a real application with Supabase, you would save to database:
+      // const { data, error } = await supabase
+      //   .from('feedback')
+      //   .insert([feedbackData]);
+      
+      // Simulate API call to send email
+      console.log("Sending feedback email to sayitqwerty@gmail.com:", feedbackData);
+      
+      // Simulate server delay
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+      
+      toast({
+        title: "Feedback submitted",
+        description: "Thank you for your feedback! We'll get back to you soon.",
+      });
+      
+      // Reset form after 2 seconds
+      setTimeout(() => {
+        setName('');
+        setEmail('');
+        setMessage('');
+        setIsSubmitted(false);
+      }, 2000);
+    } catch (error) {
+      console.error("Error submitting feedback:", error);
+      setIsSubmitting(false);
+      
+      toast({
+        title: "Submission failed",
+        description: "There was a problem submitting your feedback. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (

@@ -1,8 +1,9 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Bot, X, ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
 
 interface Message {
   id: string;
@@ -11,6 +12,17 @@ interface Message {
   timestamp: Date;
 }
 
+// Sample AI knowledge base for common questions
+const knowledgeBase = {
+  "what is quantum computing": "Quantum computing is a type of computation that harnesses quantum-mechanical phenomena like superposition and entanglement to perform calculations. Unlike classical computers that use bits (0 or 1), quantum computers use quantum bits or qubits that can exist in multiple states simultaneously.",
+  "explain machine learning": "Machine learning is a subset of artificial intelligence that enables systems to learn from data, identify patterns, and make decisions with minimal human intervention. It involves algorithms that improve automatically through experience.",
+  "what are large language models": "Large Language Models (LLMs) are advanced AI systems trained on vast amounts of text data that can understand, generate, and manipulate human language. Examples include GPT-4, Claude, and Llama. They can perform various tasks from translation to creative writing and coding.",
+  "what is generative ai": "Generative AI refers to artificial intelligence systems that can generate new content such as text, images, audio, and video. These models learn patterns from existing data and create new outputs that reflect those patterns. Examples include DALL-E for images and GPT for text.",
+  "what is deep learning": "Deep learning is a subset of machine learning that uses neural networks with multiple layers (deep neural networks) to analyze various factors of data. It's particularly powerful for processing unstructured data like images, sound, and text.",
+  "what are neural networks": "Neural networks are computing systems inspired by the human brain. They consist of interconnected nodes or 'neurons' that process information. These networks can learn to perform tasks by analyzing examples, without being explicitly programmed for the specific task.",
+  "what is nlp": "Natural Language Processing (NLP) is a field of AI that focuses on the interaction between computers and human language. It enables machines to read, understand, and derive meaning from human languages, facilitating tasks like translation, sentiment analysis, and question answering."
+};
+
 const Chatbot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
@@ -18,12 +30,22 @@ const Chatbot: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: "Hi there! I'm QuantBot, your AI assistant. How can I help you today?",
+      text: "Hi there! I'm QuantBot, your AI assistant for quantum computing and AI topics. How can I help you today?",
       sender: 'bot',
       timestamp: new Date(),
     },
   ]);
   const [isTyping, setIsTyping] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const { toast } = useToast();
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isTyping]);
 
   const toggleChat = () => {
     if (!isOpen) {
@@ -38,7 +60,57 @@ const Chatbot: React.FC = () => {
     setIsOpen(false);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Function to generate AI response based on user input
+  const generateResponse = async (userMessage: string) => {
+    const lowerCaseMessage = userMessage.toLowerCase();
+    
+    // Check knowledge base for exact matches
+    for (const [key, value] of Object.entries(knowledgeBase)) {
+      if (lowerCaseMessage.includes(key)) {
+        return value;
+      }
+    }
+    
+    // Handle greetings
+    if (lowerCaseMessage.match(/^(hi|hello|hey|greetings)/i)) {
+      return "Hello! How can I help you with quantum computing or AI today?";
+    }
+    
+    // Handle thanks
+    if (lowerCaseMessage.match(/(thank you|thanks)/i)) {
+      return "You're welcome! Feel free to ask if you have more questions.";
+    }
+
+    // Handle questions about specific topics
+    if (lowerCaseMessage.includes("quantum")) {
+      return "Quantum computing is a fascinating field that uses quantum mechanics principles to process information. It has potential applications in cryptography, optimization problems, and simulating quantum systems.";
+    }
+    
+    if (lowerCaseMessage.includes("machine learning") || lowerCaseMessage.includes("ml")) {
+      return "Machine learning is a field of study that gives computers the ability to learn without being explicitly programmed. It focuses on developing algorithms that can access data and use it to learn for themselves.";
+    }
+
+    if (lowerCaseMessage.includes("llm") || lowerCaseMessage.includes("language model")) {
+      return "Large Language Models (LLMs) are sophisticated AI systems trained on vast amounts of text data. They can understand context, generate human-like text, and perform various language tasks from translation to creative writing.";
+    }
+
+    if (lowerCaseMessage.includes("genai") || lowerCaseMessage.includes("generative")) {
+      return "Generative AI refers to AI systems that can create new content like text, images, audio, and video. These systems learn patterns from existing data and generate new outputs that reflect those patterns.";
+    }
+
+    // Default responses for unknown queries
+    const defaultResponses = [
+      "That's an interesting question about emerging technologies. While I don't have the specific answer, I recommend checking our resources section for more information.",
+      "I'm still learning about that topic. You might find more details in our research papers section on the website.",
+      "Great question! This is a complex area of research. I suggest exploring our educational resources for more in-depth information.",
+      "I don't have complete information on that yet. Our website has curated resources that might help you understand this topic better.",
+      "This is an evolving field of study. Check out our latest research papers for the most up-to-date information on this topic."
+    ];
+    
+    return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
 
@@ -49,30 +121,37 @@ const Chatbot: React.FC = () => {
       sender: 'user',
       timestamp: new Date(),
     };
-    setMessages([...messages, userMessage]);
+    setMessages(prevMessages => [...prevMessages, userMessage]);
     setInput('');
     setIsTyping(true);
 
-    // Simulate bot response after delay
-    setTimeout(() => {
-      const botResponses = [
-        "That's an interesting question about AI technologies! Let me explain...",
-        "Great question about quantum computing! It's a fascinating field that...",
-        "I'd recommend checking out our resources section for more information on that topic.",
-        "Machine learning models work by analyzing patterns in data. Would you like me to go into more detail?",
-        "You can find papers on that subject in our research section. Would you like me to point you to some specific resources?",
-      ];
+    try {
+      // Generate response based on user input
+      const response = await generateResponse(input);
       
-      const botMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        text: botResponses[Math.floor(Math.random() * botResponses.length)],
-        sender: 'bot',
-        timestamp: new Date(),
-      };
+      // Simulate variable typing time
+      const typingDelay = Math.max(700, Math.min(2000, response.length * 10));
       
-      setMessages(prevMessages => [...prevMessages, botMessage]);
+      setTimeout(() => {
+        const botMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          text: response,
+          sender: 'bot',
+          timestamp: new Date(),
+        };
+        
+        setMessages(prevMessages => [...prevMessages, botMessage]);
+        setIsTyping(false);
+      }, typingDelay);
+    } catch (error) {
+      console.error("Error generating response:", error);
+      toast({
+        title: "Error",
+        description: "Failed to generate a response. Please try again.",
+        variant: "destructive",
+      });
       setIsTyping(false);
-    }, 1000 + Math.random() * 1000);
+    }
   };
 
   const formatTime = (date: Date) => {
@@ -149,7 +228,7 @@ const Chatbot: React.FC = () => {
                               : 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white'
                           }`}
                         >
-                          <p className="text-sm">{message.text}</p>
+                          <p className="text-sm whitespace-pre-wrap">{message.text}</p>
                           <span className="text-xs opacity-70 mt-1 block text-right">
                             {formatTime(message.timestamp)}
                           </span>
@@ -168,6 +247,8 @@ const Chatbot: React.FC = () => {
                         </div>
                       </div>
                     )}
+                    
+                    <div ref={messagesEndRef} />
                   </div>
 
                   {/* Input */}
@@ -177,13 +258,13 @@ const Chatbot: React.FC = () => {
                         type="text"
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
-                        placeholder="Type your message..."
+                        placeholder="Ask about AI, quantum computing, etc..."
                         className="flex-1 px-4 py-2 rounded-l-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-quantum-500"
                       />
                       <Button
                         type="submit"
                         className="bg-quantum-500 hover:bg-quantum-600 text-white rounded-r-lg px-4"
-                        disabled={!input.trim()}
+                        disabled={!input.trim() || isTyping}
                       >
                         <Send className="h-4 w-4" />
                       </Button>

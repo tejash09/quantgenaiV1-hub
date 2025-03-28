@@ -13,6 +13,8 @@ import TopicPage from "./pages/TopicPage";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import GenAI from "./pages/GenAI";
+import LLM from "./pages/LLM";
 
 // Import framer-motion
 import { motion, AnimatePresence } from "framer-motion";
@@ -35,14 +37,15 @@ const App = () => (
               <Route path="/topic/:slug" element={<TopicPage />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
+              {/* Dedicated pages for specific technologies */}
+              <Route path="/topic/genai" element={<GenAI />} />
+              <Route path="/topic/llms" element={<LLM />} />
               {/* Redirect settings to dashboard for now */}
               <Route path="/settings" element={<Dashboard />} />
               {/* Routes for Research Papers, Learning Resources, Video Tutorials */}
               <Route path="/topic/research-papers" element={<TopicPage />} />
               <Route path="/topic/learning-resources" element={<TopicPage />} />
               <Route path="/topic/video-tutorials" element={<TopicPage />} />
-              <Route path="/topic/genai" element={<TopicPage />} />
-              <Route path="/topic/llms" element={<TopicPage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
