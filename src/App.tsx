@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -13,8 +12,6 @@ import TopicPage from "./pages/TopicPage";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
-import GenAI from "./pages/GenAI";
-import LLM from "./pages/LLM";
 
 // Import framer-motion
 import { motion, AnimatePresence } from "framer-motion";
@@ -37,9 +34,6 @@ const App = () => (
               <Route path="/topic/:slug" element={<TopicPage />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
-              {/* Dedicated pages for specific technologies */}
-              <Route path="/topic/genai" element={<GenAI />} />
-              <Route path="/topic/llms" element={<LLM />} />
               {/* Redirect settings to dashboard for now */}
               <Route path="/settings" element={<Dashboard />} />
               {/* Routes for Research Papers, Learning Resources, Video Tutorials */}

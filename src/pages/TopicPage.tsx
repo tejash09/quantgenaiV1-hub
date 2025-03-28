@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -229,7 +228,10 @@ const TopicPage = () => {
                 </div>
                 
                 <div className="mt-6 text-center">
-                  <Button variant="outline">
+                  <Button 
+                    variant="outline"
+                    onClick={() => navigate(`/topic/research-papers?topic=${topic.slug}`)}
+                  >
                     View All Papers
                     <ChevronRight className="ml-2 h-4 w-4" />
                   </Button>
@@ -271,6 +273,16 @@ const TopicPage = () => {
                     </div>
                   ))}
                 </div>
+
+                <div className="mt-6 text-center">
+                  <Button 
+                    variant="outline"
+                    onClick={() => navigate(`/topic/learning-resources?topic=${topic.slug}`)}
+                  >
+                    View All Resources
+                    <ChevronRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </div>
               </motion.div>
               
               <motion.div
@@ -282,17 +294,26 @@ const TopicPage = () => {
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Related Topics</h3>
                 
                 <ul className="space-y-2">
-                  {['Machine Learning', 'Deep Learning', 'NLP', 'Robotics', 'Drones', 'Quantum Computing']
-                    .filter(t => t.toLowerCase() !== topic.title.toLowerCase())
-                    .slice(0, 4)
+                  {[
+                    { title: 'Machine Learning', slug: 'machine-learning' },
+                    { title: 'Deep Learning', slug: 'deep-learning' },
+                    { title: 'NLP', slug: 'nlp' },
+                    { title: 'Robotics', slug: 'robotics' },
+                    { title: 'Drones', slug: 'drones' },
+                    { title: 'Quantum Computing', slug: 'quantum-computing' },
+                    { title: 'Generative AI', slug: 'genai' },
+                    { title: 'Large Language Models', slug: 'llms' }
+                  ]
+                    .filter(t => t.slug !== topic.slug)
+                    .slice(0, 8)
                     .map((relatedTopic, index) => (
                       <li key={index}>
                         <a 
-                          href={`/topic/${relatedTopic.toLowerCase().replace(' ', '-')}`}
+                          href={`/topic/${relatedTopic.slug}`}
                           className="flex items-center p-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                         >
                           <ChevronRight className="w-4 h-4 mr-2 text-quantum-500" />
-                          <span>{relatedTopic}</span>
+                          <span>{relatedTopic.title}</span>
                         </a>
                       </li>
                     ))

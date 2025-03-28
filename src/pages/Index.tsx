@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useAnimation } from 'framer-motion';
@@ -253,13 +252,13 @@ const Index = () => {
                 <li>
                   <Link to="/topic/genai" className="text-gray-400 hover:text-white transition-colors flex items-center">
                     <ChevronRight className="w-4 h-4 mr-1" />
-                    <span>GenAI</span>
+                    <span>Generative AI</span>
                   </Link>
                 </li>
                 <li>
                   <Link to="/topic/llms" className="text-gray-400 hover:text-white transition-colors flex items-center">
                     <ChevronRight className="w-4 h-4 mr-1" />
-                    <span>LLMs</span>
+                    <span>Large Language Models</span>
                   </Link>
                 </li>
               </ul>
