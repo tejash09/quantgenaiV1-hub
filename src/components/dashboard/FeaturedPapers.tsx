@@ -19,7 +19,7 @@ const FeaturedPapers = () => {
         <h2 className="text-xl font-bold text-gray-900 dark:text-white">
           Featured Research Papers
         </h2>
-        <Link to="#" className="text-quantum-500 hover:text-quantum-600 text-sm font-medium">
+        <Link to="/papers" className="text-quantum-500 hover:text-quantum-600 text-sm font-medium">
           Browse library
         </Link>
       </div>
