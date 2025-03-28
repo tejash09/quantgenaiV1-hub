@@ -1,13 +1,27 @@
 
 import React from 'react';
 import { User, FileText, Book, Video, Brain, LogOut } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, NavigateFunction } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 
+// Create a wrapper for navigation functions to handle cases when useNavigate is not available
+const useNavigateOrFallback = (): NavigateFunction | ((path: string) => void) => {
+  try {
+    return useNavigate();
+  } catch (error) {
+    // Fallback function if useNavigate throws an error (outside Router context)
+    return (path: string) => {
+      console.warn('Navigation attempted outside Router context. Would navigate to:', path);
+      // Optional: If you want to force navigation anyway:
+      window.location.href = path;
+    };
+  }
+};
+
 const UserProfile = () => {
   const { user, logout } = useAuth();
-  const navigate = useNavigate();
+  const navigate = useNavigateOrFallback();
   const { toast } = useToast();
   
   const handleLogout = () => {
@@ -16,16 +30,20 @@ const UserProfile = () => {
       title: "Logged out",
       description: "You have been successfully logged out",
     });
-    navigate('/');
+    if (typeof navigate === 'function') {
+      navigate('/');
+    }
   };
 
   const handleMenuClick = (title: string) => {
     const route = getRouteForTitle(title);
-    navigate(route);
-    toast({
-      title: `${title} Selected`,
-      description: `You've navigated to the ${title} section`,
-    });
+    if (typeof navigate === 'function') {
+      navigate(route);
+      toast({
+        title: `${title} Selected`,
+        description: `You've navigated to the ${title} section`,
+      });
+    }
   };
 
   const getRouteForTitle = (title: string) => {
