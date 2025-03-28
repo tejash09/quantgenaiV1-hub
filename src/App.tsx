@@ -15,10 +15,6 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import GenAI from "./pages/GenAI";
 import LLM from "./pages/LLM";
-import AllPapers from "./pages/AllPapers";
-import AllResources from "./pages/AllResources";
-import DeepLearning from "./pages/DeepLearning";
-import MachineLearning from "./pages/MachineLearning";
 
 // Import framer-motion
 import { motion, AnimatePresence } from "framer-motion";
@@ -44,11 +40,8 @@ const App = () => (
               {/* Dedicated pages for specific technologies */}
               <Route path="/topic/genai" element={<GenAI />} />
               <Route path="/topic/llms" element={<LLM />} />
-              <Route path="/topic/deep-learning" element={<DeepLearning />} />
-              <Route path="/topic/machine-learning" element={<MachineLearning />} />
-              {/* All Papers and Resources pages */}
-              <Route path="/papers" element={<AllPapers />} />
-              <Route path="/resources" element={<AllResources />} />
+              {/* Redirect settings to dashboard for now */}
+              <Route path="/settings" element={<Dashboard />} />
               {/* Routes for Research Papers, Learning Resources, Video Tutorials */}
               <Route path="/topic/research-papers" element={<TopicPage />} />
               <Route path="/topic/learning-resources" element={<TopicPage />} />
