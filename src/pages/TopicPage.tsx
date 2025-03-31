@@ -135,52 +135,75 @@ const TopicPage = () => {
                   </p>
                   
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies aliquam, 
-                    est odio lacinia nisi, id malesuada magna eros at justo. Phasellus nec ipsum vel magna tincidunt 
-                    consequat. Vivamus vehicula, velit at facilisis lobortis, dolor nunc tincidunt nunc, eu vestibulum 
-                    urna nulla vel sapien.
+                    {topic.overview}
                   </p>
                   
-                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                  {/* <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
                     Donec euismod, nisl eget ultricies aliquam, est odio lacinia nisi, id malesuada magna eros at justo. 
                     Phasellus nec ipsum vel magna tincidunt consequat. Vivamus vehicula, velit at facilisis lobortis, 
                     dolor nunc tincidunt nunc, eu vestibulum urna nulla vel sapien.
-                  </p>
+                  </p> */}
                   
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-4">Key Concepts</h3>
                   
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, 
-                    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta 
-                    sunt explicabo.
+                    {topic.keypoints}
                   </p>
                   
                   <ul className="list-disc pl-6 mb-4 space-y-2">
                     <li className="text-gray-700 dark:text-gray-300">
-                      Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit
+                      {topic.p1}
                     </li>
                     <li className="text-gray-700 dark:text-gray-300">
-                      Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt
+                    {topic.p2}
                     </li>
                     <li className="text-gray-700 dark:text-gray-300">
-                      Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet
+                    {topic.p3}
                     </li>
                     <li className="text-gray-700 dark:text-gray-300">
-                      Consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt
+                    {topic.p4}
+                    </li>
+                    <li className="text-gray-700 dark:text-gray-300">
+                    {topic.p5}
+                    </li>
+                    <li className="text-gray-700 dark:text-gray-300">
+                    {topic.p6}
                     </li>
                   </ul>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    {topic.c1}
+                  </p>
                   
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-4">Applications</h3>
                   
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et 
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip 
-                    ex ea commodo consequat.
+                    {topic.applications}
                   </p>
-                  
+                  <ul className="list-disc pl-6 mb-4 space-y-2">
+                    <li className="text-gray-700 dark:text-gray-300">
+                      {topic.a1}
+                    </li>
+                    <li className="text-gray-700 dark:text-gray-300">
+                    {topic.a2}
+                    </li>
+                    <li className="text-gray-700 dark:text-gray-300">
+                    {topic.a3}
+                    </li>
+                    <li className="text-gray-700 dark:text-gray-300">
+                    {topic.a4}
+                    </li>
+                    <li className="text-gray-700 dark:text-gray-300">
+                    {topic.a5}
+                    </li>
+                    <li className="text-gray-700 dark:text-gray-300">
+                    {topic.a6}
+                    </li>
+                    <li className="text-gray-700 dark:text-gray-300">
+                    {topic.a7}
+                    </li>
+                  </ul>
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    {topic.c2}
                   </p>
                 </div>
               </motion.div>
