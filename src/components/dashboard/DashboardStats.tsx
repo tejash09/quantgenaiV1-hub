@@ -34,7 +34,7 @@ const DashboardStats = () => {
             </div>
             <div>
               <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Research Papers</h3>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">24</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">48</p>
             </div>
           </div>
           <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 flex items-center">
@@ -43,7 +43,7 @@ const DashboardStats = () => {
             </div>
             <div>
               <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Learning Resources</h3>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">12</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">48</p>
             </div>
           </div>
           <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 flex items-center">
@@ -52,7 +52,7 @@ const DashboardStats = () => {
             </div>
             <div>
               <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">AI Chat Sessions</h3>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">5</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">7 topics</p>
             </div>
           </div>
         </div>
