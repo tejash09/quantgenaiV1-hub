@@ -185,6 +185,7 @@ const Contact = () => {
                     <div>
                       <h4 className="font-medium text-gray-900 dark:text-white mb-1">Our Location</h4>
                       <p className="text-gray-600 dark:text-gray-400">
+                        Vasavi college of engineering <br />
                         Ibrahim Bagh<br />
                         Hyderabad, Telangana 500031<br />
                         India
@@ -213,8 +214,9 @@ const Contact = () => {
                     <div>
                       <h4 className="font-medium text-gray-900 dark:text-white mb-1">Email</h4>
                       <p className="text-gray-600 dark:text-gray-400">
-                        <a href="mailto:info@quantgenailabs.com" className="hover:text-quantum-500 transition-colors">
-                          info@quantgenailabs.com
+                        <a href="https://mail.google.com/mail/?view=cm&to=sayitqwerty@gmail.com&su=Hello&body=This%20is%20a%20test%20email" 
+                target='_blank' className="hover:text-quantum-500 transition-colors">
+                          sayitqwerty@gmail.com
                         </a>
                       </p>
                     </div>
@@ -227,7 +229,8 @@ const Contact = () => {
                 
                 <div className="flex space-x-4">
                   <a 
-                    href="#" 
+                    href="https://mail.google.com/mail/?view=cm&to=sayitqwerty@gmail.com&su=Hello&body=This%20is%20a%20test%20email" 
+                target='_blank'
                     className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 flex items-center justify-center hover:bg-quantum-500 hover:text-white transition-colors"
                     aria-label="Facebook"
                   >
@@ -236,7 +239,8 @@ const Contact = () => {
                     </svg>
                   </a>
                   <a 
-                    href="#" 
+                    href="https://mail.google.com/mail/?view=cm&to=sayitqwerty@gmail.com&su=Hello&body=This%20is%20a%20test%20email" 
+                target='_blank'
                     className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 flex items-center justify-center hover:bg-quantum-500 hover:text-white transition-colors"
                     aria-label="Twitter"
                   >
@@ -245,7 +249,8 @@ const Contact = () => {
                     </svg>
                   </a>
                   <a 
-                    href="#" 
+                    href="https://mail.google.com/mail/?view=cm&to=sayitqwerty@gmail.com&su=Hello&body=This%20is%20a%20test%20email" 
+                target='_blank'
                     className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 flex items-center justify-center hover:bg-quantum-500 hover:text-white transition-colors"
                     aria-label="LinkedIn"
                   >
@@ -254,7 +259,8 @@ const Contact = () => {
                     </svg>
                   </a>
                   <a 
-                    href="#" 
+                    href="https://mail.google.com/mail/?view=cm&to=sayitqwerty@gmail.com&su=Hello&body=This%20is%20a%20test%20email" 
+                target='_blank'
                     className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 flex items-center justify-center hover:bg-quantum-500 hover:text-white transition-colors"
                     aria-label="GitHub"
                   >
@@ -263,7 +269,8 @@ const Contact = () => {
                     </svg>
                   </a>
                   <a 
-                    href="#" 
+                   href="https://mail.google.com/mail/?view=cm&to=sayitqwerty@gmail.com&su=Hello&body=This%20is%20a%20test%20email" 
+                   target='_blank' 
                     className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 flex items-center justify-center hover:bg-quantum-500 hover:text-white transition-colors"
                     aria-label="Instagram"
                   >
