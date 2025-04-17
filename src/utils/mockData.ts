@@ -1,59 +1,4 @@
-export type Topic = {
-  id: string;
-  title: string;
-  slug: string;
-  description: string;
-  overview:string;
-  keypoints:string;
-  p1:string;
-  p2:string;
-  p3:string;
-  p4:string;
-  p5:string;
-  p6:string;
-  c1:string;
-  c2:string;
-  applications:string;
-  a1:string;
-  a2:string;
-  a3:string;
-  a4:string;
-  a5:string;
-  a6:string;
-  a7:string;
-  shortDescription: string;
-  videoUrl: string;
-  image: string;
-  papers: Paper[];
-  resources: Resource[];
-  videoTutorials: VideoTutorial[];
-};
-
-export type Paper = {
-  id: string;
-  title: string;
-  authors: string;
-  year: string;
-  link: string;
-  abstract: string;
-};
-
-export type Resource = {
-  id: string;
-  title: string;
-  type: 'Book' | 'Course' | 'Tutorial' | 'Article' | 'Video';
-  link: string;
-  description: string;
-};
-
-export type VideoTutorial = {
-  id: string;
-  title: string;
-  duration: string;
-  thumbnail: string;
-  videoUrl: string;
-  description: string;
-};
+import { ResourceType, Topic, Paper, Resource, VideoTutorial } from '../types';
 
 export const topics: Topic[] = [
   {
@@ -134,46 +79,88 @@ export const topics: Topic[] = [
     ],
     resources: [
       {
-        id: 'ml-resource-1',
-        title: 'Machine Learning Coursera Course',
-        type: 'Course',
-        link: 'https://www.coursera.org/learn/machine-learning',
-        description: 'Stanford University\'s famous course by Andrew Ng'
+        id: '1',
+        title: 'Introduction to ' + 'Machine Learning',
+        description: 'Learn the fundamentals of ' + 'Machine Learning',
+        link: 'https://example.com/intro',
+        type: ResourceType.Tutorial
       },
       {
-        id: 'ml-resource-2',
-        title: 'Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow',
-        type: 'Book',
-        link: '#',
-        description: 'Concepts, tools, and techniques to build intelligent systems'
+        id: '2',
+        title: 'Advanced ' + 'Machine Learning' + ' Concepts',
+        description: 'Deep dive into advanced topics and applications',
+        link: 'https://example.com/advanced',
+        type: ResourceType.Course
       },
       {
-        id: 'ml-resource-3',
-        title: 'Fast.ai: Practical Deep Learning for Coders',
-        type: 'Course',
-        link: 'https://www.fast.ai/',
-        description: 'A practical approach to deep learning with a top-down teaching method'
+        id: '3',
+        title: 'Machine Learning' + ' Fundamentals Video',
+        description: 'Video tutorial covering the basics of ' + 'Machine Learning',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       },
       {
-        id: 'ml-resource-4',
-        title: 'Machine Learning Mastery',
-        type: 'Tutorial',
-        link: 'https://machinelearningmastery.com/start-here/',
-        description: 'A comprehensive set of tutorials covering various machine learning concepts and applications'
+        id: '4',
+        title: 'Advanced ' + 'Machine Learning' + ' Techniques Video',
+        description: 'Deep dive into advanced concepts and applications',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       },
       {
-        id: 'ml-resource-5',
-        title: 'Pattern Recognition and Machine Learning',
-        type: 'Book',
-        link: '#',
-        description: 'Christopher Bishop\'s comprehensive textbook on machine learning and pattern recognition techniques'
+        id: '5',
+        title: 'Machine Learning' + ' Project Tutorial Video',
+        description: 'Build a complete project from scratch',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       },
       {
-        id: 'ml-resource-6',
-        title: 'Applied Machine Learning',
-        type: 'Course',
-        link: 'https://www.youtube.com/playlist?list=PL_pVmAaAnxIQGzQS2oI3OWEPT-dpmwTfA',
-        description: 'Cornell University\'s course focusing on practical applications of machine learning'
+        id: '6',
+        title: 'Machine Learning' + ' Best Practices Video',
+        description: 'Learn industry best practices and standards',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '7',
+        title: 'Machine Learning' + ' Case Studies Video',
+        description: 'Real-world applications and case studies',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '8',
+        title: 'Machine Learning' + ' Hands-on Workshop Video',
+        description: 'Interactive workshop with practical exercises',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '9',
+        title: 'Machine Learning' + ' Industry Applications Video',
+        description: 'How this topic is used in various industries',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '10',
+        title: 'Machine Learning' + ' Future Trends Video',
+        description: 'Emerging trends and future developments',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '11',
+        title: 'Machine Learning' + ' Quick Start Guide Video',
+        description: 'Get started in under an hour',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '12',
+        title: 'Machine Learning' + ' Expert Panel Discussion Video',
+        description: 'Industry experts discuss challenges and solutions',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       }
     ],
     videoTutorials: [
@@ -273,46 +260,88 @@ export const topics: Topic[] = [
     ],
     resources: [
       {
-        id: 'dl-resource-1',
-        title: 'Deep Learning Specialization',
-        type: 'Course',
-        link: 'https://www.coursera.org/specializations/deep-learning',
-        description: 'A series of courses teaching the foundations of deep learning'
+        id: '1',
+        title: 'Introduction to ' + 'Deep Learning',
+        description: 'Learn the fundamentals of ' + 'Deep Learning',
+        link: 'https://example.com/intro',
+        type: ResourceType.Tutorial
       },
       {
-        id: 'dl-resource-2',
-        title: 'Deep Learning',
-        type: 'Book',
-        link: 'https://www.deeplearningbook.org/',
-        description: 'The "Bible" of deep learning by Goodfellow, Bengio, and Courville'
+        id: '2',
+        title: 'Advanced ' + 'Deep Learning' + ' Concepts',
+        description: 'Deep dive into advanced topics and applications',
+        link: 'https://example.com/advanced',
+        type: ResourceType.Course
       },
       {
-        id: 'dl-resource-3',
-        title: 'MIT 6.S191: Introduction to Deep Learning',
-        type: 'Course',
-        link: 'http://introtodeeplearning.com/',
-        description: 'MIT\'s introductory course to deep learning methods and applications'
+        id: '3',
+        title: 'Deep Learning' + ' Fundamentals Video',
+        description: 'Video tutorial covering the basics of ' + 'Deep Learning',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       },
       {
-        id: 'dl-resource-4',
-        title: 'TensorFlow Tutorials',
-        type: 'Tutorial',
-        link: 'https://www.tensorflow.org/tutorials',
-        description: 'Official TensorFlow tutorials covering various deep learning applications'
+        id: '4',
+        title: 'Advanced ' + 'Deep Learning' + ' Techniques Video',
+        description: 'Deep dive into advanced concepts and applications',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       },
       {
-        id: 'dl-resource-5',
-        title: 'PyTorch for Deep Learning: Zero to GANs',
-        type: 'Course',
-        link: 'https://jovian.ai/learn/deep-learning-with-pytorch-zero-to-gans',
-        description: 'A beginner-friendly course on deep learning using PyTorch'
+        id: '5',
+        title: 'Deep Learning' + ' Project Tutorial Video',
+        description: 'Build a complete project from scratch',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       },
       {
-        id: 'dl-resource-6',
-        title: 'Neural Networks and Deep Learning',
-        type: 'Book',
-        link: 'http://neuralnetworksanddeeplearning.com/',
-        description: 'A free online book explaining neural networks and deep learning concepts with clear explanations'
+        id: '6',
+        title: 'Deep Learning' + ' Best Practices Video',
+        description: 'Learn industry best practices and standards',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '7',
+        title: 'Deep Learning' + ' Case Studies Video',
+        description: 'Real-world applications and case studies',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '8',
+        title: 'Deep Learning' + ' Hands-on Workshop Video',
+        description: 'Interactive workshop with practical exercises',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '9',
+        title: 'Deep Learning' + ' Industry Applications Video',
+        description: 'How this topic is used in various industries',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '10',
+        title: 'Deep Learning' + ' Future Trends Video',
+        description: 'Emerging trends and future developments',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '11',
+        title: 'Deep Learning' + ' Quick Start Guide Video',
+        description: 'Get started in under an hour',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '12',
+        title: 'Deep Learning' + ' Expert Panel Discussion Video',
+        description: 'Industry experts discuss challenges and solutions',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       }
     ],
     videoTutorials: [
@@ -413,46 +442,88 @@ export const topics: Topic[] = [
     ],
     resources: [
       {
-        id: 'nlp-resource-1',
-        title: 'Natural Language Processing with Deep Learning',
-        type: 'Course',
-        link: 'http://web.stanford.edu/class/cs224n/',
-        description: 'Stanford\'s famous NLP course by Christopher Manning'
+        id: '1',
+        title: 'Introduction to ' + 'Natural Language Processing',
+        description: 'Learn the fundamentals of ' + 'Natural Language Processing',
+        link: 'https://example.com/intro',
+        type: ResourceType.Tutorial
       },
       {
-        id: 'nlp-resource-2',
-        title: 'Speech and Language Processing',
-        type: 'Book',
-        link: 'https://web.stanford.edu/~jurafsky/slp3/',
-        description: 'Comprehensive textbook on NLP by Jurafsky and Martin'
+        id: '2',
+        title: 'Advanced ' + 'Natural Language Processing' + ' Concepts',
+        description: 'Deep dive into advanced topics and applications',
+        link: 'https://example.com/advanced',
+        type: ResourceType.Course
       },
       {
-        id: 'nlp-resource-3',
-        title: 'Hugging Face Course',
-        type: 'Tutorial',
-        link: 'https://huggingface.co/course',
-        description: 'Learn how to use the Hugging Face ecosystem for NLP tasks'
+        id: '3',
+        title: 'Natural Language Processing' + ' Fundamentals Video',
+        description: 'Video tutorial covering the basics of ' + 'Natural Language Processing',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       },
       {
-        id: 'nlp-resource-4',
-        title: 'Natural Language Processing Specialization',
-        type: 'Course',
-        link: 'https://www.coursera.org/specializations/natural-language-processing',
-        description: 'DeepLearning.AI\'s specialization covering modern NLP techniques'
+        id: '4',
+        title: 'Advanced ' + 'Natural Language Processing' + ' Techniques Video',
+        description: 'Deep dive into advanced concepts and applications',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       },
       {
-        id: 'nlp-resource-5',
-        title: 'Transformers for Natural Language Processing',
-        type: 'Book',
-        link: '#',
-        description: 'A practical guide to implementing transformer models for NLP tasks'
+        id: '5',
+        title: 'Natural Language Processing' + ' Project Tutorial Video',
+        description: 'Build a complete project from scratch',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       },
       {
-        id: 'nlp-resource-6',
-        title: 'Applied Text Mining and Analytics',
-        type: 'Course',
-        link: 'https://www.coursera.org/learn/text-mining-analytics',
-        description: 'Course on practical text mining and analytics for business applications'
+        id: '6',
+        title: 'Natural Language Processing' + ' Best Practices Video',
+        description: 'Learn industry best practices and standards',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '7',
+        title: 'Natural Language Processing' + ' Case Studies Video',
+        description: 'Real-world applications and case studies',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '8',
+        title: 'Natural Language Processing' + ' Hands-on Workshop Video',
+        description: 'Interactive workshop with practical exercises',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '9',
+        title: 'Natural Language Processing' + ' Industry Applications Video',
+        description: 'How this topic is used in various industries',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '10',
+        title: 'Natural Language Processing' + ' Future Trends Video',
+        description: 'Emerging trends and future developments',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '11',
+        title: 'Natural Language Processing' + ' Quick Start Guide Video',
+        description: 'Get started in under an hour',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '12',
+        title: 'Natural Language Processing' + ' Expert Panel Discussion Video',
+        description: 'Industry experts discuss challenges and solutions',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       }
     ],
     videoTutorials: [
@@ -496,7 +567,7 @@ export const topics: Topic[] = [
     a4: 'Agriculture: AI-powered robots harvest crops and monitor soil health.',
     a5: 'Military & Defense: Robots handle reconnaissance, bomb disposal, and logistics.',
     a6: 'Household Assistance: Smart home robots assist with cleaning, cooking, and security.',
-    a7: 'Space Exploration: Robots like NASA’s rovers explore planets and analyze extraterrestrial environments.',
+    a7: "Space Exploration: Robots like NASA's rovers explore planets and analyze extraterrestrial environments.",
     c2:'',
     videoUrl: 'https://www.youtube.com/embed/fn3KWM1kuAw',
     image: 'https://images.unsplash.com/photo-1555255707-c07966088b7b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2036&q=80',
@@ -552,46 +623,88 @@ export const topics: Topic[] = [
     ],
     resources: [
       {
-        id: 'rob-resource-1',
-        title: 'Modern Robotics: Mechanics, Planning, and Control',
-        type: 'Book',
-        link: 'http://hades.mech.northwestern.edu/index.php/Modern_Robotics',
-        description: 'A comprehensive introduction to robotics'
+        id: '1',
+        title: 'Introduction to ' + 'Robotics',
+        description: 'Learn the fundamentals of ' + 'Robotics',
+        link: 'https://example.com/intro',
+        type: ResourceType.Tutorial
       },
       {
-        id: 'rob-resource-2',
-        title: 'Robotics: Aerial Robotics',
-        type: 'Course',
-        link: 'https://www.coursera.org/learn/robotics-flight',
-        description: 'Learn to develop dynamic models and controllers for flying robots'
+        id: '2',
+        title: 'Advanced ' + 'Robotics' + ' Concepts',
+        description: 'Deep dive into advanced topics and applications',
+        link: 'https://example.com/advanced',
+        type: ResourceType.Course
       },
       {
-        id: 'rob-resource-3',
-        title: 'ROS (Robot Operating System) Tutorials',
-        type: 'Tutorial',
-        link: 'http://wiki.ros.org/ROS/Tutorials',
-        description: 'Hands-on tutorials for the Robot Operating System framework'
+        id: '3',
+        title: 'Robotics' + ' Fundamentals Video',
+        description: 'Video tutorial covering the basics of ' + 'Robotics',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       },
       {
-        id: 'rob-resource-4',
-        title: 'Robot Academy',
-        type: 'Course',
-        link: 'https://robotacademy.net.au/',
-        description: 'Free video lessons on robotics and related mathematics by QUT'
+        id: '4',
+        title: 'Advanced ' + 'Robotics' + ' Techniques Video',
+        description: 'Deep dive into advanced concepts and applications',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       },
       {
-        id: 'rob-resource-5',
-        title: 'Probabilistic Robotics',
-        type: 'Book',
-        link: '#',
-        description: 'A comprehensive reference on probabilistic techniques in robotics by Sebastian Thrun'
+        id: '5',
+        title: 'Robotics' + ' Project Tutorial Video',
+        description: 'Build a complete project from scratch',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       },
       {
-        id: 'rob-resource-6',
-        title: 'MIT 6.141: Robotics Systems and Science',
-        type: 'Course',
-        link: 'https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-141-robotics-systems-and-science-spring-2005/',
-        description: 'MIT\'s course covering the fundamentals of robotics systems and control'
+        id: '6',
+        title: 'Robotics' + ' Best Practices Video',
+        description: 'Learn industry best practices and standards',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '7',
+        title: 'Robotics' + ' Case Studies Video',
+        description: 'Real-world applications and case studies',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '8',
+        title: 'Robotics' + ' Hands-on Workshop Video',
+        description: 'Interactive workshop with practical exercises',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '9',
+        title: 'Robotics' + ' Industry Applications Video',
+        description: 'How this topic is used in various industries',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '10',
+        title: 'Robotics' + ' Future Trends Video',
+        description: 'Emerging trends and future developments',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '11',
+        title: 'Robotics' + ' Quick Start Guide Video',
+        description: 'Get started in under an hour',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '12',
+        title: 'Robotics' + ' Expert Panel Discussion Video',
+        description: 'Industry experts discuss challenges and solutions',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       }
     ],
     videoTutorials: [
@@ -691,46 +804,88 @@ export const topics: Topic[] = [
     ],
     resources: [
       {
-        id: 'drone-resource-1',
-        title: 'DIY Drones',
-        type: 'Tutorial',
-        link: 'https://diydrones.com/',
-        description: 'Community of drone enthusiasts sharing knowledge'
+        id: '1',
+        title: 'Introduction to ' + 'Drones',
+        description: 'Learn the fundamentals of ' + 'Drones',
+        link: 'https://example.com/intro',
+        type: ResourceType.Tutorial
       },
       {
-        id: 'drone-resource-2',
-        title: 'Drone Programming with Python',
-        type: 'Course',
-        link: '#',
-        description: 'Learn to program autonomous flight paths with Python'
+        id: '2',
+        title: 'Advanced ' + 'Drones' + ' Concepts',
+        description: 'Deep dive into advanced topics and applications',
+        link: 'https://example.com/advanced',
+        type: ResourceType.Course
       },
       {
-        id: 'drone-resource-3',
-        title: 'Unmanned Aircraft Systems',
-        type: 'Book',
-        link: '#',
-        description: 'Comprehensive textbook on drone technology, design, and applications'
+        id: '3',
+        title: 'Drones' + ' Fundamentals Video',
+        description: 'Video tutorial covering the basics of ' + 'Drones',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       },
       {
-        id: 'drone-resource-4',
-        title: 'Aerial Robotics Specialization',
-        type: 'Course',
-        link: 'https://www.coursera.org/specializations/robotics',
-        description: 'University of Pennsylvania\'s specialization on drone mechanics and control'
+        id: '4',
+        title: 'Advanced ' + 'Drones' + ' Techniques Video',
+        description: 'Deep dive into advanced concepts and applications',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       },
       {
-        id: 'drone-resource-5',
-        title: 'Programming Drones with Tello',
-        type: 'Tutorial',
-        link: 'https://github.com/damiafuentes/DJITelloPy',
-        description: 'Python library and tutorials for programming Tello drones'
+        id: '5',
+        title: 'Drones' + ' Project Tutorial Video',
+        description: 'Build a complete project from scratch',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       },
       {
-        id: 'drone-resource-6',
-        title: 'FAA Part 107 Commercial Drone License Preparation',
-        type: 'Course',
-        link: 'https://www.faa.gov/uas/commercial_operators',
-        description: 'Resources for preparing for the FAA\'s commercial drone pilot certification'
+        id: '6',
+        title: 'Drones' + ' Best Practices Video',
+        description: 'Learn industry best practices and standards',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '7',
+        title: 'Drones' + ' Case Studies Video',
+        description: 'Real-world applications and case studies',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '8',
+        title: 'Drones' + ' Hands-on Workshop Video',
+        description: 'Interactive workshop with practical exercises',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '9',
+        title: 'Drones' + ' Industry Applications Video',
+        description: 'How this topic is used in various industries',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '10',
+        title: 'Drones' + ' Future Trends Video',
+        description: 'Emerging trends and future developments',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '11',
+        title: 'Drones' + ' Quick Start Guide Video',
+        description: 'Get started in under an hour',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '12',
+        title: 'Drones' + ' Expert Panel Discussion Video',
+        description: 'Industry experts discuss challenges and solutions',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       }
     ],
     videoTutorials: [
@@ -768,11 +923,11 @@ export const topics: Topic[] = [
     p6: 'Error Correction: Techniques used to minimize quantum errors due to decoherence and noise.',  
     c1: 'Quantum computing is poised to revolutionize industries by solving complex problems much faster than classical systems.',  
     applications: 'Quantum computing has the potential to transform multiple fields:',  
-    a1: 'Cryptography: Quantum algorithms like Shor’s algorithm can break traditional encryption methods.',  
-    a2: 'Drug Discovery: Simulating molecular interactions for faster pharmaceutical research.',  
-    a3: 'Optimization Problems: Solving complex logistical and scheduling problems efficiently.',  
-    a4: 'Financial Modeling: Enhancing risk analysis and portfolio optimization.',  
-    a5: 'Artificial Intelligence: Speeding up training and inference of machine learning models.',  
+    a1: "Cryptography: Quantum algorithms like Shor's algorithm can break traditional encryption methods.",  
+    a2: "Drug Discovery: Simulating molecular interactions for faster pharmaceutical research.",  
+    a3: "Optimization Problems: Solving complex logistical and scheduling problems efficiently.",  
+    a4: "Financial Modeling: Enhancing risk analysis and portfolio optimization.",  
+    a5: "Artificial Intelligence: Speeding up training and inference of machine learning models.",  
     a6: 'Material Science: Discovering new materials by simulating atomic structures.',  
     a7: 'Weather Forecasting: Improving climate models through complex quantum simulations.',  
     c2:'',
@@ -830,46 +985,88 @@ export const topics: Topic[] = [
     ],
     resources: [
       {
-        id: 'qc-resource-1',
-        title: 'Quantum Computing for the Very Curious',
-        type: 'Article',
-        link: 'https://quantum.country/qcvc',
-        description: 'Accessible introduction to quantum computing concepts'
+        id: '1',
+        title: 'Introduction to ' + 'Quantum Computing',
+        description: 'Learn the fundamentals of ' + 'Quantum Computing',
+        link: 'https://example.com/intro',
+        type: ResourceType.Tutorial
       },
       {
-        id: 'qc-resource-2',
-        title: 'Quantum Mechanics and Quantum Computation',
-        type: 'Course',
-        link: 'https://www.edx.org/learn/quantum-mechanics/university-of-california-berkeley-quantum-mechanics-and-quantum-computation',
-        description: 'Berkeley course on quantum computing foundations'
+        id: '2',
+        title: 'Advanced ' + 'Quantum Computing' + ' Concepts',
+        description: 'Deep dive into advanced topics and applications',
+        link: 'https://example.com/advanced',
+        type: ResourceType.Course
       },
       {
-        id: 'qc-resource-3',
-        title: 'Qiskit Textbook',
-        type: 'Tutorial',
-        link: 'https://qiskit.org/textbook/preface.html',
-        description: 'Open-source textbook for learning quantum computing through Qiskit'
+        id: '3',
+        title: 'Quantum Computing' + ' Fundamentals Video',
+        description: 'Video tutorial covering the basics of ' + 'Quantum Computing',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       },
       {
-        id: 'qc-resource-4',
-        title: 'Quantum Computing: An Applied Approach',
-        type: 'Book',
-        link: '#',
-        description: 'Practical textbook on quantum computing algorithms and applications'
+        id: '4',
+        title: 'Advanced ' + 'Quantum Computing' + ' Techniques Video',
+        description: 'Deep dive into advanced concepts and applications',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       },
       {
-        id: 'qc-resource-5',
-        title: 'Introduction to Quantum Computing',
-        type: 'Course',
-        link: 'https://www.coursera.org/learn/quantum-computing-algorithms',
-        description: 'St. Petersburg State University\'s course covering quantum computing fundamentals'
+        id: '5',
+        title: 'Quantum Computing' + ' Project Tutorial Video',
+        description: 'Build a complete project from scratch',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       },
       {
-        id: 'qc-resource-6',
-        title: 'Microsoft Quantum Documentation',
-        type: 'Tutorial',
-        link: 'https://docs.microsoft.com/en-us/quantum/',
-        description: 'Microsoft\'s extensive documentation and tutorials for quantum development'
+        id: '6',
+        title: 'Quantum Computing' + ' Best Practices Video',
+        description: 'Learn industry best practices and standards',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '7',
+        title: 'Quantum Computing' + ' Case Studies Video',
+        description: 'Real-world applications and case studies',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '8',
+        title: 'Quantum Computing' + ' Hands-on Workshop Video',
+        description: 'Interactive workshop with practical exercises',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '9',
+        title: 'Quantum Computing' + ' Industry Applications Video',
+        description: 'How this topic is used in various industries',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '10',
+        title: 'Quantum Computing' + ' Future Trends Video',
+        description: 'Emerging trends and future developments',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '11',
+        title: 'Quantum Computing' + ' Quick Start Guide Video',
+        description: 'Get started in under an hour',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '12',
+        title: 'Quantum Computing' + ' Expert Panel Discussion Video',
+        description: 'Industry experts discuss challenges and solutions',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       }
     ],
     videoTutorials: [
@@ -969,46 +1166,88 @@ export const topics: Topic[] = [
     ],
     resources: [
       {
-        id: 'genai-resource-1',
-        title: 'Generative Deep Learning',
-        type: 'Book',
-        link: 'https://www.oreilly.com/library/view/generative-deep-learning/9781492041931/',
-        description: 'Comprehensive guide to building generative models with practical examples'
+        id: '1',
+        title: 'Introduction to ' + 'Generative AI',
+        description: 'Learn the fundamentals of ' + 'Generative AI',
+        link: 'https://example.com/intro',
+        type: ResourceType.Tutorial
       },
       {
-        id: 'genai-resource-2',
-        title: 'Stable Diffusion Tutorial',
-        type: 'Tutorial',
-        link: 'https://huggingface.co/docs/diffusers/main/en/tutorials/stable_diffusion',
-        description: 'Learn how to use Stable Diffusion for image generation'
+        id: '2',
+        title: 'Advanced ' + 'Generative AI' + ' Concepts',
+        description: 'Deep dive into advanced topics and applications',
+        link: 'https://example.com/advanced',
+        type: ResourceType.Course
       },
       {
-        id: 'genai-resource-3',
-        title: 'GANs Specialization',
-        type: 'Course',
-        link: 'https://www.coursera.org/specializations/generative-adversarial-networks-gans',
-        description: 'DeepLearning.AI\'s specialization on Generative Adversarial Networks'
+        id: '3',
+        title: 'Generative AI' + ' Fundamentals Video',
+        description: 'Video tutorial covering the basics of ' + 'Generative AI',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       },
       {
-        id: 'genai-resource-4',
-        title: 'Deep Learning for Audio Synthesis',
-        type: 'Tutorial',
-        link: 'https://github.com/magenta/magenta',
-        description: 'Google Magenta\'s tutorials for generating music and audio with deep learning'
+        id: '4',
+        title: 'Advanced ' + 'Generative AI' + ' Techniques Video',
+        description: 'Deep dive into advanced concepts and applications',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       },
       {
-        id: 'genai-resource-5',
-        title: 'The Illustrated Stable Diffusion',
-        type: 'Article',
-        link: 'https://jalammar.github.io/illustrated-stable-diffusion/',
-        description: 'Visual explanation of how Stable Diffusion works for image generation'
+        id: '5',
+        title: 'Generative AI' + ' Project Tutorial Video',
+        description: 'Build a complete project from scratch',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       },
       {
-        id: 'genai-resource-6',
-        title: 'Advanced GANs Course',
-        type: 'Course',
-        link: '#',
-        description: 'In-depth course on advanced techniques for Generative Adversarial Networks'
+        id: '6',
+        title: 'Generative AI' + ' Best Practices Video',
+        description: 'Learn industry best practices and standards',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '7',
+        title: 'Generative AI' + ' Case Studies Video',
+        description: 'Real-world applications and case studies',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '8',
+        title: 'Generative AI' + ' Hands-on Workshop Video',
+        description: 'Interactive workshop with practical exercises',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '9',
+        title: 'Generative AI' + ' Industry Applications Video',
+        description: 'How this topic is used in various industries',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '10',
+        title: 'Generative AI' + ' Future Trends Video',
+        description: 'Emerging trends and future developments',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '11',
+        title: 'Generative AI' + ' Quick Start Guide Video',
+        description: 'Get started in under an hour',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '12',
+        title: 'Generative AI' + ' Expert Panel Discussion Video',
+        description: 'Industry experts discuss challenges and solutions',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       }
     ],
     videoTutorials: [
@@ -1108,46 +1347,88 @@ export const topics: Topic[] = [
     ],
     resources: [
       {
-        id: 'llm-resource-1',
-        title: 'Hugging Face Transformers Library',
-        type: 'Tutorial',
-        link: 'https://huggingface.co/transformers/',
-        description: 'State-of-the-art framework for working with pre-trained language models'
+        id: '1',
+        title: 'Introduction to ' + 'Large Language Models',
+        description: 'Learn the fundamentals of ' + 'Large Language Models',
+        link: 'https://example.com/intro',
+        type: ResourceType.Tutorial
       },
       {
-        id: 'llm-resource-2',
-        title: 'Building LLM applications for production',
-        type: 'Course',
-        link: 'https://www.deeplearning.ai/short-courses/building-applications-with-vector-databases/',
-        description: 'Learn how to build LLM-powered applications that can scale'
+        id: '2',
+        title: 'Advanced ' + 'Large Language Models' + ' Concepts',
+        description: 'Deep dive into advanced topics and applications',
+        link: 'https://example.com/advanced',
+        type: ResourceType.Course
       },
       {
-        id: 'llm-resource-3',
-        title: 'Natural Language Processing with Transformers',
-        type: 'Book',
-        link: 'https://www.oreilly.com/library/view/natural-language-processing/9781098136789/',
-        description: 'Comprehensive guide to using transformer models for various NLP tasks'
+        id: '3',
+        title: 'Large Language Models' + ' Fundamentals Video',
+        description: 'Video tutorial covering the basics of ' + 'Large Language Models',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       },
       {
-        id: 'llm-resource-4',
-        title: 'LangChain Documentation',
-        type: 'Tutorial',
-        link: 'https://python.langchain.com/docs/get_started/introduction.html',
-        description: 'Framework for developing applications powered by language models'
+        id: '4',
+        title: 'Advanced ' + 'Large Language Models' + ' Techniques Video',
+        description: 'Deep dive into advanced concepts and applications',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       },
       {
-        id: 'llm-resource-5',
-        title: 'Prompt Engineering Guide',
-        type: 'Tutorial',
-        link: 'https://platform.openai.com/docs/guides/prompt-engineering',
-        description: 'Techniques and best practices for effective prompt engineering with LLMs'
+        id: '5',
+        title: 'Large Language Models' + ' Project Tutorial Video',
+        description: 'Build a complete project from scratch',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       },
       {
-        id: 'llm-resource-6',
-        title: 'ChatGPT Prompt Engineering for Developers',
-        type: 'Course',
-        link: 'https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/',
-        description: 'DeepLearning.AI and OpenAI\'s course on prompt engineering techniques'
+        id: '6',
+        title: 'Large Language Models' + ' Best Practices Video',
+        description: 'Learn industry best practices and standards',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '7',
+        title: 'Large Language Models' + ' Case Studies Video',
+        description: 'Real-world applications and case studies',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '8',
+        title: 'Large Language Models' + ' Hands-on Workshop Video',
+        description: 'Interactive workshop with practical exercises',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '9',
+        title: 'Large Language Models' + ' Industry Applications Video',
+        description: 'How this topic is used in various industries',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '10',
+        title: 'Large Language Models' + ' Future Trends Video',
+        description: 'Emerging trends and future developments',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '11',
+        title: 'Large Language Models' + ' Quick Start Guide Video',
+        description: 'Get started in under an hour',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
+      },
+      {
+        id: '12',
+        title: 'Large Language Models' + ' Expert Panel Discussion Video',
+        description: 'Industry experts discuss challenges and solutions',
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: ResourceType.Video
       }
     ],
     videoTutorials: [

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
@@ -53,6 +52,16 @@ const AllResources = () => {
     
     return matchesSearch && matchesTopic && matchesType;
   });
+
+  // Group resources by type
+  const resourcesByType = filteredResources.reduce((acc, resource) => {
+    const type = resource.type.toLowerCase();
+    if (!acc[type]) {
+      acc[type] = [];
+    }
+    acc[type].push(resource);
+    return acc;
+  }, {} as Record<string, typeof filteredResources>);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
@@ -116,72 +125,81 @@ const AllResources = () => {
         </div>
 
         {/* Resources Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {filteredResources.length > 0 ? (
-            filteredResources.map((resource) => (
-              <motion.div
-                key={resource.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-                className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-              >
-                <div className="p-6">
-                  <div className="h-12 w-12 rounded-lg flex items-center justify-center mb-4"
-                    style={{
-                      backgroundColor: resource.type.toLowerCase() === 'video'
-                        ? 'rgba(220, 38, 38, 0.1)'
-                        : resource.type.toLowerCase() === 'course'
-                          ? 'rgba(79, 70, 229, 0.1)'
-                          : 'rgba(16, 185, 129, 0.1)'
-                    }}
+        <div className="space-y-8">
+          {Object.entries(resourcesByType).map(([type, resources]) => (
+            <div key={type} className="space-y-4">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white capitalize">
+                {type}s
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {resources.map((resource) => (
+                  <motion.div
+                    key={resource.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow"
                   >
-                    {resource.type.toLowerCase() === 'video' ? (
-                      <Video className="w-6 h-6 text-red-500" />
-                    ) : resource.type.toLowerCase() === 'course' ? (
-                      <Book className="w-6 h-6 text-indigo-500" />
-                    ) : (
-                      <Book className="w-6 h-6 text-emerald-500" />
-                    )}
-                  </div>
-                  
-                  <div className="flex justify-between items-start mb-2">
-                    <h3 className="font-bold text-lg text-gray-900 dark:text-white line-clamp-2">
-                      {resource.title}
-                    </h3>
-                    <Badge variant={
-                      resource.type.toLowerCase() === 'video'
-                        ? 'destructive'
-                        : resource.type.toLowerCase() === 'course'
-                          ? 'default'
-                          : 'outline'
-                    }>
-                      {resource.type}
-                    </Badge>
-                  </div>
-                  
-                  <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3">
-                    {resource.description}
-                  </p>
-                  
-                  <div className="flex items-center justify-between mt-4">
-                    <Button variant="default" size="sm" asChild className="gap-2">
-                      <a href={resource.link} target="_blank" rel="noopener noreferrer">
-                        Access 
-                        <ExternalLink size={14} />
-                      </a>
-                    </Button>
-                    <Button variant="ghost" size="sm" asChild>
-                      <a href={`/topic/${resource.topicSlug}`} className="text-xs">
-                        {resource.topic}
-                      </a>
-                    </Button>
-                  </div>
-                </div>
-              </motion.div>
-            ))
-          ) : (
-            <div className="col-span-full text-center py-12">
+                    <div className="p-6">
+                      <div className="h-12 w-12 rounded-lg flex items-center justify-center mb-4"
+                        style={{
+                          backgroundColor: resource.type.toLowerCase() === 'video'
+                            ? 'rgba(220, 38, 38, 0.1)'
+                            : resource.type.toLowerCase() === 'course'
+                              ? 'rgba(79, 70, 229, 0.1)'
+                              : 'rgba(16, 185, 129, 0.1)'
+                        }}
+                      >
+                        {resource.type.toLowerCase() === 'video' ? (
+                          <Video className="w-6 h-6 text-red-500" />
+                        ) : resource.type.toLowerCase() === 'course' ? (
+                          <Book className="w-6 h-6 text-indigo-500" />
+                        ) : (
+                          <Book className="w-6 h-6 text-emerald-500" />
+                        )}
+                      </div>
+                      
+                      <div className="flex justify-between items-start mb-2">
+                        <h3 className="font-bold text-lg text-gray-900 dark:text-white line-clamp-2">
+                          {resource.title}
+                        </h3>
+                        <Badge variant={
+                          resource.type.toLowerCase() === 'video'
+                            ? 'destructive'
+                            : resource.type.toLowerCase() === 'course'
+                              ? 'default'
+                              : 'outline'
+                        }>
+                          {resource.type}
+                        </Badge>
+                      </div>
+                      
+                      <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3">
+                        {resource.description}
+                      </p>
+                      
+                      <div className="flex items-center justify-between mt-4">
+                        <Button variant="default" size="sm" asChild className="gap-2">
+                          <a href={resource.link} target="_blank" rel="noopener noreferrer">
+                            Access 
+                            <ExternalLink size={14} />
+                          </a>
+                        </Button>
+                        <Button variant="ghost" size="sm" asChild>
+                          <a href={`/topic/${resource.topicSlug}`} className="text-xs">
+                            {resource.topic}
+                          </a>
+                        </Button>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          ))}
+          
+          {filteredResources.length === 0 && (
+            <div className="text-center py-12">
               <p className="text-gray-500 dark:text-gray-400">No resources found matching your criteria. Try adjusting your search or filters.</p>
             </div>
           )}

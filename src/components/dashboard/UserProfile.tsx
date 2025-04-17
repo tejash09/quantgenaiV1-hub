@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { User, FileText, Book, Video, Brain, LogOut } from 'lucide-react';
 import { Link, useNavigate, NavigateFunction } from 'react-router-dom';
@@ -53,7 +52,7 @@ const UserProfile = () => {
       case 'Learning Resources':
         return '/resources';
       case 'Video Tutorials':
-        return '/topic/video-tutorials';
+        return '/video-tutorials';
       case 'AI Assistant':
         return '/dashboard?openChat=true';
       default:
@@ -117,7 +116,7 @@ const UserProfile = () => {
           </li>
           <li>
             <Link 
-              to="/topic/video-tutorials" 
+              to="/video-tutorials" 
               className="flex items-center p-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
               onClick={() => handleMenuClick('Video Tutorials')}
             >

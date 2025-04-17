@@ -1,168 +1,261 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { useLocation } from 'react-router-dom';
+import { Video, ExternalLink, ChevronRight } from 'lucide-react';
 import Navbar from '../components/Navbar';
-import { getAllTopics } from '../utils/mockData';
-import { Video, Search, Filter, Play, Clock } from 'lucide-react';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { getAllTopics, Topic } from '../utils/mockData';
+import { Button } from '@/components/ui/button';
 
 const VideoTutorials = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedTopic, setSelectedTopic] = useState('all');
-  const topics = getAllTopics();
-  const location = useLocation();
-  
-  // Extract topic from URL query parameter
+  const [searchParams] = useSearchParams();
+  const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
+  const [topics, setTopics] = useState<Topic[]>([]);
+  const [filteredVideos, setFilteredVideos] = useState<any[]>([]);
+
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const topicParam = params.get('topic');
+    const topicSlug = searchParams.get('topic');
+    setSelectedTopic(topicSlug);
     
-    if (topicParam) {
-      // Find the matching topic by slug
-      const matchingTopic = topics.find(t => t.slug === topicParam);
-      if (matchingTopic) {
-        setSelectedTopic(matchingTopic.title.toLowerCase());
+    // Fetch all topics
+    const allTopics = getAllTopics();
+    setTopics(allTopics);
+    
+    // If a topic is selected, filter videos for that topic
+    if (topicSlug) {
+      const topic = allTopics.find(t => t.slug === topicSlug);
+      if (topic) {
+        // Sample video tutorials for each topic
+        const topicVideos = [
+          {
+            id: '1',
+            title: `${topic.title} Fundamentals`,
+            description: 'Learn the basics and core concepts of ' + topic.title,
+            link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+            duration: '45:30',
+            level: 'Beginner'
+          },
+          {
+            id: '2',
+            title: `Advanced ${topic.title} Techniques`,
+            description: 'Deep dive into advanced concepts and applications',
+            link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+            duration: '1:15:20',
+            level: 'Advanced'
+          },
+          {
+            id: '3',
+            title: `${topic.title} Project Tutorial`,
+            description: 'Build a complete project using ' + topic.title,
+            link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+            duration: '2:30:00',
+            level: 'Intermediate'
+          },
+          {
+            id: '4',
+            title: `${topic.title} Best Practices`,
+            description: 'Learn industry best practices and standards',
+            link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+            duration: '35:45',
+            level: 'Intermediate'
+          },
+          {
+            id: '5',
+            title: `${topic.title} Case Studies`,
+            description: 'Real-world applications and case studies',
+            link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+            duration: '1:00:00',
+            level: 'Advanced'
+          },
+          {
+            id: '6',
+            title: `${topic.title} Hands-on Workshop`,
+            description: 'Interactive workshop with practical exercises',
+            link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+            duration: '1:45:00',
+            level: 'Intermediate'
+          },
+          {
+            id: '7',
+            title: `${topic.title} Industry Applications`,
+            description: 'How ' + topic.title + ' is used in various industries',
+            link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+            duration: '50:15',
+            level: 'Intermediate'
+          },
+          {
+            id: '8',
+            title: `${topic.title} Future Trends`,
+            description: 'Emerging trends and future developments in ' + topic.title,
+            link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+            duration: '40:30',
+            level: 'Advanced'
+          },
+          {
+            id: '9',
+            title: `${topic.title} Quick Start Guide`,
+            description: 'Get started with ' + topic.title + ' in under an hour',
+            link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+            duration: '55:00',
+            level: 'Beginner'
+          },
+          {
+            id: '10',
+            title: `${topic.title} Expert Panel Discussion`,
+            description: 'Industry experts discuss ' + topic.title + ' challenges and solutions',
+            link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+            duration: '1:20:00',
+            level: 'Advanced'
+          }
+        ];
+        setFilteredVideos(topicVideos);
       }
+    } else {
+      // If no topic selected, show all videos
+      const allVideos = allTopics.flatMap(topic => [
+        {
+          id: `${topic.slug}-1`,
+          title: `${topic.title} Fundamentals`,
+          description: 'Learn the basics and core concepts of ' + topic.title,
+          link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          duration: '45:30',
+          level: 'Beginner',
+          topic: topic.title
+        },
+        {
+          id: `${topic.slug}-2`,
+          title: `Advanced ${topic.title} Techniques`,
+          description: 'Deep dive into advanced concepts and applications',
+          link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          duration: '1:15:20',
+          level: 'Advanced',
+          topic: topic.title
+        },
+        {
+          id: `${topic.slug}-3`,
+          title: `${topic.title} Project Tutorial`,
+          description: 'Build a complete project using ' + topic.title,
+          link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          duration: '2:30:00',
+          level: 'Intermediate',
+          topic: topic.title
+        },
+        {
+          id: `${topic.slug}-4`,
+          title: `${topic.title} Best Practices`,
+          description: 'Learn industry best practices and standards',
+          link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          duration: '35:45',
+          level: 'Intermediate',
+          topic: topic.title
+        },
+        {
+          id: `${topic.slug}-5`,
+          title: `${topic.title} Case Studies`,
+          description: 'Real-world applications and case studies',
+          link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          duration: '1:00:00',
+          level: 'Advanced',
+          topic: topic.title
+        }
+      ]);
+      setFilteredVideos(allVideos);
     }
-  }, [location, topics]);
-  
-  // Get all video tutorials from all topics
-  const allVideoTutorials = topics.flatMap(topic => {
-    return topic.videoTutorials.map(video => ({
-      ...video,
-      topic: topic.title,
-      topicSlug: topic.slug
-    }));
-  });
-  
-  // Filter videos based on search query and selected topic
-  const filteredVideos = allVideoTutorials.filter(video => {
-    const matchesSearch = 
-      video.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      video.description.toLowerCase().includes(searchQuery.toLowerCase());
-    
-    const matchesTopic = selectedTopic === 'all' || video.topic.toLowerCase() === selectedTopic.toLowerCase();
-    
-    return matchesSearch && matchesTopic;
-  });
+  }, [searchParams]);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <Navbar />
       
-      <div className="container mx-auto pt-24 px-4">
+      <section className="pt-24 px-4">
+        <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="mb-8"
         >
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Video Tutorials</h1>
-          <p className="text-gray-600 dark:text-gray-400 max-w-3xl">
-            Watch our collection of expert video tutorials to master quantum computing, 
-            artificial intelligence, and other advanced technologies at your own pace.
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+              {selectedTopic ? `${selectedTopic} Video Tutorials` : 'All Video Tutorials'}
+            </h1>
+            <p className="text-gray-600 dark:text-gray-400">
+              {selectedTopic 
+                ? `Explore video tutorials for ${selectedTopic}`
+                : 'Browse video tutorials across all topics'}
           </p>
         </motion.div>
 
-        {/* Search and Filter Bar */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 mb-8">
-          <div className="flex flex-col md:flex-row gap-4">
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
-              <Input 
-                type="text" 
-                placeholder="Search videos by title or description" 
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10"
-              />
-            </div>
-            <div className="w-full md:w-64">
-              <Select value={selectedTopic} onValueChange={setSelectedTopic}>
-                <SelectTrigger>
-                  <div className="flex items-center">
-                    <Filter size={18} className="mr-2 text-gray-500" />
-                    <SelectValue placeholder="Filter by topic" />
-                  </div>
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Topics</SelectItem>
-                  {topics.map(topic => (
-                    <SelectItem key={topic.id} value={topic.title.toLowerCase()}>
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            {/* Topics Sidebar */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="lg:col-span-1"
+            >
+              <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-md p-6">
+                <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Topics</h2>
+                <ul className="space-y-2">
+                  {topics.map((topic) => (
+                    <li key={topic.slug}>
+                      <Button
+                        variant={selectedTopic === topic.slug ? "default" : "ghost"}
+                        className="w-full justify-start"
+                        onClick={() => window.location.href = `/video-tutorials?topic=${topic.slug}`}
+                      >
+                        <ChevronRight className="w-4 h-4 mr-2" />
                       {topic.title}
-                    </SelectItem>
+                      </Button>
+                    </li>
                   ))}
-                </SelectContent>
-              </Select>
+                </ul>
             </div>
-          </div>
-        </div>
+            </motion.div>
 
-        {/* Videos Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {filteredVideos.length > 0 ? (
-            filteredVideos.map((video) => (
+            {/* Video Tutorials Grid */}
               <motion.div
-                key={video.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-                className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-              >
-                <div className="relative aspect-video">
-                  <img 
-                    src={video.thumbnail} 
-                    alt={video.title} 
-                    className="object-cover w-full h-full"
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
-                    <Button variant="outline" size="icon" className="rounded-full bg-white/20 border-0 backdrop-blur-sm">
-                      <Play fill="white" size={24} />
-                    </Button>
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="lg:col-span-3"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {filteredVideos.map((video) => (
+                  <div
+                    key={video.id}
+                    className="bg-white dark:bg-gray-900 rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-200"
+                  >
+                    <div className="p-6">
+                      <div className="flex items-center mb-4">
+                        <Video className="w-5 h-5 text-quantum-500 mr-2" />
+                        <h3 className="font-medium text-gray-900 dark:text-white">{video.title}</h3>
                   </div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">{video.description}</p>
+                      <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mb-4">
+                        <span>Duration: {video.duration}</span>
+                        <span>Level: {video.level}</span>
                 </div>
-                <div className="p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="px-2 py-1 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-xs rounded-md flex items-center">
-                      <Clock size={12} className="mr-1" />
-                      {video.duration}
-                    </span>
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                      {video.topic}
-                    </span>
-                  </div>
-                  <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-white line-clamp-2">
-                    {video.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3">
-                    {video.description}
-                  </p>
-                  <div className="flex items-center justify-end">
-                    <Button variant="default" size="sm" className="gap-2" asChild>
-                      <a href={video.videoUrl} target="_blank" rel="noopener noreferrer">
-                        Watch Now <Video size={14} />
+                      {!selectedTopic && (
+                        <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
+                          Topic: {video.topic}
+                        </p>
+                      )}
+                      <a
+                        href={video.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center text-quantum-500 hover:text-quantum-600 text-sm font-medium"
+                      >
+                        <ExternalLink className="w-4 h-4 mr-1" />
+                        <span>Watch Tutorial</span>
                       </a>
-                    </Button>
+                    </div>
                   </div>
+                ))}
                 </div>
               </motion.div>
-            ))
-          ) : (
-            <div className="col-span-full text-center py-12">
-              <p className="text-gray-500 dark:text-gray-400">No videos found matching your criteria. Try adjusting your search.</p>
-            </div>
-          )}
-        </div>
-        
-        <div className="bg-gray-900 text-white py-6 text-center text-sm mt-16">
-          <div className="container mx-auto">
-            <p>&copy; {new Date().getFullYear()} QuantGenAILabs. All rights reserved.</p>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };
