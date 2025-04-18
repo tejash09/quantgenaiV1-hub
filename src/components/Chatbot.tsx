@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Bot, X, ChevronDown, ChevronUp, Book, FileText } from 'lucide-react';
@@ -12,74 +11,22 @@ interface Message {
   sender: 'user' | 'bot';
   timestamp: Date;
   resources?: {
-    type: 'paper' | 'resource';
+    type: 'paper' | 'resource' | 'course' | 'video';
     title: string;
     link: string;
+    description?: string;
   }[];
+  topicLink?: {
+    title: string;
+    slug: string;
+  };
+  resourceLinks?: {
+    type: 'papers' | 'tutorials' | 'courses' | 'videos';
+    title: string;
+    slug: string;
+  }[];
+  topicIntro?: string;
 }
-
-// Sample AI knowledge base for common questions
-const knowledgeBase = {
-  "what is quantum computing": "Quantum computing is a type of computation that harnesses quantum-mechanical phenomena like superposition and entanglement to perform calculations. Unlike classical computers that use bits (0 or 1), quantum computers use quantum bits or qubits that can exist in multiple states simultaneously.",
-  "explain machine learning": "Machine learning is a subset of artificial intelligence that enables systems to learn from data, identify patterns, and make decisions with minimal human intervention. It involves algorithms that improve automatically through experience.",
-  "what are large language models": "Large Language Models (LLMs) are advanced AI systems trained on vast amounts of text data that can understand, generate, and manipulate human language. Examples include GPT-4, Claude, and Llama. They can perform various tasks from translation to creative writing and coding.",
-  "what is generative ai": "Generative AI refers to artificial intelligence systems that can generate new content such as text, images, audio, and video. These models learn patterns from existing data and create new outputs that reflect those patterns. Examples include DALL-E for images and GPT for text.",
-  "what is deep learning": "Deep learning is a subset of machine learning that uses neural networks with multiple layers (deep neural networks) to analyze various factors of data. It's particularly powerful for processing unstructured data like images, sound, and text.",
-  "what are neural networks": "Neural networks are computing systems inspired by the human brain. They consist of interconnected nodes or 'neurons' that process information. These networks can learn to perform tasks by analyzing examples, without being explicitly programmed for the specific task.",
-  "what is nlp": "Natural Language Processing (NLP) is a field of AI that focuses on the interaction between computers and human language. It enables machines to read, understand, and derive meaning from human languages, facilitating tasks like translation, sentiment analysis, and question answering."
-};
-
-const Chatbot: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isMinimized, setIsMinimized] = useState(false);
-  const [input, setInput] = useState('');
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: '1',
-      text: "Hi there! I'm QuantBot, your AI assistant for quantum computing and AI topics. How can I help you today?",
-      sender: 'bot',
-      timestamp: new Date(),
-    },
-  ]);
-  const [isTyping, setIsTyping] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const { toast } = useToast();
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages, isTyping]);
-
-  useEffect(() => {
-    // Listen for custom events to open the chat
-    const handleOpenChat = (e: CustomEvent) => {
-      if (e.detail?.open) {
-        setIsOpen(true);
-        setIsMinimized(false);
-      }
-    };
-
-    window.addEventListener('openChat' as any, handleOpenChat);
-    return () => {
-      window.removeEventListener('openChat' as any, handleOpenChat);
-    };
-  }, []);
-
-  const toggleChat = () => {
-    if (!isOpen) {
-      setIsOpen(true);
-      setIsMinimized(false);
-    } else {
-      setIsMinimized(!isMinimized);
-    }
-  };
-
-  const closeChat = () => {
-    setIsOpen(false);
-  };
 
   // Function to find related papers and resources for a topic
   const findTopicResources = (query: string) => {
@@ -123,6 +70,10 @@ const Chatbot: React.FC = () => {
         matchedTopic = topics.find(t => t.slug === 'llm');
       } else if (lcQuery.includes('genai') || lcQuery.includes('generative ai')) {
         matchedTopic = topics.find(t => t.slug === 'genai');
+    } else if (lcQuery.includes('drone') || lcQuery.includes('drones')) {
+      matchedTopic = topics.find(t => t.slug === 'drones');
+    } else if (lcQuery.includes('robotics') || lcQuery.includes('robot')) {
+      matchedTopic = topics.find(t => t.slug === 'robotics');
       }
     }
     
@@ -131,9 +82,10 @@ const Chatbot: React.FC = () => {
     }
     
     const result: {
-      type: 'paper' | 'resource';
+    type: 'paper' | 'resource' | 'course' | 'video';
       title: string;
       link: string;
+    description?: string;
     }[] = [];
     
     // Add papers if requested
@@ -141,33 +93,40 @@ const Chatbot: React.FC = () => {
       result.push(...matchedTopic.papers.slice(0, 3).map(paper => ({
         type: 'paper' as const,
         title: paper.title,
-        link: paper.link
+      link: paper.link,
+      description: paper.abstract
       })));
     }
     
     // Add resources if requested
     if (isAskingForResources) {
+    // Add tutorials
       if (matchedTopic.tutorials) {
-        result.push(...matchedTopic.tutorials.slice(0, 1).map(tutorial => ({
+      result.push(...matchedTopic.tutorials.slice(0, 3).map(tutorial => ({
           type: 'resource' as const,
           title: tutorial.title,
-          link: tutorial.link
+        link: tutorial.link,
+        description: tutorial.description
         })));
       }
       
+    // Add courses
       if (matchedTopic.courses) {
-        result.push(...matchedTopic.courses.slice(0, 1).map(course => ({
-          type: 'resource' as const,
+      result.push(...matchedTopic.courses.slice(0, 3).map(course => ({
+        type: 'course' as const,
           title: course.title,
-          link: course.link
+        link: course.link,
+        description: course.description
         })));
       }
       
+    // Add videos
       if (matchedTopic.videos) {
-        result.push(...matchedTopic.videos.slice(0, 1).map(video => ({
-          type: 'resource' as const,
+      result.push(...matchedTopic.videos.slice(0, 3).map(video => ({
+        type: 'video' as const,
           title: video.title,
-          link: video.link
+        link: video.link,
+        description: video.description
         })));
       }
     }
@@ -175,96 +134,303 @@ const Chatbot: React.FC = () => {
     return result.length > 0 ? result : null;
   };
 
-  // Function to generate AI response based on user input
-  const generateResponse = async (userMessage: string) => {
-    const lowerCaseMessage = userMessage.toLowerCase();
-    
-    // Find related resources if the user is asking for papers or resources
-    const relatedResources = findTopicResources(userMessage);
-    
-    // Check knowledge base for exact matches
-    for (const [key, value] of Object.entries(knowledgeBase)) {
-      if (lowerCaseMessage.includes(key)) {
-        let response = value;
-        
-        // Add a prompt to ask for resources if we found related resources
-        if (relatedResources) {
-          response += "\n\nI've also found some relevant resources that might interest you.";
-        }
-        
-        return { text: response, resources: relatedResources };
-      }
+// Function to get topic information
+const getTopicInfo = (query: string) => {
+  const lcQuery = query.toLowerCase();
+  const topics = getAllTopics();
+  
+  // Find the topic that matches the query
+  let matchedTopic = null;
+  for (const topic of topics) {
+    if (lcQuery.includes(topic.title.toLowerCase()) || lcQuery.includes(topic.slug.replace('-', ' '))) {
+      matchedTopic = topic;
+      break;
     }
-    
-    // Handle greetings
-    if (lowerCaseMessage.match(/^(hi|hello|hey|greetings)/i)) {
-      return { text: "Hello! How can I help you with quantum computing or AI today?" };
+  }
+  
+  // If no specific topic is found, look for general AI/ML/Quantum keywords
+  if (!matchedTopic) {
+    if (lcQuery.includes('quantum') || lcQuery.includes('qubits')) {
+      matchedTopic = topics.find(t => t.slug === 'quantum-computing');
+    } else if (lcQuery.includes('ai') || lcQuery.includes('artificial intelligence')) {
+      matchedTopic = topics.find(t => t.slug === 'artificial-intelligence');
+    } else if (lcQuery.includes('machine learning') || lcQuery.includes('ml')) {
+      matchedTopic = topics.find(t => t.slug === 'machine-learning');
+    } else if (lcQuery.includes('deep learning') || lcQuery.includes('neural network')) {
+      matchedTopic = topics.find(t => t.slug === 'deep-learning');
+    } else if (lcQuery.includes('llm') || lcQuery.includes('language model')) {
+      matchedTopic = topics.find(t => t.slug === 'llm');
+    } else if (lcQuery.includes('genai') || lcQuery.includes('generative ai')) {
+      matchedTopic = topics.find(t => t.slug === 'genai');
+    } else if (lcQuery.includes('drone') || lcQuery.includes('drones')) {
+      matchedTopic = topics.find(t => t.slug === 'drones');
+    } else if (lcQuery.includes('robotics') || lcQuery.includes('robot')) {
+      matchedTopic = topics.find(t => t.slug === 'robotics');
     }
-    
-    // Handle thanks
-    if (lowerCaseMessage.match(/(thank you|thanks)/i)) {
-      return { text: "You're welcome! Feel free to ask if you have more questions." };
-    }
+  }
+  
+  if (!matchedTopic) {
+    return null;
+  }
+  
+  return {
+    title: matchedTopic.title,
+    slug: matchedTopic.slug,
+    description: matchedTopic.shortDescription || matchedTopic.overview,
+    keypoints: matchedTopic.keypoints
+  };
+};
 
-    // Handle questions about specific topics
-    if (lowerCaseMessage.includes("quantum")) {
-      let response = "Quantum computing is a fascinating field that uses quantum mechanics principles to process information. It has potential applications in cryptography, optimization problems, and simulating quantum systems.";
-      
-      if (relatedResources) {
-        response += "\n\nI've found some relevant quantum computing resources that might interest you.";
-      }
-      
-      return { text: response, resources: relatedResources };
-    }
-    
-    if (lowerCaseMessage.includes("machine learning") || lowerCaseMessage.includes("ml")) {
-      let response = "Machine learning is a field of study that gives computers the ability to learn without being explicitly programmed. It focuses on developing algorithms that can access data and use it to learn for themselves.";
-      
-      if (relatedResources) {
-        response += "\n\nI've found some relevant machine learning resources that might interest you.";
-      }
-      
-      return { text: response, resources: relatedResources };
-    }
+const Chatbot: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
+  const [input, setInput] = useState('');
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: '1',
+      text: "Hi there! I'm QuantBot, your AI assistant for quantum computing and AI topics. I can help you learn about:\n\n" +
+            "• Quantum Computing\n" +
+            "• Machine Learning\n" +
+            "• Deep Learning\n" +
+            "• Natural Language Processing\n" +
+            "• Large Language Models\n" +
+            "• Generative AI\n\n" +
+            "What would you like to learn about today?",
+      sender: 'bot',
+      timestamp: new Date(),
+    },
+  ]);
+  const [isTyping, setIsTyping] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const { toast } = useToast();
+  
+  // Hardcoded API key - replace with your actual Groq API key
+  const groqApiKey = "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";
 
-    if (lowerCaseMessage.includes("llm") || lowerCaseMessage.includes("language model")) {
-      let response = "Large Language Models (LLMs) are sophisticated AI systems trained on vast amounts of text data. They can understand context, generate human-like text, and perform various language tasks from translation to creative writing.";
-      
-      if (relatedResources) {
-        response += "\n\nI've found some relevant LLM resources that might interest you.";
-      }
-      
-      return { text: response, resources: relatedResources };
-    }
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
-    if (lowerCaseMessage.includes("genai") || lowerCaseMessage.includes("generative")) {
-      let response = "Generative AI refers to AI systems that can create new content like text, images, audio, and video. These systems learn patterns from existing data and generate new outputs that reflect those patterns.";
-      
-      if (relatedResources) {
-        response += "\n\nI've found some relevant Generative AI resources that might interest you.";
-      }
-      
-      return { text: response, resources: relatedResources };
-    }
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isTyping]);
 
-    // If the user is asking for resources but we don't have a specific topic match
-    if (relatedResources) {
+  useEffect(() => {
+    // Listen for custom events to open the chat
+    const handleOpenChat = (e: CustomEvent) => {
+      if (e.detail?.open) {
+        setIsOpen(true);
+        setIsMinimized(false);
+      }
+    };
+
+    window.addEventListener('openChat' as any, handleOpenChat);
+    return () => {
+      window.removeEventListener('openChat' as any, handleOpenChat);
+    };
+  }, []);
+
+  const toggleChat = () => {
+    if (!isOpen) {
+      setIsOpen(true);
+      setIsMinimized(false);
+    } else {
+      setIsMinimized(!isMinimized);
+    }
+  };
+
+  const closeChat = () => {
+    setIsOpen(false);
+  };
+
+  // Function to call Groq API
+  const callGroqAPI = async (userMessage: string, conversationHistory: Message[]) => {
+    if (!groqApiKey) {
       return { 
-        text: "I've found some resources that might help you with your question:", 
-        resources: relatedResources 
+        text: "Please set your Groq API key in the code before using the chatbot.",
+        resources: null
       };
     }
 
-    // Default responses for unknown queries
-    const defaultResponses = [
-      "That's an interesting question about emerging technologies. While I don't have the specific answer, I recommend checking our resources section for more information.",
-      "I'm still learning about that topic. You might find more details in our research papers section on the website.",
-      "Great question! This is a complex area of research. I suggest exploring our educational resources for more in-depth information.",
-      "I don't have complete information on that yet. Our website has curated resources that might help you understand this topic better.",
-      "This is an evolving field of study. Check out our latest research papers for the most up-to-date information on this topic."
-    ];
-    
-    return { text: defaultResponses[Math.floor(Math.random() * defaultResponses.length)] };
+    try {
+      // Test API key first
+      try {
+        const testResponse = await fetch('https://api.groq.com/openai/v1/models', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${groqApiKey}`
+          }
+        });
+        
+        if (!testResponse.ok) {
+          console.error('API key test failed:', await testResponse.text());
+          return { 
+            text: "There's an issue with the API key. Please check the console for details.", 
+            resources: null 
+          };
+        }
+      } catch (testError) {
+        console.error('API key test error:', testError);
+      }
+
+      // Format conversation history for the API
+      const formattedHistory = conversationHistory.map(msg => ({
+        role: msg.sender === 'user' ? 'user' : 'assistant',
+        content: msg.text
+      }));
+
+      // Add system message to guide the AI
+      const systemMessage = {
+        role: 'system',
+        content: `You are QuantBot, an AI assistant specialized in quantum computing and AI topics. 
+        Your purpose is to help users learn about these technologies and provide accurate information.
+        When discussing topics, mention that users can visit the topic page on the website for more information.
+        DO NOT include any markdown links in your responses like [View Topic Name page](/topic/topic-slug).
+        Available topics include: quantum-computing, machine-learning, deep-learning, nlp, llm, genai, artificial-intelligence, robotics, drones.
+        Keep your responses concise but informative. If you don't know something, admit it and suggest related topics.`
+      };
+
+      // Prepare the API request
+      const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${groqApiKey}`
+        },
+        body: JSON.stringify({
+          model: 'llama3-70b-8192',
+          messages: [systemMessage, ...formattedHistory, { role: 'user', content: userMessage }],
+          temperature: 0.7,
+          max_tokens: 1024
+        })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error?.message || 'Failed to get response from Groq API');
+      }
+
+      const data = await response.json();
+      let aiResponse = data.choices[0].message.content;
+
+      // Find related resources if the user is asking for papers or resources
+      const relatedResources = findTopicResources(userMessage);
+      
+      // Check if the response contains a topic link
+      const topicLinkMatch = aiResponse.match(/\[View (.*?) page\]\(\/topic\/(.*?)\)/);
+      let topicLink = undefined;
+      
+      if (topicLinkMatch) {
+        topicLink = {
+          title: topicLinkMatch[1],
+          slug: topicLinkMatch[2]
+        };
+        
+        // Remove the markdown link from the response text
+        aiResponse = aiResponse.replace(/\[View (.*?) page\]\(\/topic\/(.*?)\)/, '');
+      }
+      
+      // Check if user is asking for specific resource types
+      const resourceTypes = [];
+      const lcQuery = userMessage.toLowerCase();
+      
+      // More precise detection of resource type requests
+      if (lcQuery.includes('video') || lcQuery.includes('videos') || lcQuery.includes('video tutorial')) {
+        resourceTypes.push('videos');
+      }
+      if (lcQuery.includes('tutorial') || lcQuery.includes('tutorials') || lcQuery.includes('guide')) {
+        resourceTypes.push('tutorials');
+      }
+      if (lcQuery.includes('course') || lcQuery.includes('courses') || lcQuery.includes('class')) {
+        resourceTypes.push('courses');
+      }
+      if (lcQuery.includes('paper') || lcQuery.includes('papers') || lcQuery.includes('research')) {
+        resourceTypes.push('papers');
+      }
+      
+      // If no specific resource type is mentioned but the query is about resources in general
+      if (resourceTypes.length === 0 && 
+          (lcQuery.includes('resource') || lcQuery.includes('learn') || lcQuery.includes('study') || 
+           lcQuery.includes('material') || lcQuery.includes('content'))) {
+        // Don't automatically add all resource types - wait for specific requests
+      }
+      
+      // Generate resource links if a topic is identified and resource types are requested
+      let resourceLinks = undefined;
+      if (topicLink && resourceTypes.length > 0) {
+        resourceLinks = resourceTypes.map(type => ({
+          type: type as 'papers' | 'tutorials' | 'courses' | 'videos',
+          title: type.charAt(0).toUpperCase() + type.slice(1),
+          slug: topicLink.slug
+        }));
+      }
+      
+      // Get topic introduction if a topic is identified
+      let topicIntro = undefined;
+      let topicInfo = undefined;
+      
+      // Check if user is asking for topic information
+      const isAskingForTopicInfo = 
+        lcQuery.includes('explain') || 
+        lcQuery.includes('describe') || 
+        lcQuery.includes('what is') || 
+        lcQuery.includes('tell me about') || 
+        lcQuery.includes('introduction') || 
+        lcQuery.includes('intro') ||
+        lcQuery.includes('overview');
+      
+      if (topicLink || isAskingForTopicInfo) {
+        // Try to get topic from the link first
+        const topicSlug = topicLink ? topicLink.slug : null;
+        
+        if (topicSlug) {
+          topicInfo = getTopicInfo(topicSlug);
+        } else {
+          // If no topic link, try to extract topic from the query
+          topicInfo = getTopicInfo(userMessage);
+        }
+        
+        if (topicInfo) {
+          topicIntro = topicInfo.description;
+          // If we found a topic but no topic link was detected, create one
+          if (!topicLink) {
+            topicLink = {
+              title: topicInfo.title,
+              slug: topicInfo.slug
+            };
+          }
+        }
+      }
+
+      return { 
+        text: aiResponse, 
+        resources: relatedResources,
+        topicLink,
+        resourceLinks,
+        topicIntro,
+        topicInfo
+      };
+    } catch (error) {
+      console.error('Error calling Groq API:', error);
+      // Log more detailed error information
+      if (error instanceof Error) {
+        console.error('Error details:', error.message);
+        console.error('Error stack:', error.stack);
+      }
+      
+      // Check if the error is related to the API key
+      if (error instanceof Error && error.message.includes('401')) {
+        return { 
+          text: "Authentication error with the Groq API. Please check your API key.", 
+          resources: null 
+        };
+      }
+      
+      return { 
+        text: "I'm having trouble connecting to my AI brain right now. Please try again later or check your API key.", 
+        resources: null 
+      };
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -283,8 +449,8 @@ const Chatbot: React.FC = () => {
     setIsTyping(true);
 
     try {
-      // Generate response based on user input
-      const response = await generateResponse(input);
+      // Call Groq API for response
+      const response = await callGroqAPI(input, messages);
       
       // Simulate variable typing time
       const typingDelay = Math.max(700, Math.min(2000, response.text.length * 10));
@@ -295,7 +461,10 @@ const Chatbot: React.FC = () => {
           text: response.text,
           sender: 'bot',
           timestamp: new Date(),
-          resources: response.resources || undefined
+          resources: response.resources || undefined,
+          topicLink: response.topicLink,
+          resourceLinks: response.resourceLinks,
+          topicIntro: response.topicIntro
         };
         
         setMessages(prevMessages => [...prevMessages, botMessage]);
@@ -388,6 +557,56 @@ const Chatbot: React.FC = () => {
                         >
                           <p className="text-sm whitespace-pre-wrap">{message.text}</p>
                           
+                          {/* Topic Introduction */}
+                          {message.topicIntro && (
+                            <div className="mt-3 p-2 bg-white dark:bg-gray-700 rounded-md text-xs">
+                              <p className="font-medium mb-1">About {message.topicLink?.title}:</p>
+                              <p className="text-gray-700 dark:text-gray-300">{message.topicIntro}</p>
+                            </div>
+                          )}
+                          
+                          {/* Topic Link Button */}
+                          {message.topicLink && (
+                            <div className="mt-3">
+                              <a
+                                href={`/topic/${message.topicLink.slug}`}
+                                className="inline-flex items-center px-3 py-1.5 bg-quantum-500 hover:bg-quantum-600 text-white text-xs font-medium rounded-md transition-colors"
+                              >
+                                <Book className="h-3 w-3 mr-1" />
+                                View {message.topicLink.title} Page
+                              </a>
+                            </div>
+                          )}
+                          
+                          {/* Resource Type Links */}
+                          {message.resourceLinks && message.resourceLinks.length > 0 && (
+                            <div className="mt-3">
+                              <p className="text-xs font-medium mb-2">Browse {message.topicLink?.title} resources:</p>
+                              <div className="flex flex-wrap gap-2">
+                                {message.resourceLinks.map((link, index) => (
+                                  <a
+                                    key={index}
+                                    href={`/${link.type}/${link.slug}`}
+                                    className="inline-flex items-center px-3 py-1.5 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-800 dark:text-white text-xs font-medium rounded-md transition-colors border border-gray-200 dark:border-gray-600"
+                                  >
+                                    {link.type === 'papers' ? (
+                                      <FileText className="h-3 w-3 mr-1 text-quantum-500" />
+                                    ) : link.type === 'courses' ? (
+                                      <Book className="h-3 w-3 mr-1 text-quantum-500" />
+                                    ) : link.type === 'videos' ? (
+                                      <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1 text-quantum-500" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z" />
+                                      </svg>
+                                    ) : (
+                                      <Book className="h-3 w-3 mr-1 text-quantum-500" />
+                                    )}
+                                    Browse {link.title}
+                                  </a>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                          
                           {/* Resources section */}
                           {message.resources && message.resources.length > 0 && (
                             <div className="mt-3 border-t border-gray-200 dark:border-gray-700 pt-2">
@@ -403,10 +622,21 @@ const Chatbot: React.FC = () => {
                                   >
                                     {resource.type === 'paper' ? (
                                       <FileText className="h-3 w-3 mr-2 text-quantum-500" />
+                                    ) : resource.type === 'course' ? (
+                                      <Book className="h-3 w-3 mr-2 text-quantum-500" />
+                                    ) : resource.type === 'video' ? (
+                                      <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-2 text-quantum-500" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z" />
+                                      </svg>
                                     ) : (
                                       <Book className="h-3 w-3 mr-2 text-quantum-500" />
                                     )}
-                                    <span className="line-clamp-1">{resource.title}</span>
+                                    <div>
+                                      <span className="line-clamp-1 font-medium">{resource.title}</span>
+                                      {resource.description && (
+                                        <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-1 mt-0.5">{resource.description}</p>
+                                      )}
+                                    </div>
                                   </a>
                                 ))}
                               </div>
