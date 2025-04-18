@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Send, MessageSquare } from 'lucide-react';
@@ -6,6 +5,7 @@ import Navbar from '../components/Navbar';
 import Chatbot from '../components/Chatbot';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
+import emailjs from 'emailjs-com';  // Import EmailJS SDK
 
 const Contact = () => {
   const [name, setName] = useState('');
@@ -14,14 +14,14 @@ const Contact = () => {
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-  
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!name || !email || !subject || !message) {
       toast({
         title: "Missing information",
@@ -30,24 +30,45 @@ const Contact = () => {
       });
       return;
     }
-    
+
     setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
-    
-    toast({
-      title: "Message sent",
-      description: "Thank you for your message. We'll get back to you soon!",
-    });
-    
-    // Reset form
-    setName('');
-    setEmail('');
-    setSubject('');
-    setMessage('');
+
+    // Send email via EmailJS
+    const templateParams = {
+      from_name: name,
+      from_email: email,
+      subject: subject,
+      message: message,
+    };
+
+    try {
+      await emailjs.send(
+        'service_tpg97mp',     // Replace with your EmailJS service ID
+        'template_oaweuqf',    // Replace with your EmailJS template ID
+        templateParams,
+        'yexGhRB6DNhat2YoP'         // Replace with your EmailJS user ID
+      );
+      
+      setIsSubmitting(false);
+
+      toast({
+        title: "Message sent",
+        description: "Thank you for your message. We'll get back to you soon!",
+      });
+
+      // Reset form
+      setName('');
+      setEmail('');
+      setSubject('');
+      setMessage('');
+    } catch (error) {
+      setIsSubmitting(false);
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again later.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (

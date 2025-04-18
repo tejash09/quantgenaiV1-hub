@@ -79,21 +79,21 @@ export const topics: Topic[] = [
     ],
     resources: [
       {
-        id: '1',
+        id: '1',  //tutorials
         title: 'Introduction to ' + 'Machine Learning',
         description: 'Learn the fundamentals of ' + 'Machine Learning',
         link: 'https://example.com/intro',
-        type: ResourceType.Tutorial
+        type: ResourceType.Tutorial 
       },
       {
-        id: '2',
+        id: '2', //courses
         title: 'Advanced ' + 'Machine Learning' + ' Concepts',
         description: 'Deep dive into advanced topics and applications',
         link: 'https://example.com/advanced',
         type: ResourceType.Course
       },
       {
-        id: '3',
+        id: '3', // videos 
         title: 'Machine Learning' + ' Fundamentals Video',
         description: 'Video tutorial covering the basics of ' + 'Machine Learning',
         link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
