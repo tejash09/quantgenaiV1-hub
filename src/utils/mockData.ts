@@ -25,7 +25,7 @@ export const topics: Topic[] = [
     a6:'Manufacturing: Predictive maintenance and quality control optimize production processes.',
     a7:'Cybersecurity: ML detects anomalies and prevents cyber threats in real-time.',
     c2:'Machine Learning continues to evolve, leading to more advanced applications in multiple fields.',
-    videoUrl: 'https://www.youtube.com/embed/9sQEP87_RYs',
+    videoUrl: 'https://www.youtube.com/watch?v=6mSx_KJxcHI',
     image: 'https://images.unsplash.com/photo-1488229297570-58520851e868?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80',
     papers: [
       {
@@ -206,7 +206,7 @@ export const topics: Topic[] = [
     a6: 'Entertainment: AI-generated music, movies, and personalized content recommendations.',
     a7: 'Cybersecurity: Deep learning models detect malware and prevent cyber threats in real time.',
     c2:'',
-    videoUrl: 'https://www.youtube.com/embed/5tvA8ByFCdY',
+    videoUrl: 'https://www.youtube.com/watch?v=6M5VXKLf4D4',
     image: 'https://images.unsplash.com/photo-1544654803-b69140b285a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
     papers: [
       {
@@ -388,7 +388,7 @@ export const topics: Topic[] = [
     a6: 'Grammar Checking: Tools like Grammarly for writing improvement.',
     a7: 'Information Retrieval: AI-enhanced search engines for quick data access.',
     c2:'',
-    videoUrl: 'https://www.youtube.com/embed/fOvTtapxa9c',
+    videoUrl: 'https://www.youtube.com/watch?v=CMrHM8a3hqw',
     image: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80',
     papers: [
       {
@@ -569,7 +569,7 @@ export const topics: Topic[] = [
     a6: 'Household Assistance: Smart home robots assist with cleaning, cooking, and security.',
     a7: "Space Exploration: Robots like NASA's rovers explore planets and analyze extraterrestrial environments.",
     c2:'',
-    videoUrl: 'https://www.youtube.com/embed/fn3KWM1kuAw',
+    videoUrl: 'https://www.youtube.com/watch?v=HvMQONnCXbE',
     image: 'https://images.unsplash.com/photo-1555255707-c07966088b7b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2036&q=80',
     papers: [
       {
@@ -750,7 +750,7 @@ export const topics: Topic[] = [
     a6: 'Infrastructure Inspection: Power lines, pipelines, and bridges are monitored using drones.',
     a7: 'Military Applications: Drones are used for reconnaissance, targeting, and combat missions.',
     c2:'',
-    videoUrl: 'https://www.youtube.com/embed/QjfF7DIEmi4',
+    videoUrl: 'https://www.youtube.com/watch?v=gE6QHM1wzXw',
     image: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
     papers: [
       {
@@ -931,7 +931,7 @@ export const topics: Topic[] = [
     a6: 'Material Science: Discovering new materials by simulating atomic structures.',  
     a7: 'Weather Forecasting: Improving climate models through complex quantum simulations.',  
     c2:'',
-    videoUrl: 'https://www.youtube.com/embed/Lbndu5EIWvI',
+    videoUrl: 'https://www.youtube.com/watch?v=jHoEjvuPoB8',
     image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
     papers: [
       {
@@ -1112,7 +1112,7 @@ export const topics: Topic[] = [
     a6: 'Art Generation: AI creates paintings and digital artwork based on different styles.',  
     a7: 'Virtual Reality & Simulations: AI generates immersive virtual environments for training and entertainment.',      
     c2:'',
-    videoUrl: 'https://www.youtube.com/embed/3oVc3pWJ3bw',
+    videoUrl: 'https://www.youtube.com/watch?v=rwF-X5STYks',
     image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
     papers: [
       {
@@ -1293,7 +1293,7 @@ export const topics: Topic[] = [
     a6: 'Question Answering: AI-powered systems provide accurate responses to queries.',  
     a7: 'Personalized Recommendations: AI analyzes user text input to suggest relevant content.',      
     c2:'',
-    videoUrl: 'https://www.youtube.com/embed/zjkBMFhNj_g',
+    videoUrl: 'https://www.youtube.com/watch?v=zizonToFXDs',
     image: 'https://images.unsplash.com/photo-1677442135968-6d89469c5f97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
     papers: [
       {
