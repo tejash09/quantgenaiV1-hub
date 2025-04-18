@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, X, FileText, Book, Tag } from 'lucide-react';
@@ -70,15 +69,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onClose, className }) =
               onChange={(e) => setQuery(e.target.value)}
               className="flex-1 bg-transparent border-none focus:outline-none focus:ring-0 text-gray-900 dark:text-white placeholder-gray-400 text-lg"
             />
-            {query && (
-              <button
-                type="button"
-                onClick={handleClear}
-                className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            )}
+            <button
+              type="button"
+              onClick={onClose}
+              className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+            >
+              <X className="h-5 w-5" />
+            </button>
           </div>
         </form>
 
@@ -127,9 +124,11 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onClose, className }) =
                           <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3">Papers</h3>
                           <div className="space-y-2">
                             {results.papers.map((paper: any) => (
-                              <Link
+                              <a
                                 key={paper.id}
-                                to={`/topic/${paper.topicSlug}`}
+                                href={paper.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 onClick={onClose}
                                 className="block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                               >
@@ -140,7 +139,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onClose, className }) =
                                     <p className="text-sm text-gray-500 dark:text-gray-400">{paper.authors} ({paper.year})</p>
                                   </div>
                                 </div>
-                              </Link>
+                              </a>
                             ))}
                           </div>
                         </div>
@@ -151,9 +150,11 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onClose, className }) =
                           <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3">Resources</h3>
                           <div className="space-y-2">
                             {results.resources.map((resource: any) => (
-                              <Link
+                              <a
                                 key={resource.id}
-                                to={`/topic/${resource.topicSlug}`}
+                                href={resource.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 onClick={onClose}
                                 className="block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                               >
@@ -164,7 +165,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onClose, className }) =
                                     <p className="text-sm text-gray-500 dark:text-gray-400">{resource.type}</p>
                                   </div>
                                 </div>
-                              </Link>
+                              </a>
                             ))}
                           </div>
                         </div>

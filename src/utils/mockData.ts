@@ -41,7 +41,7 @@ export const topics: Topic[] = [
         title: 'Machine Learning: Trends, Perspectives, and Prospects',
         authors: 'M. I. Jordan, T. M. Mitchell',
         year: '2015',
-        link: '#',
+        link: ' https://www.cs.cmu.edu/~tom/pubs/Science-ML-2015.pdf',
         abstract: 'A survey of machine learning and where it may be headed.'
       },
       {
@@ -49,7 +49,7 @@ export const topics: Topic[] = [
         title: 'Explaining and Harnessing Adversarial Examples',
         authors: 'Ian J. Goodfellow, Jonathon Shlens, Christian Szegedy',
         year: '2015',
-        link: 'https://arxiv.org/abs/1412.6572',
+        link: 'https://arxiv.org/pdf/1412.6572',
         abstract: 'This paper explains why neural networks are vulnerable to adversarial examples and proposes a fast method of generating them.'
       },
       {
@@ -82,7 +82,7 @@ export const topics: Topic[] = [
         id: '1',  //tutorials
         title: 'Introduction to ' + 'Machine Learning',
         description: 'Learn the fundamentals of ' + 'Machine Learning',
-        link: 'https://example.com/intro',
+        link: 'https://examhttps://www.youtube.com/watch?v=ukzFI9rgwfU&ab_channel=Simplilearnple.com/intro',
         type: ResourceType.Tutorial 
       },
       {
@@ -167,9 +167,9 @@ export const topics: Topic[] = [
       {
         id: 'ml-video-1',
         title: 'Machine Learning Fundamentals',
-        duration: '45:22',
+        duration: '12:44',
         thumbnail: 'https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
-        videoUrl: 'https://www.youtube.com/embed/9sQEP87_RYs',
+        videoUrl: 'https://www.youtube.com/watch?v=Gv9_4yMHFhI&list=PLblh5JKOoLUICTaGLRoHQDuF_7q2GfuJF&ab_channel=StatQuestwithJoshStarmer',
         description: 'An introduction to the core concepts of machine learning with practical examples.'
       },
       {
@@ -222,7 +222,7 @@ export const topics: Topic[] = [
         title: 'ImageNet Classification with Deep Convolutional Neural Networks',
         authors: 'A. Krizhevsky, I. Sutskever, G. E. Hinton',
         year: '2012',
-        link: '#',
+        link: ' https://proceedings.neurips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf',
         abstract: 'The paper that rekindled interest in CNNs and deep learning.'
       },
       {
@@ -263,7 +263,7 @@ export const topics: Topic[] = [
         id: '1',
         title: 'Introduction to ' + 'Deep Learning',
         description: 'Learn the fundamentals of ' + 'Deep Learning',
-        link: 'https://example.com/intro',
+        link: 'https://www.youtube.com/watch?v=6M5VXKLf4D4&ab_channel=Simplilearn',
         type: ResourceType.Tutorial
       },
       {
@@ -348,7 +348,7 @@ export const topics: Topic[] = [
       {
         id: 'dl-video-1',
         title: 'Deep Learning Crash Course',
-        duration: '52:10',
+        duration: '1:25:39',
         thumbnail: 'https://images.unsplash.com/photo-1522094626083-4d9be62319aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
         videoUrl: 'https://www.youtube.com/embed/VyWAvY2CF9c',
         description: 'A comprehensive crash course covering key deep learning concepts and architectures.'
@@ -356,7 +356,7 @@ export const topics: Topic[] = [
       {
         id: 'dl-video-2',
         title: 'Building Neural Networks with PyTorch',
-        duration: '41:28',
+        duration: '4:35:42',
         thumbnail: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
         videoUrl: 'https://www.youtube.com/embed/c36lUUr864M',
         description: 'Learn how to build and train neural networks using the PyTorch framework.'
@@ -404,7 +404,7 @@ export const topics: Topic[] = [
         title: 'BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding',
         authors: 'J. Devlin, M. Chang, K. Lee, K. Toutanova',
         year: '2018',
-        link: '#',
+        link: 'https://arxiv.org/pdf/1810.04805',
         abstract: 'Introduces BERT, which advanced the state of the art in many NLP tasks.'
       },
       {
@@ -445,7 +445,7 @@ export const topics: Topic[] = [
         id: '1',
         title: 'Introduction to ' + 'Natural Language Processing',
         description: 'Learn the fundamentals of ' + 'Natural Language Processing',
-        link: 'https://example.com/intro',
+        link: 'https://example.chttps://www.youtube.com/watch?v=CMrHM8a3hqw&ab_channel=Simplilearnom/intro',
         type: ResourceType.Tutorial
       },
       {
@@ -530,7 +530,7 @@ export const topics: Topic[] = [
       {
         id: 'nlp-video-1',
         title: 'Introduction to NLP and Transformers',
-        duration: '49:35',
+        duration: '11:36',
         thumbnail: 'https://images.unsplash.com/photo-1617791160505-6f00504e3519?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
         videoUrl: 'https://www.youtube.com/embed/xI0HHN5XKDo',
         description: 'Learn the fundamentals of NLP and how transformer models have revolutionized the field.'
@@ -538,7 +538,7 @@ export const topics: Topic[] = [
       {
         id: 'nlp-video-2',
         title: 'Building a Chatbot with Python',
-        duration: '37:42',
+        duration: '14:32',
         thumbnail: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
         videoUrl: 'https://www.youtube.com/embed/Da-iHgrmHYg',
         description: 'A step-by-step tutorial on creating your own chatbot using Python and NLP techniques.'
@@ -577,15 +577,15 @@ export const topics: Topic[] = [
         title: 'A Roadmap for US Robotics: From Internet to Robotics',
         authors: 'H. Christensen et al.',
         year: '2016',
-        link: '#',
+        link: ' https://hichristensen.com/pdf/roadmap-2024.pdf',
         abstract: 'A look at the future of robotics research and applications.'
       },
       {
         id: 'rob-paper-2',
-        title: 'Learning Human-like Hand-Eye Coordination using Deep Reinforcement Learning',
+        title: 'Learning Hand-Eye Coordination for Robotic Grasping with Deep Learning and Large-Scale Data Collection',
         authors: 'S. Levine et al.',
         year: '2016',
-        link: '#',
+        link: ' https://arxiv.org/abs/1603.02199',
         abstract: 'Using deep RL to teach robots fine motor skills.'
       },
       {
@@ -626,7 +626,7 @@ export const topics: Topic[] = [
         id: '1',
         title: 'Introduction to ' + 'Robotics',
         description: 'Learn the fundamentals of ' + 'Robotics',
-        link: 'https://example.com/intro',
+        link: 'https://example.chttps://www.youtube.com/watch?v=htjRUL3neMg&ab_channel=TechMightom/intro',
         type: ResourceType.Tutorial
       },
       {
@@ -711,17 +711,17 @@ export const topics: Topic[] = [
       {
         id: 'rob-video-1',
         title: 'Introduction to Robotics',
-        duration: '53:18',
+        duration: '21:01',
         thumbnail: 'https://images.unsplash.com/photo-1561144257-e32e8271dce9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
-        videoUrl: 'https://www.youtube.com/embed/fn3KWM1kuAw',
+        videoUrl: 'https://www.youtube.com/watch?v=eqXQ80vlgqE&list=PLGs0VKk2DiYxkoe2XNxDvVHqL5XG4dMWi&ab_channel=PaulMcWhorter',
         description: 'A comprehensive introduction to robotics principles, mechanics, and control systems.'
       },
       {
         id: 'rob-video-2',
-        title: 'Building Your First Robot with Arduino',
+        title: 'Building Your First AI Robot',
         duration: '42:15',
         thumbnail: 'https://images.unsplash.com/photo-1535378917042-10a22c95931a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
-        videoUrl: 'https://www.youtube.com/embed/QjfF7DIEmi4',
+        videoUrl: 'https://www.youtube.com/watch?v=x0oUZ4HS7lg&ab_channel=Murtaza%27sWorkshop-RoboticsandAI',
         description: 'Step-by-step guide to building a simple robot using Arduino microcontrollers.'
       }
     ]
@@ -755,18 +755,18 @@ export const topics: Topic[] = [
     papers: [
       {
         id: 'drone-paper-1',
-        title: 'Vision-Based Navigation for Autonomous Drones',
-        authors: 'D. Scaramuzza et al.',
+        title: 'Learning Deep Sensorimotor Policies for Vision-based Autonomous Drone Racing',
+        authors: 'Jiawei Fu et al.',
         year: '2014',
-        link: '#',
+        link: 'https://arxiv.org/abs/2210.14985',
         abstract: 'Overview of vision-based navigation systems for drones.'
       },
       {
         id: 'drone-paper-2',
-        title: 'Drone-carried Networks: Challenges, Solutions, and Future Directions',
-        authors: 'M. Mozaffari et al.',
+        title: 'A Deep Reinforcement Learning Approach to Efficient Drone Handover in Cellular Networks',
+        authors: 'Yun Chen et al.',
         year: '2019',
-        link: '#',
+        link: 'https://arxiv.org/pdf/2005.05229',
         abstract: 'A look at using drones for wireless communication networks.'
       },
       {
@@ -787,10 +787,10 @@ export const topics: Topic[] = [
       },
       {
         id: 'drone-paper-5',
-        title: 'Design, Modeling and Control of a UAV for Pollination',
+        title: 'Autonomous UAV Navigation Using Deep Learning-Based Computer Vision',
         authors: 'J. Kim et al.',
         year: '2018',
-        link: '#',
+        link: 'https://pdf.sciencedirectassets.com/320039/1-s2.0-S2590005624X0003X/1-s2.0-S2590005624000274/main.pdf?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDhn4dnoBuvS%2BYxcBQQ8vpqrQPMyd9LYHHSr4bRYWfDqgIgLXkXPBLjsIxZ08PesKjQK6oKOUTuYleNl68iCpAy898qswUIbxAFGgwwNTkwMDM1NDY4NjUiDHGyXUMJlKsyivMgjyqQBc8dJ%2Bc8zcwxMpJfVHNdh3oKQRLDuijGJqb5nI0Y8DdUc5E4L6bXMsaAo5o%2BfZSxagPqZZ0905zFbSljxqg%2FK5Fjxcx2HGg5v2QaXZreEG%2FeQESnz1y2C6mb9kABKbbi%2B2mvmLAG69RsyL7wie7hxxaFriVObRSaYMpfVCbt6sJwgvILu%2B%2Bn0uMNMhmYlHuOyUAda%2BuPDZocLkVRosIUwGpM6BInVT4augiDm6qyhwTnY%2FKTBloJFrV591OjdVSBoYekEUqxhKzkl01T7HbHePcylpbxaoH%2FejIcge8LvrDQYQHCMfZhGOq%2F5PCwEUU1m8f3sipB4DIM3ak%2FEFgZnTSvkSG7dAowPJXv%2BfYUAsUedA4S%2FfTfszFYvJxBGaJzz1DcB8nihnBXiK5A6JvM2%2BBQpdABJdAi4yyrd8ID9sPU8nwfdOj%2BYg7pMqXe%2BBuLDbdorgjZPOyTReoZ6kVjAkG6EQKm6hlj08hwMh1x2xg7HUJRDCjWX9n5olr5jjapWCNbSKjhKBnjV1lqr%2FqzqiawYXr6AOtAo%2FEUVDwtGA7UpwHm6d1sh81iHkkehSptDO%2B9KuodSC%2BCZ1IA0q1vhe2W0tT8T31nUIXgSQZsMk4LgS3LSpljAiAbjO6s2chPYmotQhVdlf0jJkBXP72eXFr18qKzbNKehDxaH7CaBykQbfEAYqxI1nie6y8TOIs5cfEc%2FlcKGBFvjWUCGBiV912peJDzyrHlwT1QO9IBqfq5GWNIcFnXXp84jjzRr%2Fj8nCrsg47Bwu7qFfmj%2FCYv9iAYjeS2LI0MgUyW%2BIqS%2B%2F8FFCmTyHpMR2gr8IIHHkHOjWxcaeX9OOtJaErBh3tvubIYJv1USwLSBhZ9QkP7fFf%2BMM%2Fch8AGOrEB%2BpuAE6mHmlyhxez9UfkmRZZQxismBk%2FXDAzxwRCCOzkTPAYzEgY%2FubDTAnoLcw%2FMYv%2Bn5tP47gTpJUktg3hDsLgtoNpgNcw42Ob8rK21UCGzyU5nykNTUK%2B51NjLzjPgYyhypPVR27qbSHkrVn%2F2d7XvXo8l5T7h8sH0qjmT3XFfJUbhbidxC1qjpt9s6NqcM24lddVPZBKmi1BL5WJlFDIX2NhuFTojYz%2FqoXBgmUGX&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250418T072440Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQ3PHCVTYYSKGA2ZJ%2F20250418%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=221f8314a0458f38a4d459a59bd461afd51d6927baa8bd4270361e319f9ccaa1&hash=63888ef4dd52f2da4f857f0fc6e4dda46cb286d924649f330089f975bf33abf5&host=68042c943591013ac2b2430a89b270f6af2c76d8dfd086a07176afe7c76c2c61&pii=S2590005624000274&tid=spdf-1ba2031e-3228-454f-9476-1b9748c35355&sid=6185e79e95d3f44c432b9880b0b7cdf7877dgxrqb&type=client&tsoh=d3d3LnNjaWVuY2VkaXJlY3QuY29t&rh=d3d3LnNjaWVuY2VkaXJlY3QuY29t&ua=13085957535151015b5706&rr=93226c80a9e4cd03&cc=in',
         abstract: 'This paper presents a drone system designed for assisting in crop pollination to address declining bee populations.'
       },
       {
@@ -807,7 +807,7 @@ export const topics: Topic[] = [
         id: '1',
         title: 'Introduction to ' + 'Drones',
         description: 'Learn the fundamentals of ' + 'Drones',
-        link: 'https://example.com/intro',
+        link: 'https://example.https://www.youtube.com/watch?v=N_XneaFmOmU&ab_channel=SabinCivilEngineeringcom/intro',
         type: ResourceType.Tutorial
       },
       {
@@ -892,17 +892,17 @@ export const topics: Topic[] = [
       {
         id: 'drone-video-1',
         title: 'Drone Flight Basics',
-        duration: '38:22',
+        duration: '10:29',
         thumbnail: 'https://images.unsplash.com/photo-1579829366248-204fe8413f31?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
-        videoUrl: 'https://www.youtube.com/embed/QjfF7DIEmi4',
+        videoUrl: 'https://www.youtube.com/watch?v=1GNwMhPwFiE&ab_channel=Murtaza%27sWorkshop-RoboticsandAI',
         description: 'Learn the fundamentals of drone flight controls, safety, and basic maneuvers.'
       },
       {
         id: 'drone-video-2',
         title: 'Advanced Drone Programming',
-        duration: '45:10',
+        duration: '3:33:02',
         thumbnail: 'https://images.unsplash.com/photo-1527977966376-1c8408f9f108?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
-        videoUrl: 'https://www.youtube.com/embed/xR0kJqcwxMQ',
+        videoUrl: 'https://www.youtube.com/watch?v=LmEcyQnfpDA&ab_channel=Murtaza%27sWorkshop-RoboticsandAI',
         description: 'Explore advanced programming techniques for autonomous drone navigation and obstacle avoidance.'
       }
     ]
@@ -947,7 +947,7 @@ export const topics: Topic[] = [
         title: 'Quantum Computing in the NISQ era and beyond',
         authors: 'J. Preskill',
         year: '2018',
-        link: '#',
+        link: 'https://arxiv.org/pdf/1801.00862',
         abstract: 'Overview of near-term quantum computing and its limitations.'
       },
       {
@@ -988,7 +988,7 @@ export const topics: Topic[] = [
         id: '1',
         title: 'Introduction to ' + 'Quantum Computing',
         description: 'Learn the fundamentals of ' + 'Quantum Computing',
-        link: 'https://example.com/intro',
+        link: 'https://example.com/https://www.youtube.com/watch?v=B3U1NDUiwSA&ab_channel=ScienceABCintro',
         type: ResourceType.Tutorial
       },
       {
@@ -1073,7 +1073,7 @@ export const topics: Topic[] = [
       {
         id: 'qc-video-1',
         title: 'Quantum Computing Explained',
-        duration: '47:15',
+        duration: '1:14:13',
         thumbnail: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
         videoUrl: 'https://www.youtube.com/embed/Lbndu5EIWvI',
         description: 'A beginner-friendly introduction to quantum computing concepts and applications.'
@@ -1081,7 +1081,7 @@ export const topics: Topic[] = [
       {
         id: 'qc-video-2',
         title: 'Programming Quantum Computers',
-        duration: '39:42',
+        duration: '1:28:23',
         thumbnail: 'https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
         videoUrl: 'https://www.youtube.com/embed/F_Riqjdh2oM',
         description: 'Learn the basics of programming quantum algorithms using popular quantum computing frameworks.'
@@ -1169,7 +1169,7 @@ export const topics: Topic[] = [
         id: '1',
         title: 'Introduction to ' + 'Generative AI',
         description: 'Learn the fundamentals of ' + 'Generative AI',
-        link: 'https://example.com/intro',
+        link: 'https://example.com/ihttps://www.youtube.com/watch?v=G2fqAlgmoPo&ab_channel=GoogleCloudTechntro',
         type: ResourceType.Tutorial
       },
       {
@@ -1254,17 +1254,17 @@ export const topics: Topic[] = [
       {
         id: 'genai-video-1',
         title: 'Introduction to Generative AI',
-        duration: '51:30',
+        duration: '22:07',
         thumbnail: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
-        videoUrl: 'https://www.youtube.com/embed/3oVc3pWJ3bw',
+        videoUrl: 'https://www.youtube.com/watch?v=G2fqAlgmoPo&ab_channel=GoogleCloudTech',
         description: 'An overview of generative AI technologies and their applications in various fields.'
       },
       {
         id: 'genai-video-2',
         title: 'Creating Art with Stable Diffusion',
-        duration: '35:45',
+        duration: '1:00:41',
         thumbnail: 'https://images.unsplash.com/photo-1515405295579-ba7b45403062?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
-        videoUrl: 'https://www.youtube.com/embed/a5KaVYxQb8Q',
+        videoUrl: 'https://www.youtube.com/watch?v=dMkiOex_cKU&ab_channel=freeCodeCamp.org',
         description: 'Learn how to generate stunning artwork using Stable Diffusion and prompt engineering techniques.'
       }
     ]
@@ -1350,7 +1350,7 @@ export const topics: Topic[] = [
         id: '1',
         title: 'Introduction to ' + 'Large Language Models',
         description: 'Learn the fundamentals of ' + 'Large Language Models',
-        link: 'https://example.com/intro',
+        link: 'https://example.com/ihttps://www.youtube.com/watch?v=5sLYAQS9sWQ&ab_channel=IBMTechnologyntro',
         type: ResourceType.Tutorial
       },
       {
@@ -1435,7 +1435,7 @@ export const topics: Topic[] = [
       {
         id: 'llm-video-1',
         title: 'Understanding Large Language Models',
-        duration: '48:20',
+        duration: '59:47',
         thumbnail: 'https://images.unsplash.com/photo-1677442135968-6d89469c5f97?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
         videoUrl: 'https://www.youtube.com/embed/zjkBMFhNj_g',
         description: 'A deep dive into how large language models work and how they\'re changing AI applications.'
@@ -1443,9 +1443,9 @@ export const topics: Topic[] = [
       {
         id: 'llm-video-2',
         title: 'Building Applications with LLMs',
-        duration: '37:15',
+        duration: '29:43',
         thumbnail: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
-        videoUrl: 'https://www.youtube.com/embed/pxqFN3WbxPI',
+        videoUrl: 'https://www.youtube.com/watch?v=NYSWn1ipbgg&list=PL-Y17yukoyy3zzoMJNkWQuogKbWGyBL-d&ab_channel=DaveEbbelaar',
         description: 'Learn how to integrate large language models into practical applications using modern frameworks.'
       }
     ]
