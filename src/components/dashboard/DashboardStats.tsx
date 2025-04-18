@@ -52,7 +52,7 @@ const DashboardStats = () => {
             </div>
             <div>
               <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">AI Chat Sessions</h3>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">7 topics</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">8 topics</p>
             </div>
           </div>
         </div>

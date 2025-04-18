@@ -35,8 +35,8 @@ const Contact = () => {
 
     // Send email via EmailJS
     const templateParams = {
-      from_name: name,
-      from_email: email,
+      name: name,
+      email: email,
       subject: subject,
       message: message,
     };
