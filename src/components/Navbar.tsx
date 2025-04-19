@@ -36,7 +36,7 @@ const Navbar = () => {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white/80 dark:bg-black/80 backdrop-blur-md shadow-md' : 'bg-transparent'
+      isScrolled ? 'bg-gray-100/95 backdrop-blur-sm shadow-lg' : 'bg-gray-100/90 backdrop-blur-sm'
     }`}>
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
@@ -49,12 +49,12 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link to="/" className="nav-link">Home</Link>
-            <Link to="/about" className="nav-link">About</Link>
+            <Link to="/" className="text-gray-700 hover:text-gray-900 transition-colors font-medium">Home</Link>
+            <Link to="/about" className="text-gray-700 hover:text-gray-900 transition-colors font-medium">About</Link>
             <div className="relative group">
-              <Link to="#services" className="nav-link">Services</Link>
-              <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2 z-10">
-                <div className="rounded-md ring-1 ring-black ring-opacity-5 p-2 space-y-1">
+              <Link to="#services" className="text-gray-700 hover:text-gray-900 transition-colors font-medium">Services</Link>
+              <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white/95 backdrop-blur-sm opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2 z-10">
+                <div className="rounded-md ring-1 ring-gray-200 p-2 space-y-1">
                   {['Machine Learning', 'Deep Learning', 'NLP', 'Robotics', 'Drones', 'Quantum Computing', 'GenAI', 'LLMs'].map((service) => (
                     <Link 
                       key={service}
@@ -67,23 +67,23 @@ const Navbar = () => {
                 </div>
               </div>
             </div>
-            <Link to="/contact" className="nav-link">Contact</Link>
+            <Link to="/contact" className="text-gray-700 hover:text-gray-900 transition-colors font-medium">Contact</Link>
           </nav>
 
           {/* Right side buttons */}
           <div className="flex items-center space-x-4">
             <button 
               onClick={toggleSearch}
-              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              className="p-2 rounded-full hover:bg-gray-200 transition-colors"
               aria-label="Search"
             >
-              <Search className="w-5 h-5" />
+              <Search className="w-5 h-5 text-gray-700" />
             </button>
 
             {isAuthenticated ? (
               <div className="hidden md:flex items-center space-x-4">
                 <Link to="/dashboard">
-                  <Button variant="outline" size="sm" className="flex items-center">
+                  <Button variant="outline" size="sm" className="flex items-center bg-white hover:bg-blue-500 hover:text-white text-gray-900 transition-colors">
                     <User className="w-4 h-4 mr-2" />
                     Dashboard
                   </Button>
@@ -92,6 +92,7 @@ const Navbar = () => {
                   variant="ghost" 
                   size="sm"
                   onClick={() => logout()}
+                  className="text-gray-700 hover:text-gray-900"
                 >
                   Logout
                 </Button>
@@ -99,10 +100,10 @@ const Navbar = () => {
             ) : (
               <div className="hidden md:flex items-center space-x-4">
                 <Link to="/login">
-                  <Button variant="ghost" size="sm">Login</Button>
+                  <Button variant="outline" size="sm" className="bg-gray-100 text-gray-700 hover:bg-blue-500 hover:text-white hover:border-blue-500 font-semibold transition-colors backdrop-blur-sm">Login</Button>
                 </Link>
                 <Link to="/signup">
-                  <Button variant="default" size="sm">Sign Up</Button>
+                  <Button variant="outline" size="sm" className="bg-gray-100 text-gray-700 hover:bg-blue-500 hover:text-white hover:border-blue-500 font-semibold transition-colors backdrop-blur-sm">Sign Up</Button>
                 </Link>
               </div>
             )}
@@ -110,20 +111,20 @@ const Navbar = () => {
             {/* Mobile menu button */}
             <button
               onClick={toggleMenu}
-              className="p-2 rounded-full md:hidden hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              className="p-2 rounded-full md:hidden hover:bg-quantum-800 transition-colors"
               aria-label="Menu"
             >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMenuOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-white" />}
             </button>
           </div>
         </div>
 
         {/* Mobile menu */}
         <div className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${isMenuOpen ? 'max-h-screen opacity-100 mt-4' : 'max-h-0 opacity-0'}`}>
-          <nav className="flex flex-col space-y-4 py-4">
-            <Link to="/" className="nav-link px-4 py-2">Home</Link>
-            <Link to="/about" className="nav-link px-4 py-2">About</Link>
-            <Link to="#services" className="nav-link px-4 py-2">Services</Link>
+          <nav className="flex flex-col space-y-4 py-4 bg-black/90 backdrop-blur-sm rounded-lg px-4">
+            <Link to="/" className="text-gray-100 hover:text-white transition-colors font-medium">Home</Link>
+            <Link to="/about" className="text-gray-100 hover:text-white transition-colors font-medium">About</Link>
+            <Link to="#services" className="text-gray-100 hover:text-white transition-colors font-medium">Services</Link>
             <div className="pl-8 space-y-2">
               {['Machine Learning', 'Deep Learning', 'NLP', 'Robotics', 'Drones', 'Quantum Computing', 'GenAI', 'LLMs'].map((service) => (
                 <Link 
@@ -135,7 +136,7 @@ const Navbar = () => {
                 </Link>
               ))}
             </div>
-            <Link to="/contact" className="nav-link px-4 py-2">Contact</Link>
+            <Link to="/contact" className="text-gray-100 hover:text-white transition-colors font-medium">Contact</Link>
             
             {isAuthenticated ? (
               <>
@@ -149,8 +150,8 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <Link to="/login" className="nav-link px-4 py-2">Login</Link>
-                <Link to="/signup" className="nav-link px-4 py-2">Sign Up</Link>
+                <Link to="/login" className="nav-link px-4 py-2 text-gray-100 hover:text-white transition-colors font-medium">Login</Link>
+                <Link to="/signup" className="nav-link px-4 py-2 text-gray-100 hover:text-white transition-colors font-medium">Sign Up</Link>
               </>
             )}
           </nav>
