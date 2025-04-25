@@ -49,13 +49,13 @@ const Hero = () => {
             className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4"
           >
             <Link to="/signup">
-              <Button size="lg" className="bg-quantum-500 hover:bg-quantum-600 text-white">
-                Get Started
+              <Button variant="outline" size="lg" className="border-2 border-quantum-500 bg-quantum-500 text-white hover:bg-quantum-700 hover:text-white hover:border-quantum-700 font-semibold transition-colors backdrop-blur-sm">
+                Sign Up
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
             <Link to="/about">
-              <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/10">
+              <Button variant="outline" size="lg" className="border-2 border-quantum-500 bg-quantum-500 text-white hover:bg-quantum-700 hover:text-white hover:border-quantum-700 font-semibold transition-colors backdrop-blur-sm">
                 Learn More
               </Button>
             </Link>
