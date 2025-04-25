@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar';
 import { getAllTopics } from '../utils/mockData';
 import { Topic, VideoTutorial } from '../types';
 import { Button } from '@/components/ui/button';
+ 
 
 const VideoTutorials = () => {
   const [searchParams] = useSearchParams();
