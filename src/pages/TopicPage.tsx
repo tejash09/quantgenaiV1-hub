@@ -1,23 +1,58 @@
-
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FileText, Book, ExternalLink, Download, ChevronRight, ArrowLeft } from 'lucide-react';
+import { FileText, Book, ExternalLink, Download, ChevronRight, ArrowLeft, Brain } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import VideoPlayer from '../components/VideoPlayer';
 import FeedbackForm from '../components/FeedbackForm';
 import Chatbot from '../components/Chatbot';
+import Quiz from '../components/Quiz';
 import { Button } from '@/components/ui/button';
 import { getTopicBySlug, Topic, Paper, Resource } from '../utils/mockData';
+import { 
+  machineLearningQuestions,
+  deepLearningQuestions,
+  nlpQuestions,
+  roboticsQuestions,
+  dronesQuestions,
+  quantumComputingQuestions,
+  genaiQuestions,
+  llmsQuestions
+} from '../utils/quizData';
 import { useToast } from '@/hooks/use-toast';
 
 const TopicPage = () => {
   const { slug } = useParams<{ slug: string }>();
   const [topic, setTopic] = useState<Topic | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isQuizOpen, setIsQuizOpen] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
   
+  // Get the appropriate questions based on the topic
+  const getQuestionsForTopic = (topicSlug: string) => {
+    switch (topicSlug) {
+      case 'machine-learning':
+        return machineLearningQuestions;
+      case 'deep-learning':
+        return deepLearningQuestions;
+      case 'nlp':
+        return nlpQuestions;
+      case 'robotics':
+        return roboticsQuestions;
+      case 'drones':
+        return dronesQuestions;
+      case 'quantum-computing':
+        return quantumComputingQuestions;
+      case 'genai':
+        return genaiQuestions;
+      case 'llms':
+        return llmsQuestions;
+      default:
+        return [];
+    }
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
     
@@ -123,7 +158,18 @@ const TopicPage = () => {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="bg-white dark:bg-gray-900 rounded-2xl shadow-md p-6 md:p-8"
               >
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Introduction to {topic.title}</h2>
+                <div className="flex justify-between items-center mb-6">
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Introduction to {topic.title}</h2>
+                  {getQuestionsForTopic(slug || '').length > 0 && (
+                    <Button
+                      onClick={() => setIsQuizOpen(true)}
+                      className="flex items-center gap-2"
+                    >
+                      <Brain className="w-4 h-4" />
+                      Take Quiz
+                    </Button>
+                  )}
+                </div>
                 
                 <div className="mb-8">
                   <VideoPlayer videoUrl={topic.videoUrl} title={`${topic.title} Overview`} />
@@ -357,10 +403,19 @@ const TopicPage = () => {
         </div>
       </section>
       
+      {/* Quiz Component */}
+      {getQuestionsForTopic(slug || '').length > 0 && (
+        <Quiz
+          isOpen={isQuizOpen}
+          onClose={() => setIsQuizOpen(false)}
+          questions={getQuestionsForTopic(slug || '')}
+        />
+      )}
+      
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-6 text-center text-sm">
-        <div className="container mx-auto">
-          <p>&copy; {new Date().getFullYear()} QuantGenAILabs. All rights reserved.</p>
+      <footer className="bg-gray-900 text-gray-400 py-8">
+        <div className="container mx-auto px-4">
+          <p className="text-center">© 2024 QuantGenAI. All rights reserved.</p>
         </div>
       </footer>
       
