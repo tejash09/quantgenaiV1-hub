@@ -1,6 +1,11 @@
 
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { verifyUser, createUser, User } from '../utils/authUtils';
+
+type User = {
+  id: string;
+  email: string;
+  name: string;
+};
 
 type AuthContextType = {
   user: User | null;
@@ -29,15 +34,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = async (email: string, password: string) => {
     setLoading(true);
     try {
-      // Authenticate user with simulated MongoDB
-      const authenticatedUser = await verifyUser(email, password);
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
       
-      if (!authenticatedUser) {
-        throw new Error('Invalid email or password');
-      }
-      
-      setUser(authenticatedUser);
-      localStorage.setItem('user', JSON.stringify(authenticatedUser));
+      // For demo purposes, accept any email/password combination
+      // In a real app, you would validate credentials against a backend
+      const user = { 
+        id: '1', 
+        email, 
+        name: email.split('@')[0].split('.').map(part => 
+          part.charAt(0).toUpperCase() + part.slice(1)
+        ).join(' ')
+      };
+      setUser(user);
+      localStorage.setItem('user', JSON.stringify(user));
     } catch (error) {
       console.error('Login error:', error);
       throw error;
@@ -49,15 +59,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const signup = async (name: string, email: string, password: string) => {
     setLoading(true);
     try {
-      // Create user in simulated MongoDB
-      const newUser = await createUser(name, email, password);
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
       
-      if (!newUser) {
-        throw new Error('Failed to create user');
-      }
-      
-      setUser(newUser);
-      localStorage.setItem('user', JSON.stringify(newUser));
+      // Mock signup success
+      const user = { id: Date.now().toString(), email, name };
+      setUser(user);
+      localStorage.setItem('user', JSON.stringify(user));
     } catch (error) {
       console.error('Signup error:', error);
       throw error;
