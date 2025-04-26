@@ -1,91 +1,74 @@
 
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { AuthError, User } from '@supabase/supabase-js';
-import { supabase } from '@/integrations/supabase/client';
-import { useToast } from '@/hooks/use-toast';
-import { UserWithProfile } from '@/types';
+import { verifyUser, createUser, User } from '../utils/authUtils';
 
 type AuthContextType = {
-  user: UserWithProfile | null;
+  user: User | null;
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  signup: (email: string, password: string, username: string) => Promise<void>;
-  logout: () => Promise<void>;
+  signup: (name: string, email: string, password: string) => Promise<void>;
+  logout: () => void;
   isAuthenticated: boolean;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<UserWithProfile | null>(null);
-  const [loading, setLoading] = useState(true);
-  const { toast } = useToast();
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    // Set up auth state listener
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        setUser(session?.user ?? null);
-        setLoading(false);
-      }
-    );
-
-    // Check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
-
-    return () => subscription.unsubscribe();
+    // Check for saved user in localStorage
+    const savedUser = localStorage.getItem('user');
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
+    }
+    setLoading(false);
   }, []);
 
   const login = async (email: string, password: string) => {
+    setLoading(true);
     try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+      // Authenticate user with MongoDB
+      const authenticatedUser = await verifyUser(email, password);
       
-      if (error) throw error;
+      if (!authenticatedUser) {
+        throw new Error('Invalid email or password');
+      }
+      
+      setUser(authenticatedUser);
+      localStorage.setItem('user', JSON.stringify(authenticatedUser));
     } catch (error) {
-      const authError = error as AuthError;
-      throw new Error(authError.message);
+      console.error('Login error:', error);
+      throw error;
+    } finally {
+      setLoading(false);
     }
   };
 
-  const signup = async (email: string, password: string, username: string) => {
+  const signup = async (name: string, email: string, password: string) => {
+    setLoading(true);
     try {
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: {
-            username,
-          },
-        },
-      });
+      // Create user in MongoDB
+      const newUser = await createUser(name, email, password);
       
-      if (error) throw error;
-
-      toast({
-        title: "Sign up successful",
-        description: "Please check your email to verify your account.",
-      });
+      if (!newUser) {
+        throw new Error('Failed to create user');
+      }
+      
+      setUser(newUser);
+      localStorage.setItem('user', JSON.stringify(newUser));
     } catch (error) {
-      const authError = error as AuthError;
-      throw new Error(authError.message);
+      console.error('Signup error:', error);
+      throw error;
+    } finally {
+      setLoading(false);
     }
   };
 
-  const logout = async () => {
-    try {
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
-      setUser(null);
-    } catch (error) {
-      const authError = error as AuthError;
-      throw new Error(authError.message);
-    }
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem('user');
   };
 
   return (

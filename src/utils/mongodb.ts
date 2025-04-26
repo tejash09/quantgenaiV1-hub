@@ -1,46 +1,43 @@
 
-// This is a browser-compatible simulation of MongoDB functionality
-// In a real application, this would be implemented as a backend service
+import { MongoClient, ServerApiVersion } from 'mongodb';
 
-// In-memory storage for user data
-const users = [
-  {
-    _id: '1',
-    name: 'Demo User',
-    email: 'demo@example.com',
-    // Password: demo123
-    password: '$2a$10$demohashedpasswordfordemouserthatisvalid',
-    createdAt: new Date()
+// Replace with your actual MongoDB connection string
+// Note: In production, this should come from environment variables
+const uri = "mongodb+srv://<db_username>:<db_password>@cluster0.zmychm0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
+// Create a MongoClient with appropriate options
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
   }
-];
+});
 
-// Simulates a MongoDB collection
-export const getUsersCollection = async () => {
-  // Return an object that mimics MongoDB collection methods
-  return {
-    findOne: async (query: { email?: string }) => {
-      console.log('Finding user with query:', query);
-      return users.find(user => user.email === query.email) || null;
-    },
-    
-    insertOne: async (doc: any) => {
-      console.log('Inserting new user:', doc);
-      const _id = Math.random().toString(36).substring(2, 15);
-      const newUser = { ...doc, _id };
-      users.push(newUser);
-      return { insertedId: _id };
-    }
-  };
-};
+// Database and collection names
+const dbName = 'quantgenailabs';
+const usersCollection = 'users';
 
-// No need for actual connection in the browser
+// Connect to the database
 export const connectToDatabase = async () => {
-  console.log('Simulating MongoDB connection');
-  // Return a mock DB object
-  return { collection: () => getUsersCollection() };
+  try {
+    await client.connect();
+    console.log("Successfully connected to MongoDB");
+    return client.db(dbName);
+  } catch (error) {
+    console.error("Failed to connect to MongoDB:", error);
+    throw error;
+  }
 };
 
-// No need to close connection in the browser
+// Get users collection
+export const getUsersCollection = async () => {
+  const db = await connectToDatabase();
+  return db.collection(usersCollection);
+};
+
+// Close the connection
 export const closeConnection = async () => {
-  console.log('Simulating MongoDB connection close');
+  await client.close();
+  console.log("MongoDB connection closed");
 };

@@ -1,46 +1,64 @@
-import { User as SupabaseUser } from '@supabase/supabase-js';
+export enum ResourceType {
+  Book = 'Book',
+  Course = 'Course',
+  Tutorial = 'Tutorial',
+  Article = 'Article',
+  Video = 'Video'
+}
 
-export interface Topic {
+export type Topic = {
   id: string;
   title: string;
-  description: string;
-  icon: string;
   slug: string;
-}
-
-export interface Paper {
-  id: string;
-  title: string;
-  authors: string[];
-  abstract: string;
-  publicationDate: string;
-  url: string;
-  topic: string;
-}
-
-export interface Resource {
-  id: string;
-  title: string;
   description: string;
-  type: string;
-  url: string;
-  topic: string;
-}
+  overview: string;
+  keypoints: string;
+  p1: string;
+  p2: string;
+  p3: string;
+  p4: string;
+  p5: string;
+  p6: string;
+  c1: string;
+  c2: string;
+  applications: string;
+  a1: string;
+  a2: string;
+  a3: string;
+  a4: string;
+  a5: string;
+  a6: string;
+  a7: string;
+  shortDescription: string;
+  videoUrl: string;
+  image: string;
+  papers: Paper[];
+  resources: Resource[];
+  videoTutorials: VideoTutorial[];
+};
 
-export interface FeedbackData extends Record<string, unknown> {
-  name: string;
-  email: string;
-  message: string;
-}
-
-export interface Profile {
+export type Paper = {
   id: string;
-  username: string | null;
-  avatar_url: string | null;
-  created_at: string;
-  updated_at: string;
-}
+  title: string;
+  authors: string;
+  year: string;
+  link: string;
+  abstract: string;
+};
 
-export interface UserWithProfile extends SupabaseUser {
-  profile?: Profile;
-}
+export type Resource = {
+  id: string;
+  title: string;
+  type: ResourceType;
+  link: string;
+  description: string;
+};
+
+export type VideoTutorial = {
+  id: string;
+  title: string;
+  duration: string;
+  thumbnail: string;
+  videoUrl: string;
+  description: string;
+}; 

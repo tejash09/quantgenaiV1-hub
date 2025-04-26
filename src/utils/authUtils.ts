@@ -1,9 +1,10 @@
 
-import bcrypt from 'bcryptjs';
+import { ObjectId } from 'mongodb';
 import { getUsersCollection } from './mongodb';
+import bcrypt from 'bcryptjs';
 
 export type User = {
-  _id?: string;
+  _id?: string | ObjectId;
   id?: string;
   name: string;
   email: string;
@@ -32,7 +33,7 @@ export const createUser = async (name: string, email: string, password: string):
       createdAt: new Date()
     };
     
-    // Insert user into the simulated database
+    // Insert user into the database
     const result = await collection.insertOne(newUser);
     
     // Return user without password
