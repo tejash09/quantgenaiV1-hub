@@ -29,7 +29,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = async (email: string, password: string) => {
     setLoading(true);
     try {
-      // Authenticate user with MongoDB
+      // Authenticate user with simulated MongoDB
       const authenticatedUser = await verifyUser(email, password);
       
       if (!authenticatedUser) {
@@ -49,7 +49,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const signup = async (name: string, email: string, password: string) => {
     setLoading(true);
     try {
-      // Create user in MongoDB
+      // Create user in simulated MongoDB
       const newUser = await createUser(name, email, password);
       
       if (!newUser) {
