@@ -1,74 +1,91 @@
 
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { verifyUser, createUser, User } from '../utils/authUtils';
+import { AuthError, User } from '@supabase/supabase-js';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
+import { UserWithProfile } from '@/types';
 
 type AuthContextType = {
-  user: User | null;
+  user: UserWithProfile | null;
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  signup: (name: string, email: string, password: string) => Promise<void>;
-  logout: () => void;
+  signup: (email: string, password: string, username: string) => Promise<void>;
+  logout: () => Promise<void>;
   isAuthenticated: boolean;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [user, setUser] = useState<UserWithProfile | null>(null);
+  const [loading, setLoading] = useState(true);
+  const { toast } = useToast();
 
   useEffect(() => {
-    // Check for saved user in localStorage
-    const savedUser = localStorage.getItem('user');
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-    }
-    setLoading(false);
+    // Set up auth state listener
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        setUser(session?.user ?? null);
+        setLoading(false);
+      }
+    );
+
+    // Check for existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+      setLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const login = async (email: string, password: string) => {
-    setLoading(true);
     try {
-      // Authenticate user with simulated MongoDB
-      const authenticatedUser = await verifyUser(email, password);
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
       
-      if (!authenticatedUser) {
-        throw new Error('Invalid email or password');
-      }
-      
-      setUser(authenticatedUser);
-      localStorage.setItem('user', JSON.stringify(authenticatedUser));
+      if (error) throw error;
     } catch (error) {
-      console.error('Login error:', error);
-      throw error;
-    } finally {
-      setLoading(false);
+      const authError = error as AuthError;
+      throw new Error(authError.message);
     }
   };
 
-  const signup = async (name: string, email: string, password: string) => {
-    setLoading(true);
+  const signup = async (email: string, password: string, username: string) => {
     try {
-      // Create user in simulated MongoDB
-      const newUser = await createUser(name, email, password);
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            username,
+          },
+        },
+      });
       
-      if (!newUser) {
-        throw new Error('Failed to create user');
-      }
-      
-      setUser(newUser);
-      localStorage.setItem('user', JSON.stringify(newUser));
+      if (error) throw error;
+
+      toast({
+        title: "Sign up successful",
+        description: "Please check your email to verify your account.",
+      });
     } catch (error) {
-      console.error('Signup error:', error);
-      throw error;
-    } finally {
-      setLoading(false);
+      const authError = error as AuthError;
+      throw new Error(authError.message);
     }
   };
 
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('user');
+  const logout = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+      setUser(null);
+    } catch (error) {
+      const authError = error as AuthError;
+      throw new Error(authError.message);
+    }
   };
 
   return (

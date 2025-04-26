@@ -1,3 +1,4 @@
+import { User as SupabaseUser } from '@supabase/supabase-js';
 
 export interface Topic {
   id: string;
@@ -26,9 +27,20 @@ export interface Resource {
   topic: string;
 }
 
-export interface FeedbackData {
-  [key: string]: unknown;
+export interface FeedbackData extends Record<string, unknown> {
   name: string;
   email: string;
   message: string;
+}
+
+export interface Profile {
+  id: string;
+  username: string | null;
+  avatar_url: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface UserWithProfile extends SupabaseUser {
+  profile?: Profile;
 }
