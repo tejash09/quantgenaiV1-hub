@@ -210,7 +210,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
     setIsLoading(true);
     
     try {
-      await signup(name, email, password);
+      await signup(email, password, name);
       toast({
         title: "Account created",
         description: "Your account has been successfully created.",

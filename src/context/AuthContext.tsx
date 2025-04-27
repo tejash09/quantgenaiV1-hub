@@ -1,74 +1,106 @@
+import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
 
-import React, { createContext, useState, useContext, useEffect } from 'react';
-
-type User = {
+// Define the structure of your user object (adjust as needed)
+interface User {
   id: string;
   email: string;
-  name: string;
-};
+  name?: string;
+  // Add other fields like tokens if using JWT later
+}
 
-type AuthContextType = {
+interface AuthContextType {
   user: User | null;
-  loading: boolean;
-  login: (email: string, password: string) => Promise<void>;
-  signup: (name: string, email: string, password: string) => Promise<void>;
+  login: (email: string, password: string) => Promise<void>; // Make async
   logout: () => void;
-  isAuthenticated: boolean;
-};
+  signup: (email: string, password: string, name?: string) => Promise<void>; // Make async
+  loading: boolean; // Add loading state
+  error: string | null;
+  isAuthenticated: boolean; // Add error state
+}
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+// Define the backend API base URL
+const API_URL = 'http://localhost:5001/api/auth'; // Adjust port if needed
 
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState<boolean>(true); // Start true for initial check
+  const [error, setError] = useState<string | null>(null);
+
+  // Check local storage on initial load (optional, for persistence)
   useEffect(() => {
-    // Check for saved user in localStorage
-    const savedUser = localStorage.getItem('user');
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      try {
+        setUser(JSON.parse(storedUser));
+      } catch (e) {
+        console.error("Failed to parse stored user:", e);
+        localStorage.removeItem('user');
+      }
     }
-    setLoading(false);
+    setLoading(false); // Done checking storage
   }, []);
 
   const login = async (email: string, password: string) => {
     setLoading(true);
+    setError(null);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // For demo purposes, accept any email/password combination
-      // In a real app, you would validate credentials against a backend
-      const user = { 
-        id: '1', 
-        email, 
-        name: email.split('@')[0].split('.').map(part => 
-          part.charAt(0).toUpperCase() + part.slice(1)
-        ).join(' ')
-      };
-      setUser(user);
-      localStorage.setItem('user', JSON.stringify(user));
-    } catch (error) {
-      console.error('Login error:', error);
-      throw error;
+      const response = await fetch(`${API_URL}/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || `HTTP error! status: ${response.status}`);
+      }
+
+      // Assuming the backend sends back user info on successful login
+      const loggedInUser: User = data.user;
+      setUser(loggedInUser);
+      localStorage.setItem('user', JSON.stringify(loggedInUser)); // Persist user
+      console.log("Login successful:", data.message);
+    } catch (err: any) {
+      console.error("Login failed:", err);
+      setError(err.message || 'Login failed. Please check your credentials.');
+      // Ensure user state is null on failure
+      setUser(null);
+      localStorage.removeItem('user');
     } finally {
       setLoading(false);
     }
   };
 
-  const signup = async (name: string, email: string, password: string) => {
+  const signup = async (email: string, password: string, name?: string) => {
     setLoading(true);
+    setError(null);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Mock signup success
-      const user = { id: Date.now().toString(), email, name };
-      setUser(user);
-      localStorage.setItem('user', JSON.stringify(user));
-    } catch (error) {
-      console.error('Signup error:', error);
-      throw error;
+      const response = await fetch(`${API_URL}/signup`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password, name }), // Include name if provided
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || `HTTP error! status: ${response.status}`);
+      }
+
+      // Optionally log the user in automatically after signup
+      // const signedUpUser: User = data.user;
+      // setUser(signedUpUser);
+      // localStorage.setItem('user', JSON.stringify(signedUpUser));
+      // Or just show a success message and let them log in manually
+      console.log("Signup successful:", data.message);
+      // You might want to redirect to login page or show a success message
+
+    } catch (err: any) {
+      console.error("Signup failed:", err);
+      setError(err.message || 'Signup failed. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -76,20 +108,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('user');
+    localStorage.removeItem('user'); // Clear persisted user
+    // Optionally redirect to login page
   };
 
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        loading,
-        login,
-        signup,
-        logout,
-        isAuthenticated: !!user,
-      }}
-    >
+    <AuthContext.Provider value={{ user, login, logout, signup, loading, error,isAuthenticated: !!user }}>
       {children}
     </AuthContext.Provider>
   );
@@ -100,5 +124,9 @@ export const useAuth = () => {
   if (context === undefined) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
+  
+  
+  
+  
   return context;
 };

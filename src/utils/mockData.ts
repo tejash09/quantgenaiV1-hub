@@ -79,10 +79,31 @@ export const topics: Topic[] = [
     ],
     resources: [
       {
-        id: '1',  //tutorials
+        id: '0',  //tutorials
         title: 'Introduction to ' + 'Machine Learning',
         description: 'Learn the fundamentals of ' + 'Machine Learning',
-        link: 'https://examhttps://www.youtube.com/watch?v=ukzFI9rgwfU&ab_channel=Simplilearnple.com/intro',
+        link: 'https://www.geeksforgeeks.org/machine-learning/',
+        type: ResourceType.Tutorial 
+      },
+      {
+        id: '1',  //tutorials
+        title: 'Machine Learning ' + 'Using Python',
+        description: 'Learn the fundamentals of ' + 'Machine Learning',
+        link: 'https://www.w3schools.com/python/python_ml_getting_started.asp',
+        type: ResourceType.Tutorial 
+      },
+      {
+        id: '2',  //tutorials
+        title: 'Learn about '+'Machine Learning ' ,
+        description: 'Learn the fundamentals of ' + 'Machine Learning',
+        link: 'https://www.tutorialspoint.com/machine_learning/index.htm',
+        type: ResourceType.Tutorial 
+      },
+      {
+        id: '3',  //tutorials
+        title: 'Get on '+'Machine Learning ' ,
+        description: 'Learn the fundamentals of ' + 'Machine Learning',
+        link: 'https://www.tpointtech.com/machine-learning',
         type: ResourceType.Tutorial 
       },
       {
@@ -260,10 +281,31 @@ export const topics: Topic[] = [
     ],
     resources: [
       {
-        id: '1',
+        id: '0',
         title: 'Introduction to ' + 'Deep Learning',
         description: 'Learn the fundamentals of ' + 'Deep Learning',
-        link: 'https://www.youtube.com/watch?v=6M5VXKLf4D4&ab_channel=Simplilearn',
+        link: 'https://www.geeksforgeeks.org/deep-learning-tutorial/',
+        type: ResourceType.Tutorial
+      },
+      {
+        id: '1',
+        title: 'Code on ' + 'Deep Learning',
+        description: 'Learn the fundamentals of ' + 'Deep Learning',
+        link: 'https://www.w3schools.com/ai/ai_neural_networks.asp',
+        type: ResourceType.Tutorial
+      },
+      {
+        id: '2',  //tutorials
+        title: 'Dive Deep into ' + 'Deep Learning',
+        description: 'Learn the fundamentals of ' + 'Deep Learning',
+        link: 'https://www.tpointtech.com/deep-learning',
+        type: ResourceType.Tutorial 
+      },
+      {
+        id: '3',
+        title: 'Deep Learning'+ ' using Python',
+        description: 'Learn the fundamentals of ' + 'Deep Learning',
+        link: 'https://www.tutorialspoint.com/python_deep_learning/index.htm',
         type: ResourceType.Tutorial
       },
       {
@@ -442,10 +484,17 @@ export const topics: Topic[] = [
     ],
     resources: [
       {
-        id: '1',
+        id: '0',
         title: 'Introduction to ' + 'Natural Language Processing',
         description: 'Learn the fundamentals of ' + 'Natural Language Processing',
-        link: 'https://example.chttps://www.youtube.com/watch?v=CMrHM8a3hqw&ab_channel=Simplilearnom/intro',
+        link: 'https://www.geeksforgeeks.org/natural-language-processing-nlp-tutorial/',
+        type: ResourceType.Tutorial
+      },
+      {
+        id: '1',
+        title: 'Learn ' + 'Natural Language Processing',
+        description: 'Learn the fundamentals of ' + 'Natural Language Processing',
+        link: 'https://www.tutorialspoint.com/natural_language_processing/index.htm',
         type: ResourceType.Tutorial
       },
       {
@@ -623,10 +672,17 @@ export const topics: Topic[] = [
     ],
     resources: [
       {
-        id: '1',
+        id: '0',
         title: 'Introduction to ' + 'Robotics',
         description: 'Learn the fundamentals of ' + 'Robotics',
-        link: 'https://example.chttps://www.youtube.com/watch?v=htjRUL3neMg&ab_channel=TechMightom/intro',
+        link: 'https://www.geeksforgeeks.org/robotics-introduction/',
+        type: ResourceType.Tutorial
+      },
+      {
+        id: '1',
+        title: 'Work on ' + 'Robotics',
+        description: 'Learn the fundamentals of ' + 'Robotics',
+        link: 'https://www.tutorialspoint.com/robotics/index.htm',
         type: ResourceType.Tutorial
       },
       {
@@ -804,10 +860,10 @@ export const topics: Topic[] = [
     ],
     resources: [
       {
-        id: '1',
+        id: '0',
         title: 'Introduction to ' + 'Drones',
         description: 'Learn the fundamentals of ' + 'Drones',
-        link: 'https://example.https://www.youtube.com/watch?v=N_XneaFmOmU&ab_channel=SabinCivilEngineeringcom/intro',
+        link: 'https://uavcoach.com/how-to-fly-a-quadcopter-guide/',
         type: ResourceType.Tutorial
       },
       {
@@ -985,10 +1041,17 @@ export const topics: Topic[] = [
     ],
     resources: [
       {
-        id: '1',
+        id: '0',
         title: 'Introduction to ' + 'Quantum Computing',
         description: 'Learn the fundamentals of ' + 'Quantum Computing',
-        link: 'https://example.com/https://www.youtube.com/watch?v=B3U1NDUiwSA&ab_channel=ScienceABCintro',
+        link: 'https://www.geeksforgeeks.org/introduction-quantum-computing/',
+        type: ResourceType.Tutorial
+      },
+      {
+        id: '1',
+        title: 'Byte to Byte on ' + 'Quantum Computing',
+        description: 'Learn the fundamentals of ' + 'Quantum Computing',
+        link: 'https://www.tutorialspoint.com/quantum-computing/index.htm',
         type: ResourceType.Tutorial
       },
       {
@@ -1166,10 +1229,17 @@ export const topics: Topic[] = [
     ],
     resources: [
       {
-        id: '1',
+        id: '0',
         title: 'Introduction to ' + 'Generative AI',
         description: 'Learn the fundamentals of ' + 'Generative AI',
-        link: 'https://example.com/ihttps://www.youtube.com/watch?v=G2fqAlgmoPo&ab_channel=GoogleCloudTechntro',
+        link: 'https://www.w3schools.com/gen_ai/',
+        type: ResourceType.Tutorial
+      },
+      {
+        id: '1',
+        title: 'Genesis of ' + 'Generative AI',
+        description: 'Learn the fundamentals of ' + 'Generative AI',
+        link: 'https://www.tutorialspoint.com/gen-ai/index.htm',
         type: ResourceType.Tutorial
       },
       {
@@ -1347,17 +1417,17 @@ export const topics: Topic[] = [
     ],
     resources: [
       {
-        id: '1',
+        id: '0',
         title: 'Introduction to ' + 'Large Language Models',
         description: 'Learn the fundamentals of ' + 'Large Language Models',
-        link: 'https://example.com/ihttps://www.youtube.com/watch?v=5sLYAQS9sWQ&ab_channel=IBMTechnologyntro',
+        link: 'https://www.geeksforgeeks.org/large-language-model-llm/',
         type: ResourceType.Tutorial
       },
       {
         id: '2',
         title: 'Advanced ' + 'Large Language Models' + ' Concepts',
         description: 'Deep dive into advanced topics and applications',
-        link: 'https://example.com/advanced',
+        link: 'https://huggingface.co/learn/llm-course/en/chapter1/1',
         type: ResourceType.Course
       },
       {
