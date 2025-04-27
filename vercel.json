@@ -2,29 +2,24 @@
   "builds": [
     {
       "src": "server/server.js",
-      "use": "@vercel/node"     
+      "use": "@vercel/node"
     },
     {
-      "src": "package.json",     
-      "use": "@vercel/vite",    
-      "config": { "project": ".","includeFiles": ["server/models/**"] }
+      "src": "index.html",
+      "use": "@vercel/static-build"
     }
   ],
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/" },
+  "routes": [
     {
-      "source": "/api/(.*)",             
-      "destination": "/server/server.js" 
+      "src": "/api/(.*)",
+      "dest": "/server/server.js"
     },
     {
-      "source": "/((?!api/).*)",       
-      "destination": "/index.html"     
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ],
   "env": {
-     "MONGODB_URI": "mongodb+srv://navyasree2405:navyasree2405@clustertbp.qpknhdd.mongodb.net/" 
-   }
-
+    "MONGODB_URI": "mongodb+srv://navyasree2405:navyasree2405@clustertbp.qpknhdd.mongodb.net/"
+  }
 }
-
-  
