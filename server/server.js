@@ -12,7 +12,10 @@ app.use(cors()); // Enable CORS for all origins (adjust for production)
 app.use(express.json()); // Parse JSON request bodies
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI,{
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
   .then(() =>{ console.log('MongoDB connected successfully');
   console.log(`Connected to database: '${mongoose.connection.name}'`);})
   .catch(err => console.error('MongoDB connection error:', err));
@@ -94,3 +97,5 @@ app.post('/api/auth/login', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
+module.exports = app;
