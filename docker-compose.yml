@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80" # Map host port 80 to container port 80 (nginx default)
+    container_name: quantgen-frontend
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT:-5001}:${PORT:-5001}" # Map host port (from .env or default 5001) to container port
+    container_name: quantgen-backend
+    environment:
+      MONGODB_URI: ${MONGODB_URI}
+      PORT: ${PORT:-5001}
+      # Add any other backend environment variables here
+    env_file:
+      - .env # Load environment variables from .env file in the root
+    restart: unless-stopped
+
+# Optional: Add a MongoDB service if you want to run it in Docker
+# mongodb:
+#   image: mongo:latest
+#   container_name: quantgen-mongodb
+#   ports:
+#     - "27017:27017"
+#   volumes:
+#     - mongo-data:/data/db # Persist database data
+#   restart: unless-stopped
+
+# volumes:
+#   mongo-data: # Define the named volume for MongoDB data
