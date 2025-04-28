@@ -30,13 +30,13 @@ app.post('/api/auth/signup', async (req, res) => {
     try {
       const { email, password, name } = req.body;
       console.log(`Received signup request for: ${email}`); // <--- Add this
-  
+
       // Basic validation
       if (!email || !password) {
         console.log('Validation failed: Email or password missing'); // <--- Add this
         return res.status(400).json({ message: 'Email and password are required' });
       }
-  
+
       // Check if user already exists
       console.log(`Checking if user exists: ${email}`); // <--- Add this
       const existingUser = await User.findOne({ email });
@@ -45,11 +45,11 @@ app.post('/api/auth/signup', async (req, res) => {
         return res.status(409).json({ message: 'User already exists with this email' });
       }
       console.log(`User does not exist, proceeding to create: ${email}`); // <--- Add this
-  
+
       const newUser = new User({ email, password, name });
       await newUser.save();
       console.log(`User saved successfully: ${email}, ID: ${newUser._id}`); // <--- Add this
-  
+
       const userResponse = { id: newUser._id, email: newUser.email, name: newUser.name };
       res.status(201).json({ message: 'User created successfully', user: userResponse });
       console.log(`Signup successful for: ${email}`); // <--- Add this
